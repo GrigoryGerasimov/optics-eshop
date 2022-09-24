@@ -1,4 +1,4 @@
-import { Main, Login } from "./components/layout";
+import { Main, Login, Register } from "./components/layout";
 
 export const routeConfig = [
     {
@@ -9,6 +9,12 @@ export const routeConfig = [
     },
     {
         id: 2,
+        path: "/register",
+        name: "Register",
+        component: Register
+    },
+    {
+        id: 3,
         path: "/",
         name: "Main",
         component: Main
