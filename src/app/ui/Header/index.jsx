@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { navbarLinks } from "./navbarLinks";
+import { navbarLinks } from "./navbarLinks.js";
 import styles from "./index.module.scss";
 
-const Footer = () => {
+const Header = () => {
     return (
-        <footer className={styles.navbar}>
+        <nav className={styles.navbar}>
             {navbarLinks.map(link => (
                 <NavLink
                     className={styles.navbar_item}
@@ -15,8 +15,8 @@ const Footer = () => {
                     {link.label}
                 </NavLink>
             ))}
-        </footer>
+        </nav>
     );
 };
 
-export default Footer;
+export default Header;
