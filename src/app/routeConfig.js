@@ -1,4 +1,4 @@
-import { Main, Login } from "./layout";
+import { Main, Login } from "./components/layout";
 
 export const routeConfig = [
     {

@@ -1,0 +1,43 @@
+.auth_container {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_container {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 15%;
+  padding: 70px;
+  font-family: Bahnschrift, Segoe UI, sans-serif;
+  font-size: 20px;
+  color: rgb(69, 69, 69);
+  &_item {
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid rgba(69, 69, 69, 0.50);
+      margin-bottom: 55px;
+      line-height: 35px;
+    }
+    label {
+      margin-right: 40px;
+    }
+  }
+  &__button_submit {
+    width: 100%;
+    background-color: rgb(69, 69, 69);
+    color: rgb(255, 224, 177);
+    font-family: inherit;
+    font-size: inherit;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    &:active {
+      color: rgb(253, 182, 75);
+    }
+  }
+}
