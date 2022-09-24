@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { routeConfig } from "./routeConfig.js";
-import { Landing } from "./layout";
+import { Landing } from "./components/layout";
 
 const App = () => {
     return (
