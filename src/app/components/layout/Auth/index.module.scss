@@ -1,19 +1,20 @@
 .auth_container {
   width: inherit;
-  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
 }
 
 .form_container {
   width: fit-content;
   height: fit-content;
-  border-radius: 15%;
   padding: 70px;
   font-family: Bahnschrift, Segoe UI, sans-serif;
   font-size: 20px;
   color: rgb(69, 69, 69);
+  border: none;
+  outline: none;
   &_item {
     input {
       width: 100%;
@@ -38,6 +39,17 @@
     cursor: pointer;
     &:active {
       color: rgb(253, 182, 75);
+    }
+  }
+  &__invitation {
+    text-align: center;
+    margin-top: 40px;
+    line-height: 45px;
+    p a {
+      text-decoration: none;
+      &:active {
+        color: rgb(253, 182, 75);
+      }
     }
   }
 }
