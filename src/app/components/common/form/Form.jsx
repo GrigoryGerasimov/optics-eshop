@@ -1,18 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const initialState = {
-    login: "",
-    password: ""
-};
-
-const Form = ({ className, title, children }) => {
+const Form = ({ className, title, children, initialState, onSubmit }) => {
     const [data, setData] = useState(initialState);
-
-    const handleSubmit = evt => {
-        evt.preventDefault();
-        console.log(evt);
-    };
 
     const handleChange = ({ target }) => {
         const { name, value } = target;
@@ -22,35 +12,27 @@ const Form = ({ className, title, children }) => {
         }));
     };
 
+    const handleSubmit = evt => {
+        evt.preventDefault();
+        onSubmit(data);
+    };
+
     return (
         <fieldset className={className}>
             <legend>{title}</legend>
             <form onSubmit={handleSubmit}>
                 {React.Children.map(children, child => {
-                    let config = {};
-                    switch (child.props.type) {
-                        case "submit": {
-                            config = {
-                                ...child,
-                                type: child.props.type
-                            };
-                            break;
-                        }
-                        default: {
-                            config = {
-                                ...child,
-                                id: data[child.props.name],
-                                type: "text",
-                                name: data[child.props.name],
-                                value: data[child.props.value],
-                                onChange: handleChange,
-                                error: ""
-                            };
-                            break;
-                        }
-                    }
+                    const type = child.props.type || "text";
+                    const config = {
+                        ...child,
+                        type,
+                        value: data[child.props.name],
+                        onChange: handleChange,
+                        error: ""
+                    };
                     return React.cloneElement(child, config);
-                })}
+                })
+                }
             </form>
         </fieldset>
     );
@@ -59,7 +41,9 @@ const Form = ({ className, title, children }) => {
 export default Form;
 
 Form.propTypes = {
+    initialState: PropTypes.object,
     className: PropTypes.string,
     title: PropTypes.string,
+    onSubmit: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
