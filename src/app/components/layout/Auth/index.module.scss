@@ -28,21 +28,27 @@
   border: none;
   outline: none;
   &_item {
+    margin-bottom: 55px;
     input {
       width: 100%;
       border: none;
       outline: none;
       border-bottom: 1px solid rgba(69, 69, 69, 0.50);
-      margin-bottom: 55px;
       line-height: 35px;
     }
     label {
       margin-right: 40px;
     }
+    div span {
+      display: inline-block;
+      color: rgb(199, 89, 111);
+      font-size: 16px;
+      padding: 15px 0;
+    }
   }
   &_check {
     line-height: 35px;
-    & input {
+    input {
       appearance: none;
       width: 15px;
       height: 15px;
@@ -50,9 +56,16 @@
       border-radius: 2px;
       background-clip: content-box;
       margin-right: 5px;
+      cursor: pointer;
       &:checked {
         background-color: rgb(255, 224, 177);
       }
+    }
+    div span {
+      display: inline-block;
+      color: rgb(199, 89, 111);
+      font-size: 16px;
+      padding: 15px 0 0;
     }
     &:nth-of-type(2n+1) {
       margin-bottom: 55px;
@@ -69,6 +82,10 @@
     cursor: pointer;
     &:active {
       color: rgb(253, 182, 75);
+    }
+    &[disabled] {
+      opacity: 0.5;
+      cursor: initial;
     }
   }
   &__invitation {

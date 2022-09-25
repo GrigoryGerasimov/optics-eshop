@@ -4,6 +4,7 @@ import { Form, FormField, Button, CheckboxField } from "../../../common/form";
 import { withAuthOption } from "../hoc/withAuthOption.jsx";
 import styles from "../index.module.scss";
 import { setToStorage } from "../../../../utils/storage/setToStorage.js";
+import { validatorConfig } from "./validatorConfig.js";
 
 const RegisterForm = withAuthOption(Form);
 
@@ -33,6 +34,7 @@ const Register = () => {
                 className={styles.form_container}
                 title="Регистрация"
                 onSubmit={handleSubmit}
+                config={validatorConfig}
             >
                 <FormField
                     className={styles.form_container_item}
