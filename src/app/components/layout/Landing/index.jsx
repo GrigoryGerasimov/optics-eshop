@@ -7,7 +7,7 @@ const Landing = ({ children }) => {
     return (
         <div className={styles.container}>
             <Header/>
-            <main className={styles.container_main}>
+            <main>
                 {children}
             </main>
             <Footer/>
