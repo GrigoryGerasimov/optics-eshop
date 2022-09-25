@@ -4,6 +4,7 @@ import Button from "../../../common/Button.jsx";
 import { withAuthOption } from "../hoc/withAuthOption.jsx";
 import { getFromStorage } from "../../../../utils/storage/getFromStorage.js";
 import styles from "../index.module.scss";
+import { validatorConfig } from "./validatorConfig.js";
 
 const LoginForm = withAuthOption(Form);
 
@@ -23,22 +24,23 @@ const Login = () => {
         });
     }, []);
 
-    const handleSubmit = evt => {
-        evt.preventDefault();
+    const handleSubmit = data => {
+        console.log(data);
     };
 
     return (
         <div className={styles.auth_container__login}>
-            {Object.keys(initialState).includes("login") || Object.keys(initialState).includes("password") ? (
+            {Object.keys(initialState).length ? (
                 <LoginForm
                     initialState={initialState}
                     className={styles.form_container}
                     title="Авторизация"
                     onSubmit={handleSubmit}
+                    config={validatorConfig}
                 >
                     <FormField
                         className={styles.form_container_item}
-                        label="Логин"
+                        label="E-Mail"
                         id="login"
                         name="login"
                     />
