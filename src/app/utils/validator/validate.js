@@ -5,7 +5,7 @@ export const validate = (data, config) => {
     for (const name in data) {
         for (const rule in config[name]) {
             const { message } = config[name][rule];
-            const isValid = validateRules[rule](data[name]);
+            const isValid = (name === "confirmPassword" && rule === "isPasswordConfirmed") ? validateRules[rule]({ a: data.password, b: data.confirmPassword }) : validateRules[rule](data[name]);
             if (!isValid) {
                 error[name] = message;
                 break;

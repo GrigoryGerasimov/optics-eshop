@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const CheckboxField = ({ className, label, id, name, value, onChange, error }) => {
+const FormCheckboxSingle = ({ checkboxFieldClass, label, id, name, value, onChange, error }) => {
     const handleChange = ({ target }) => {
         const { name, checked: value } = target;
         onChange({
@@ -10,7 +10,7 @@ const CheckboxField = ({ className, label, id, name, value, onChange, error }) =
     };
 
     return (
-        <div className={className}>
+        <div className={checkboxFieldClass}>
             <input
                 id={id}
                 name={name}
@@ -19,15 +19,15 @@ const CheckboxField = ({ className, label, id, name, value, onChange, error }) =
                 onChange={handleChange}
             />{" "}
             <label htmlFor={id}>{label}</label>
-            <div>{error && <span>{error}</span>}</div>
+            <div>{error && <pre>{error}</pre>}</div>
         </div>
     );
 };
 
-export default CheckboxField;
+export default React.memo(FormCheckboxSingle);
 
-CheckboxField.propTypes = {
-    className: PropTypes.string,
+FormCheckboxSingle.propTypes = {
+    checkboxFieldClass: PropTypes.string,
     label: PropTypes.string,
     id: PropTypes.string,
     name: PropTypes.string,
