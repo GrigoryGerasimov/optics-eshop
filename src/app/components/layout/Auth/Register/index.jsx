@@ -1,11 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, FormControl, FormCheckboxSingle } from "../../../common/form";
 import Button from "../../../common/Button.jsx";
 import { withAuthOption } from "../hoc/withAuthOption.jsx";
-import styles from "../index.module.scss";
 import { setToStorage } from "../../../../utils/storage/setToStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
+import styles from "../index.module.scss";
 
 const RegisterForm = withAuthOption(Form);
 
@@ -27,11 +27,11 @@ const initialPasswordState = {
 };
 
 const Register = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSubmit = data => {
         setToStorage(data._id, data).then(data => console.log(data));
-        history.replace("/login");
+        navigate("/login", { replace: true });
     };
 
     return (

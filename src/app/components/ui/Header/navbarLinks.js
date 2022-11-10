@@ -41,7 +41,7 @@ export const navbarLinks = [
     },
     {
         id: 9,
-        pathTo: "/login",
+        pathTo: "/auth",
         label: "Войти"
     }
 ];
