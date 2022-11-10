@@ -35,69 +35,67 @@ const Register = () => {
     };
 
     return (
-        <div className={styles.auth_container__register}>
-            <RegisterForm
-                initialState={initialState}
-                initialPasswordState={initialPasswordState}
-                formClass={styles.form_container}
-                title="Регистрация"
-                onSubmit={handleSubmit}
-                config={validatorConfig}
-            >
-                <FormControl
-                    formFieldClass={styles.form_container_item}
-                    label="Имя пользователя"
-                    id="userName"
-                    name="userName"
-                    autoFocus
-                />
-                <FormControl
-                    formFieldClass={styles.form_container_item}
-                    label="Имя"
-                    id="firstName"
-                    name="firstName"
-                />
-                <FormControl
-                    formFieldClass={styles.form_container_item}
-                    label="Фамилия"
-                    id="lastName"
-                    name="lastName"
-                />
-                <FormControl
-                    formFieldClass={styles.form_container_item}
-                    label="E-Mail"
-                    id="email"
-                    name="email"
-                />
-                <FormControl
-                    formFieldClass={styles.form_container_item}
-                    type="password"
-                    label="Пароль"
-                    id="password"
-                    name="password"
-                />
-                <FormControl
-                    formFieldClass={styles.form_container_item}
-                    type="password"
-                    label="Подтверждение пароля"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                />
-                <FormCheckboxSingle
-                    checkboxFieldClass={styles.form_container_check}
-                    label="Я хочу подписаться на рекламную рассылку по электронной почте"
-                    id="adv"
-                    name="adv"
-                />
-                <FormCheckboxSingle
-                    checkboxFieldClass={styles.form_container_check}
-                    label="Я ознакомлен и согласен с Лицензионным соглашением"
-                    id="license"
-                    name="license"
-                />
-                <Button buttonClass={styles.form_container__button_submit} type="submit">Отправить</Button>
-            </RegisterForm>
-        </div>
+        <RegisterForm
+            initialState={initialState}
+            initialPasswordState={initialPasswordState}
+            formClass={styles.form_container}
+            title="Регистрация"
+            onSubmit={handleSubmit}
+            config={validatorConfig}
+        >
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="Имя пользователя"
+                id="userName"
+                name="userName"
+                autoFocus
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="Имя"
+                id="firstName"
+                name="firstName"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="Фамилия"
+                id="lastName"
+                name="lastName"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="E-Mail"
+                id="email"
+                name="email"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                type="password"
+                label="Пароль"
+                id="password"
+                name="password"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                type="password"
+                label="Подтверждение пароля"
+                id="confirmPassword"
+                name="confirmPassword"
+            />
+            <FormCheckboxSingle
+                checkboxFieldClass={styles.form_container_check}
+                label="Я хочу подписаться на рекламную рассылку по электронной почте"
+                id="adv"
+                name="adv"
+            />
+            <FormCheckboxSingle
+                checkboxFieldClass={styles.form_container_check}
+                label="Я ознакомлен и согласен с Лицензионным соглашением"
+                id="license"
+                name="license"
+            />
+            <Button buttonClass={styles.form_container__button_submit} type="submit">Отправить</Button>
+        </RegisterForm>
     );
 };
 
