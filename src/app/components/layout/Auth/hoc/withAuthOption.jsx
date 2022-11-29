@@ -8,7 +8,7 @@ const LoginOption = () => {
         <div className={styles.form_container__invitation}>
             <p>Уже зарегистрированы?</p>
             <p>Вы можете войти в свою учётную запись{" "}
-                <Link to="/login">
+                <Link to="/auth/login">
                     <strong>здесь</strong>
                 </Link>
             </p>
@@ -21,7 +21,7 @@ const RegisterOption = () => {
         <div className={styles.form_container__invitation}>
             <p>Нет учётной записи? Не беда!</p>
             <p>Вы всегда можете зарегистрироваться{" "}
-                <Link to="/register">
+                <Link to="/auth/register">
                     <strong>здесь</strong>
                 </Link>
             </p>
@@ -35,7 +35,7 @@ export const withAuthOption = Component => {
         return (
             <Component {...props}>
                 {children}
-                {pathname === "/login" ? <RegisterOption/> : <LoginOption/>}
+                {pathname === "/auth/login" ? <RegisterOption/> : <LoginOption/>}
             </Component>
         );
     };

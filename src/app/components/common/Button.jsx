@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = ({ className, label, type, disabled }) => {
+const Button = ({ buttonClass, type, children, ...rest }) => {
     return (
         <button
-            className={className}
+            className={buttonClass}
             type={type}
-            disabled={disabled}
+            {...rest}
         >
-            {label}
+            {children}
         </button>
     );
 };
@@ -16,8 +16,7 @@ const Button = ({ className, label, type, disabled }) => {
 export default React.memo(Button);
 
 Button.propTypes = {
-    className: PropTypes.string,
-    label: PropTypes.string,
+    buttonClass: PropTypes.string,
     type: PropTypes.string,
-    disabled: PropTypes.bool
+    children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node, PropTypes.string])
 };

@@ -1,10 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { Form, FormField, Button, CheckboxField } from "../../../common/form";
+import { useNavigate } from "react-router-dom";
+import { Form, FormControl, FormCheckboxSingle } from "../../../common/form";
+import Button from "../../../common/Button.jsx";
 import { withAuthOption } from "../hoc/withAuthOption.jsx";
-import styles from "../index.module.scss";
 import { setToStorage } from "../../../../utils/storage/setToStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
+import styles from "../index.module.scss";
 
 const RegisterForm = withAuthOption(Form);
 
@@ -15,73 +16,86 @@ const initialState = {
     lastName: "",
     email: "",
     password: "",
+    confirmPassword: "",
     adv: false,
     license: false
 };
 
+const initialPasswordState = {
+    password: false,
+    confirmPassword: false
+};
+
 const Register = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSubmit = data => {
         setToStorage(data._id, data).then(data => console.log(data));
-        history.replace("/login");
+        navigate("/login", { replace: true });
     };
 
     return (
-        <div className={styles.auth_container__register}>
-            <RegisterForm
-                initialState={initialState}
-                className={styles.form_container}
-                title="Регистрация"
-                onSubmit={handleSubmit}
-                config={validatorConfig}
-            >
-                <FormField
-                    className={styles.form_container_item}
-                    label="Имя пользователя"
-                    id="userName"
-                    name="userName"
-                />
-                <FormField
-                    className={styles.form_container_item}
-                    label="Имя"
-                    id="firstName"
-                    name="firstName"
-                />
-                <FormField
-                    className={styles.form_container_item}
-                    label="Фамилия"
-                    id="lastName"
-                    name="lastName"
-                />
-                <FormField
-                    className={styles.form_container_item}
-                    label="E-Mail"
-                    id="email"
-                    name="email"
-                />
-                <FormField
-                    className={styles.form_container_item}
-                    type="password"
-                    label="Пароль"
-                    id="password"
-                    name="password"
-                />
-                <CheckboxField
-                    className={styles.form_container_check}
-                    label="Я хочу подписаться на рекламную рассылку по электронной почте"
-                    id="adv"
-                    name="adv"
-                />
-                <CheckboxField
-                    className={styles.form_container_check}
-                    label="Я ознакомлен и согласен с Лицензионным соглашением"
-                    id="license"
-                    name="license"
-                />
-                <Button className={styles.form_container__button_submit} type="submit" label="Отправить"/>
-            </RegisterForm>
-        </div>
+        <RegisterForm
+            initialState={initialState}
+            initialPasswordState={initialPasswordState}
+            formClass={styles.form_container}
+            title="Регистрация"
+            onSubmit={handleSubmit}
+            config={validatorConfig}
+        >
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="Имя пользователя"
+                id="userName"
+                name="userName"
+                autoFocus
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="Имя"
+                id="firstName"
+                name="firstName"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="Фамилия"
+                id="lastName"
+                name="lastName"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                label="E-Mail"
+                id="email"
+                name="email"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                type="password"
+                label="Пароль"
+                id="password"
+                name="password"
+            />
+            <FormControl
+                formFieldClass={styles.form_container_item}
+                type="password"
+                label="Подтверждение пароля"
+                id="confirmPassword"
+                name="confirmPassword"
+            />
+            <FormCheckboxSingle
+                checkboxFieldClass={styles.form_container_check}
+                label="Я хочу подписаться на рекламную рассылку по электронной почте"
+                id="adv"
+                name="adv"
+            />
+            <FormCheckboxSingle
+                checkboxFieldClass={styles.form_container_check}
+                label="Я ознакомлен и согласен с Лицензионным соглашением"
+                id="license"
+                name="license"
+            />
+            <Button buttonClass={styles.form_container__button_submit} type="submit">Отправить</Button>
+        </RegisterForm>
     );
 };
 
