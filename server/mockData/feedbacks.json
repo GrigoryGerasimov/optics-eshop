@@ -1,17 +1,11 @@
 [
   {
-    "content": "Test Description 1",
-    "productCardId": "ObjectId_sample_#1",
-    "userId": "ObjectId_sample_#3"
+    "content": "Test Description 1"
   },
   {
-    "content": "Test Description 2",
-    "productCardId": "ObjectId_sample_#2",
-    "userId": "ObjectId_sample_#67"
+    "content": "Test Description 2"
   },
   {
-    "content": "Test Description 3",
-    "productCardId": "ObjectId_sample_#14",
-    "userId": "ObjectId_sample_#13"
+    "content": "Test Description 3"
   }
 ]

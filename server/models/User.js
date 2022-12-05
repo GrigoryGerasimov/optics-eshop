@@ -23,6 +23,10 @@ const schema = new Schema({
         type: String,
         required: true
     },
+    role: {
+        type: Schema.Types.ObjectId,
+        ref: "Role"
+    },
     gender: {
         type: String,
         required: false,
