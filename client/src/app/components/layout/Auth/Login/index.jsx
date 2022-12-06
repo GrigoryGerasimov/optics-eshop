@@ -41,13 +41,15 @@ const Login = () => {
                 label="E-Mail"
                 id="login"
                 name="login"
+                autoComplete="username"
             />
             <FormControl
                 formFieldClass="mb-[55px]"
                 type="password"
                 label="Пароль"
-                if="password"
+                id="password"
                 name="password"
+                autoComplete="current-password"
             />
             <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Войти</Button>
         </LoginForm>

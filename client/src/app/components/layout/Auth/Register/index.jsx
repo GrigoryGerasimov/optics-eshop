@@ -45,8 +45,8 @@ const Register = () => {
             <FormControl
                 formFieldClass="mb-[55px]"
                 label="Имя пользователя"
-                id="userName"
-                name="userName"
+                id="username"
+                name="username"
                 autoFocus
             />
             <FormControl
@@ -73,6 +73,7 @@ const Register = () => {
                 label="Пароль"
                 id="password"
                 name="password"
+                autoComplete="new-password"
             />
             <FormControl
                 formFieldClass="mb-[55px]"
@@ -80,6 +81,7 @@ const Register = () => {
                 label="Подтверждение пароля"
                 id="confirmPassword"
                 name="confirmPassword"
+                autoComplete="new-password"
             />
             <FormCheckboxSingle
                 checkboxFieldClass="leading-10"

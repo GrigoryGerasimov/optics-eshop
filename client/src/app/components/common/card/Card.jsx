@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 export const Card = ({ img, name, title, description, ...rest }) => {
     return (
-        <div className="w-[400px] h-max m-5 cursor-pointer hover:shadow-lg">
+        <div className="w-[400px] h-max m-5 cursor-pointer hover:shadow-lg" {...rest} >
             <CardImage
                 cardImgPath={img}
                 cardImgTitle={name}
