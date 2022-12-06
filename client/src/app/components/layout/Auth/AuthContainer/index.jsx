@@ -1,10 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import styles from "../index.module.scss";
 
 const AuthContainer = () => {
     return (
-        <div className={styles.auth_container}>
+        <div className="w-[inherit] h-full flex justify-center items-center mt-[100px] pb-[10%]">
             <Outlet/>
         </div>
     );

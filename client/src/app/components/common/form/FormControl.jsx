@@ -1,14 +1,15 @@
 import React from "react";
 import Button from "../Button.jsx";
+import { EyeIcon, EyeSlashIcon } from "../../ui/common_ui/Icons";
 import PropTypes from "prop-types";
-import styles from "./index.module.scss";
 
 const FormControl = ({ formFieldClass, label, id, type, name, value, onChange, isPasswordVisible, onShowPassword, error, ...rest }) => {
     return (
         <div className={formFieldClass}>
-            <label htmlFor={id}>{label}</label>{" "}
-            <div className={styles.form__internal_wrapper}>
+            <label htmlFor={id} className="mr-[40px]">{label}</label>{" "}
+            <div className="flex">
                 <input
+                    className="w-full outline-none border-b border-gray-700 border-opacity-50 leading-9"
                     id={id}
                     type={type}
                     name={name}
@@ -22,12 +23,11 @@ const FormControl = ({ formFieldClass, label, id, type, name, value, onChange, i
                         type="button"
                         onClick={() => onShowPassword(name, isPasswordVisible)}
                     >
-                        {isPasswordVisible ? "Скрыть" : "Показать"}
-                        {/* <i className={`bi bi-eye${isPasswordVisible ? "-slash" : ""}`}></i> */}
+                        {isPasswordVisible ? <EyeSlashIcon/> : <EyeIcon/>}
                     </Button>
                 )}
             </div>
-            <div>{error && <pre>{error}</pre>}</div>
+            <div>{error && <pre className="inline-block text-pink-600 text-base py-4 px-0">{error}</pre>}</div>
         </div>
     );
 };
