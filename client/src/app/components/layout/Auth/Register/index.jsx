@@ -5,7 +5,6 @@ import Button from "../../../common/Button.jsx";
 import { withAuthOption } from "../hoc/withAuthOption.jsx";
 import { setToStorage } from "../../../../utils/storage/setToStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
-import styles from "../index.module.scss";
 
 const RegisterForm = withAuthOption(Form);
 
@@ -38,63 +37,65 @@ const Register = () => {
         <RegisterForm
             initialState={initialState}
             initialPasswordState={initialPasswordState}
-            formClass={styles.form_container}
+            formClass="w-max h-max p-[70px] text-xl text-gray-700 border-none outline-none"
             title="Регистрация"
             onSubmit={handleSubmit}
             config={validatorConfig}
         >
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 label="Имя пользователя"
-                id="userName"
-                name="userName"
+                id="username"
+                name="username"
                 autoFocus
             />
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 label="Имя"
                 id="firstName"
                 name="firstName"
             />
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 label="Фамилия"
                 id="lastName"
                 name="lastName"
             />
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 label="E-Mail"
                 id="email"
                 name="email"
             />
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 type="password"
                 label="Пароль"
                 id="password"
                 name="password"
+                autoComplete="new-password"
             />
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 type="password"
                 label="Подтверждение пароля"
                 id="confirmPassword"
                 name="confirmPassword"
+                autoComplete="new-password"
             />
             <FormCheckboxSingle
-                checkboxFieldClass={styles.form_container_check}
+                checkboxFieldClass="leading-10"
                 label="Я хочу подписаться на рекламную рассылку по электронной почте"
                 id="adv"
                 name="adv"
             />
             <FormCheckboxSingle
-                checkboxFieldClass={styles.form_container_check}
+                checkboxFieldClass="leading-10 mb-[55px]"
                 label="Я ознакомлен и согласен с Лицензионным соглашением"
                 id="license"
                 name="license"
             />
-            <Button buttonClass={styles.form_container__button_submit} type="submit">Отправить</Button>
+            <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Отправить</Button>
         </RegisterForm>
     );
 };

@@ -5,7 +5,6 @@ import { withAuthOption } from "../hoc/withAuthOption.jsx";
 import { getFromStorage } from "../../../../utils/storage/getFromStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
 import Loader from "../../../common/Loader.jsx";
-import styles from "../index.module.scss";
 
 const LoginForm = withAuthOption(Form);
 
@@ -32,25 +31,27 @@ const Login = () => {
     return Object.keys(initialState).length ? (
         <LoginForm
             initialState={initialState}
-            formClass={styles.form_container}
+            formClass="w-max h-max p-[70px] text-xl text-gray-700 border-none outline-none"
             title="Авторизация"
             onSubmit={handleSubmit}
             config={validatorConfig}
         >
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 label="E-Mail"
                 id="login"
                 name="login"
+                autoComplete="username"
             />
             <FormControl
-                formFieldClass={styles.form_container_item}
+                formFieldClass="mb-[55px]"
                 type="password"
                 label="Пароль"
-                if="password"
+                id="password"
                 name="password"
+                autoComplete="current-password"
             />
-            <Button buttonClass={styles.form_container__button_submit} type="submit">Войти</Button>
+            <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Войти</Button>
         </LoginForm>
     ) : <Loader/>;
 };

@@ -1,14 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
-import styles from "../index.module.scss";
 
 const LoginOption = () => {
     return (
-        <div className={styles.form_container__invitation}>
+        <div className="text-center mt-[40px] leading-10">
             <p>Уже зарегистрированы?</p>
             <p>Вы можете войти в свою учётную запись{" "}
-                <Link to="/auth/login">
+                <Link to="/auth/login" className="no-underline visited:text-gray-700 visited:text-opacity-75 active:text-yellow-300">
                     <strong>здесь</strong>
                 </Link>
             </p>
@@ -18,10 +17,10 @@ const LoginOption = () => {
 
 const RegisterOption = () => {
     return (
-        <div className={styles.form_container__invitation}>
+        <div className="text-center mt-[40px] leading-10">
             <p>Нет учётной записи? Не беда!</p>
             <p>Вы всегда можете зарегистрироваться{" "}
-                <Link to="/auth/register">
+                <Link to="/auth/register" className="no-underline visited:text-gray-700 visited:text-opacity-75 active:text-yellow-300">
                     <strong>здесь</strong>
                 </Link>
             </p>

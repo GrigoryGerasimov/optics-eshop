@@ -1,5 +1,5 @@
 export const validatorConfig = {
-    userName: {
+    username: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }

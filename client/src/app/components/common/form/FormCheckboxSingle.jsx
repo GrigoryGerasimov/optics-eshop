@@ -12,6 +12,7 @@ const FormCheckboxSingle = ({ checkboxFieldClass, label, id, name, value, onChan
     return (
         <div className={checkboxFieldClass}>
             <input
+                className="appearance-none w-[15px] h-[15px] border border-solid border-gray-700 rounded-sm bg-clip-content mr-[5px] cursor-pointer checked:bg-yellow-200"
                 id={id}
                 name={name}
                 type="checkbox"
@@ -19,7 +20,7 @@ const FormCheckboxSingle = ({ checkboxFieldClass, label, id, name, value, onChan
                 onChange={handleChange}
             />{" "}
             <label htmlFor={id}>{label}</label>
-            <div>{error && <pre>{error}</pre>}</div>
+            <div>{error && <pre className="inline-block text-pink-600 text-base py-4 px-0">{error}</pre>}</div>
         </div>
     );
 };
