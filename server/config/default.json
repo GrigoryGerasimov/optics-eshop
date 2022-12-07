@@ -1,0 +1,22 @@
+{
+  "server": {
+    "S_PROTOCOL": "https",
+    "S_HOST": "localhost",
+    "S_PORT": 5000
+  },
+  "client": {
+    "C_PROTOCOL": "https",
+    "C_HOST": "localhost",
+    "C_PORT": 3000
+  },
+  "db": {
+    "mongodb": {
+      "M_SRV_URI": "mongodb+srv://grigory_gerasimov:tWb2ki8HBZ9VIEME@cluster0.qwsqton.mongodb.net/?retryWrites=true&w=majority",
+      "M_PROTOCOL": "mongodb",
+      "M_HOST": "localhost",
+      "M_PORT": 27017,
+      "M_DBPATH": "optics-eshop",
+      "isSRV": false
+    }
+  }
+}

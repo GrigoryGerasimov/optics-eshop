@@ -11,7 +11,7 @@ const RegisterForm = withAuthOption(Form);
 
 const initialState = {
     _id: "test_uuid",
-    userName: "",
+    username: "",
     firstName: "",
     lastName: "",
     email: "",
