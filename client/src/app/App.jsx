@@ -1,13 +1,16 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
 import { Landing } from "./components/layout";
+import { ProductsProvider } from "./components/hooks/useProducts.jsx";
 import { routes } from "./routes.jsx";
 
 const App = () => {
     return (
-        <Landing>
-            {useRoutes(routes())}
-        </Landing>
+        <ProductsProvider>
+            <Landing>
+                {useRoutes(routes())}
+            </Landing>
+        </ProductsProvider>
     );
 };
 
