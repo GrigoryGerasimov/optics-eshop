@@ -1,14 +1,22 @@
 const { handleTimeout } = require("./handleTimeout");
 const { handleAccepts } = require("./handleAccepts");
-const { handleValidation } = require('./handleValidation');
+const { handleValidationOnSignUp } = require('./handleValidationOnSignUp');
+const { handleValidationOnSignIn } = require('./handleValidationOnSignIn');
 const { handleUserExistenceCheck } = require("./handleUserExistenceCheck");
+const { handleAuth } = require("./handleAuth");
+const { handleRoleAccessCheck } = require("./handleRoleAccessCheck");
+const { handleTokenAccessCheck } = require("./handleTokenAccessCheck");
 
 const mw = {};
 
 mw.onTimeout = handleTimeout;
 mw.onAccept = handleAccepts;
-mw.onValidation = handleValidation;
+mw.onValidationSignUp = handleValidationOnSignUp;
+mw.onValidationSignIn = handleValidationOnSignIn;
 mw.onUserExistence = handleUserExistenceCheck;
+mw.onAuth = handleAuth;
+mw.onRoleAccessCheck = handleRoleAccessCheck;
+mw.onTokenAccessCheck = handleTokenAccessCheck;
 
 module.exports = {
     mw

@@ -5,6 +5,7 @@
     "lastName": "Doe",
     "email": "jane.doe@test.test",
     "password": "1234567890",
+    "role": "638cc18d53d64e41177e97ba",
     "adv": false
   },
   {
@@ -13,6 +14,7 @@
     "lastName": "Doe",
     "email": "john.doe@test.com.co.uk",
     "password": "1234567890",
+    "role": "638cc18d53d64e41177e97bb",
     "adv": true
   }
 ]

@@ -6,14 +6,12 @@ const schema = new Schema({
         required: true
     },
     productCardId: {
-        // type: Schema.Types.ObjectId,
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: "Product"
     },
     userId: {
-        // type: Schema.Types.ObjectId,
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }
 }, {
     timestamps: true

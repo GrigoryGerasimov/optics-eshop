@@ -1,5 +1,5 @@
-const { UserService } = require("../services/UserService");
 const { models } = require("../models");
+
 const handleUserExistenceCheck = async (req, res, next) => {
     const { username, email } = req.body;
 

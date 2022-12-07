@@ -3,10 +3,12 @@ const userRoutes = Router();
 const { UserController } = require("../controllers/UserController");
 const { mw } = require("../middleware");
 
+const { onTokenAccessCheck, onRoleAccessCheck } = mw;
+
 userRoutes
     .route("/")
-    .get(UserController.read)
-    .post(mw.onValidation, mw.onUserExistence, UserController.create);
+    .get(onTokenAccessCheck, onRoleAccessCheck(["admin", "buyer"]), UserController.read)
+    .post(onTokenAccessCheck, onRoleAccessCheck("admin"), UserController.create);
 
 userRoutes
     .route("/:userId")

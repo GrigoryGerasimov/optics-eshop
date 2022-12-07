@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
-    "SALT": bcrypt.genSalt(12)
+    "SALT": 12
 };

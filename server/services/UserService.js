@@ -8,6 +8,7 @@ class UserService {
         try {
             return await models.User.find().exec();
         } catch (err) {
+            process.env.NODE_ENV === "development" && console.log(err);
             throw new Error("Вследствие возникшей ошибки невозможно выполнение операции. Повторите попытку");
         }
     }
@@ -16,6 +17,7 @@ class UserService {
         try {
             return await models.User.findById(id).exec();
         } catch (err) {
+            process.env.NODE_ENV === "development" && console.log(err);
             throw new Error("Вследствие возникшей ошибки невозможно выполнение операции. Повторите попытку");
         }
     }
@@ -24,9 +26,7 @@ class UserService {
 
         try {
             const newBoundAttachment = file ? await FileService.save(file) : null;
-            const newEntity = await models.User.create({ ...payload, fileName: newBoundAttachment });
-            await newEntity.save();
-            return newEntity;
+            return await models.User.create({ ...payload, fileName: newBoundAttachment });
         } catch (err) {
             process.env.NODE_ENV === "development" && console.log(err);
             throw new Error("Вследствие возникшей ошибки запись нового пользователя не могла быть создана");
@@ -53,6 +53,7 @@ class UserService {
             await updatedEntity.save();
             return updatedEntity;
         } catch (err) {
+            process.env.NODE_ENV === "development" && console.log(err);
             throw new Error("Вследствие возникшей ошибки данные пользователя не смогли быть изменены");
         }
     }
@@ -64,6 +65,7 @@ class UserService {
             if (boundAttachmentName && fsSync.existsSync(path.resolve(__dirname, "../static", boundAttachmentName))) await FileService.delete(boundAttachmentName);
             await models.User.findByIdAndDelete(id);
         } catch (err) {
+            process.env.NODE_ENV === "development" && console.log(err);
             throw new Error("Вследствие возникшей ошибки пользователь не мог быть удалён");
         }
     }

@@ -1,5 +1,7 @@
 const { UserService } = require("../services/UserService");
 const { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const controllerConfig = require("./controllerConfig");
 
 class UserController {
     static async read(req, res) {
@@ -56,7 +58,7 @@ class UserController {
                     }
                 })
             });
-        };
+        }
 
         if (!req.files || !Object.keys(req.files).length) {
             return res.format({
@@ -81,12 +83,14 @@ class UserController {
         }
 
         try {
-            const newUser = await UserService.create(req.files.file, req.body);
+            const hashedPassword = await bcrypt.hash(req.body.password, controllerConfig["SALT"]);
+            const newUser = await UserService.create(req.files.file, { ...req.body, password: hashedPassword });
             res.status(201).json({
                 code: 201,
                 message: "Пользователь успешно занесён в коллекцию",
                 data: newUser
             });
+            return newUser;
         } catch (err) {
             res.format({
                 "text/plain": () => res.status(400).send(`${err}`),
