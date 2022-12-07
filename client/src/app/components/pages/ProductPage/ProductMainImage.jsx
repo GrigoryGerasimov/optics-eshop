@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const ProductMainImage = ({ productMainImgClass, productMainImgPath, productMainImgTitle }) => {
+const ProductMainImage = ({ productMainImgClass, productMainImgPath, productMainImgTitle }) => {
     return (
         <img className={productMainImgClass} src={productMainImgPath} alt={productMainImgTitle}/>
     );
 };
+
+export default React.memo(ProductMainImage);
 
 ProductMainImage.defaultProps = {
     productMainImgClass: "w-full"

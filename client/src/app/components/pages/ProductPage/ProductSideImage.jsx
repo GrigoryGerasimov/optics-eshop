@@ -1,11 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const ProductSideImage = ({ productSideImgClass, productSideImgPath, productSideImgTitle }) => {
+const ProductSideImage = ({ productSideImgClass, productSideImgPath, productSideImgTitle }) => {
     return (
         <img className={productSideImgClass} src={productSideImgPath} alt={productSideImgTitle}/>
     );
 };
+
+export default React.memo(ProductSideImage);
 
 ProductSideImage.defaultProps = {
     productSideImgClass: "w-1/3"

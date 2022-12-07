@@ -5,7 +5,7 @@ import { NavLogo } from "./NavLogo.jsx";
 
 const Header = () => {
     return (
-        <header className="w-full h-[50%] md:h-[40%] lg:h-[30%] xl:h-[20%] 2xl:h-[10%] mt-[50px]">
+        <header className="w-full h-[50%] md:h-[40%] lg:h-[30%] xl:h-[20%] mt-[50px]">
             <nav className="h-[50%] flex flex-row justify-evenly items-center flex-wrap">
                 <NavLogo/>
                 <div className="flex flex-row justify-evenly items-center flex-wrap">

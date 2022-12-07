@@ -1,12 +1,12 @@
 import React from "react";
 import Button from "../Button.jsx";
-import { EyeIcon, EyeSlashIcon } from "../../ui/common_ui/Icons";
+import { EyeIcon, EyeSlashIcon } from "../../ui/common_ui/icons";
 import PropTypes from "prop-types";
 
 const FormControl = ({ formFieldClass, label, id, type, name, value, onChange, isPasswordVisible, onShowPassword, error, ...rest }) => {
     return (
         <div className={formFieldClass}>
-            <label htmlFor={id} className="mr-[40px]">{label}</label>{" "}
+            {label && <label htmlFor={id} className="mr-[40px]">{label}</label>}{" "}
             <div className="flex">
                 <input
                     className="w-full outline-none border-b border-gray-700 border-opacity-50 leading-9"
@@ -19,7 +19,6 @@ const FormControl = ({ formFieldClass, label, id, type, name, value, onChange, i
                 />
                 {(name === "password" || name === "confirmPassword") && (
                     <Button
-                        buttonClass=""
                         type="button"
                         onClick={() => onShowPassword(name, isPasswordVisible)}
                     >

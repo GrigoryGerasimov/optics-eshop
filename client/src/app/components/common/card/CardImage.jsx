@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export const CardImage = ({ cardImgClass, cardImgPath, cardImgTitle }) => {
+const CardImage = ({ cardImgClass, cardImgPath, cardImgTitle }) => {
     return (
         <img
             className={cardImgClass}
@@ -10,6 +10,8 @@ export const CardImage = ({ cardImgClass, cardImgPath, cardImgTitle }) => {
         />
     );
 };
+
+export default React.memo(CardImage);
 
 CardImage.defaultProps = {
     cardImgClass: "block w-full h-[250px]"

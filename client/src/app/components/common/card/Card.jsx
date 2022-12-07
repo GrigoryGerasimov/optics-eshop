@@ -1,11 +1,11 @@
 import React from "react";
-import { CardImage } from "./CardImage.jsx";
+import CardImage from "./CardImage.jsx";
 import { CardTitle } from "./CardTitle.jsx";
 import { CardBody } from "./CardBody.jsx";
 import { CardFooter } from "./CardFooter.jsx";
 import PropTypes from "prop-types";
 
-export const Card = ({ cardClass, img, name, title, description, ...rest }) => {
+export const Card = ({ cardClass, img, name, title, brand, collection, ...rest }) => {
     return (
         <div className={cardClass} {...rest} >
             <CardImage
@@ -16,7 +16,7 @@ export const Card = ({ cardClass, img, name, title, description, ...rest }) => {
                 cardTitleText={title}
             />
             <CardBody
-                cardBodyText={description}
+                cardBodyText={`${brand} - ${collection}`}
             />
             <CardFooter/>
         </div>
@@ -32,5 +32,6 @@ Card.propTypes = {
     img: PropTypes.string,
     name: PropTypes.string,
     title: PropTypes.string,
-    description: PropTypes.string
+    brand: PropTypes.string,
+    collection: PropTypes.string
 };

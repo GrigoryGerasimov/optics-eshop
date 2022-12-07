@@ -4,7 +4,7 @@ import {
     InstagramIcon,
     TelegramIcon,
     TwitterIcon
-} from "../../../ui/common_ui/Icons";
+} from "../../common_ui/icons";
 
 export const metaContactsLinks = [
     {
