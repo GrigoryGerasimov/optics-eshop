@@ -5,9 +5,9 @@ import { CardBody } from "./CardBody.jsx";
 import { CardFooter } from "./CardFooter.jsx";
 import PropTypes from "prop-types";
 
-export const Card = ({ img, name, title, description, ...rest }) => {
+export const Card = ({ cardClass, img, name, title, description, ...rest }) => {
     return (
-        <div className="w-[400px] h-max m-5 cursor-pointer hover:shadow-lg" {...rest} >
+        <div className={cardClass} {...rest} >
             <CardImage
                 cardImgPath={img}
                 cardImgTitle={name}
@@ -23,7 +23,12 @@ export const Card = ({ img, name, title, description, ...rest }) => {
     );
 };
 
+Card.defaultProps = {
+    cardClass: "w-[400px] h-max m-5 self-center justify-self-center cursor-pointer hover:shadow-lg"
+};
+
 Card.propTypes = {
+    cardClass: PropTypes.string,
     img: PropTypes.string,
     name: PropTypes.string,
     title: PropTypes.string,

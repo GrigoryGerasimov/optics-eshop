@@ -41,7 +41,6 @@ const Login = () => {
                 label="E-Mail"
                 id="login"
                 name="login"
-                autoComplete="username"
             />
             <FormControl
                 formFieldClass="mb-[55px]"
