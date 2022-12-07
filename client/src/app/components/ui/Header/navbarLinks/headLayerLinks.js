@@ -1,4 +1,4 @@
-export const navbarLinks = [
+export const headLayerLinks = [
     {
         id: 1,
         pathTo: "/",
@@ -38,10 +38,5 @@ export const navbarLinks = [
         id: 8,
         pathTo: "",
         label: "Консультация офтальмолога"
-    },
-    {
-        id: 9,
-        pathTo: "/auth",
-        label: "Войти"
     }
 ];

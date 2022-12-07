@@ -268,8 +268,8 @@ const ProductPage = () => {
     const currentItem = productData.find(productItem => productItem._id === productId);
 
     return (
-        <div className="w-[inherit] h-full flex flex-row flex-wrap justify-evenly items-center mt-[50px] pb-[10%]">
-            <div className="w-6/12">
+        <div className="flex flex-row flex-wrap justify-evenly items-center mt-[50px]">
+            <div className="2xl:w-6/12">
                 <ProductMainImage
                     productMainImgPath={currentItem.imgBig}
                     productMainImgTitle={currentItem.name}
@@ -284,7 +284,7 @@ const ProductPage = () => {
                     ))}
                 </div>
             </div>
-            <div className="w-3/12">
+            <div className="p-10 2xl:w-3/12">
                 <ProductInfoBlock {...currentItem}/>
             </div>
         </div>
