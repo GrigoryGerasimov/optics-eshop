@@ -1,4 +1,5 @@
 import React, { useState, useContext, useMemo, useCallback } from "react";
+import { useCategories } from "./useCategories.jsx";
 import PropTypes from "prop-types";
 
 const initialProductData = [
@@ -10,7 +11,8 @@ const initialProductData = [
         name: "glasses img 1",
         title: "Brand New Day",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#ss23mdeluxe", "#dprogres", "#round", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -28,7 +30,8 @@ const initialProductData = [
         name: "glasses img 2",
         title: "Super Glasses 2022",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw23mdeluxe", "#dfmen", "#thick", "#monthly"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -46,7 +49,8 @@ const initialProductData = [
         name: "glasses img 3",
         title: "Collection FW2021",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw23mdeluxe", "#dmen", "#square", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -64,7 +68,8 @@ const initialProductData = [
         name: "glasses img 4",
         title: "Perfect choice!",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw23mdeluxe", "#dcomp", "#thin", "#daily"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -82,7 +87,8 @@ const initialProductData = [
         name: "glasses img 5",
         title: "Fantastic Tale",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw23unisex", "#dfsun", "#thin", "#daily"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -100,7 +106,8 @@ const initialProductData = [
         name: "glasses img 6",
         title: "Women Collection SS22",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw22wdeluxe", "#dwomen", "#thin", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -118,7 +125,8 @@ const initialProductData = [
         name: "glasses img 7",
         title: "Kids Choice",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#ss23kidsteens", "#dfkids", "#thick", "#monthly"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -136,7 +144,8 @@ const initialProductData = [
         name: "glasses img 8",
         title: "Brand New Day",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#ss22wdeluxe", "#ddriver", "#thin", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -154,7 +163,8 @@ const initialProductData = [
         name: "glasses img 9",
         title: "Super Glasses 2022",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw22mdeluxe", "#dfflat", "#classic", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -170,9 +180,10 @@ const initialProductData = [
         imgBig: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6",
         imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         name: "glasses img 10",
-        title: "Collection FW2021",
+        title: "Collection SS2023",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#ss23kidsteens", "#dmen", "#thin", "#daily"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -190,7 +201,8 @@ const initialProductData = [
         name: "glasses img 11",
         title: "Perfect choice!",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw23unisex", "#dfstyle", "#round", "#daily"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -208,7 +220,8 @@ const initialProductData = [
         name: "glasses img 12",
         title: "Fantastic Tale",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw22mdeluxe", "#dphotochr", "#square", "#monthly"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -226,7 +239,8 @@ const initialProductData = [
         name: "glasses img 13",
         title: "Women Collection SS22",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#ss22wdeluxe", "#dwomen", "#semi", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -244,7 +258,8 @@ const initialProductData = [
         name: "glasses img 14",
         title: "Kids Choice",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#ss23kidsteens", "#dkids", "#thick", "#daily"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -262,7 +277,8 @@ const initialProductData = [
         name: "glasses img 15",
         title: "Kids Choice",
         brand: "Personal Brand",
-        collection: "Men FW22",
+        params: ["#fw22kidsteens", "#dfkids", "#thin", "#everyday"],
+        collectionTitle: "Men FW22",
         productGroup: "очки коррекционные",
         description: "универсальные медицинские мужские очки для зрения - элегантные, лёгкие, изящные и прочные (ширина линзы 54 мм). Подходят к среднему и крупному мужскому лицу шириной 141-147 мм",
         colors: ["чёрные", "тёмно-коричневые", "светло-серые"],
@@ -280,18 +296,59 @@ export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState(initialProductData);
+    const { collection, glassTypes, frameTypes, lenseTypes } = useCategories();
 
     const filterSearchedProducts = useCallback(data => {
         const searchedProducts = products.filter(productUnit => productUnit.title.toLowerCase().includes(data.toLowerCase()));
         setProducts(searchedProducts);
     }, []);
 
+    const filterCatalogedProducts = useCallback((criteria, category, type, subtype) => {
+        const filteredProducts = products.filter(productUnit => {
+            switch (criteria) {
+                case "collection": {
+                    for (const cat of Object.keys(collection[category])) {
+                        if (cat === type) {
+                            for (const item of collection[category][cat]) {
+                                if (productUnit.params.includes(!subtype ? item._id : subtype)) return productUnit;
+                            }
+                        }
+                    }
+                    break;
+                }
+                case "glassTypes": {
+                    for (const item of glassTypes[category]) {
+                        if (productUnit.params.includes(!type ? item._id : type)) return productUnit;
+                    }
+                    break;
+                }
+                case "frameTypes": {
+                    for (const item of frameTypes[category]) {
+                        if (productUnit.params.includes(!type ? item._id : type)) return productUnit;
+                    }
+                    break;
+                }
+                case "lenseTypes": {
+                    for (const item of lenseTypes[category]) {
+                        if (productUnit.params.includes(!type ? item._id : type)) return productUnit;
+                    }
+                    break;
+                }
+                default: return productUnit;
+            }
+            return false;
+        });
+        setProducts(filteredProducts);
+    }, [collection, glassTypes, frameTypes, lenseTypes]);
+
     return <ProductsContext.Provider value={useMemo(() => ({
         products,
-        filterSearchedProducts
+        filterSearchedProducts,
+        filterCatalogedProducts
     }), [
         products,
-        filterSearchedProducts
+        filterSearchedProducts,
+        filterCatalogedProducts
     ])}>{children}</ProductsContext.Provider>;
 };
 
