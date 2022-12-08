@@ -21,7 +21,7 @@ export const routes = () => {
         },
         {
             path: PRODUCTS,
-            element: !isSignedIn ? <Navigate to={AUTH_LOGIN} state={{ from: location }}/> : <ProductCardsList/>,
+            element: !isSignedIn ? <Navigate to={AUTH_LOGIN()} state={{ from: location }}/> : <ProductCardsList/>,
             children: [
                 { path: BASE, element: <ProductCards/> },
                 {
@@ -30,10 +30,10 @@ export const routes = () => {
                     children: [
                         { path: BASE, element: <ProductPage/> },
                         // { path: EDIT, element: <ProductCardEditPage/> },
-                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
                     ]
                 },
-                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
             ]
         },
         {
