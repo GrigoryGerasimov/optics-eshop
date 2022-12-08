@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Card } from "../../common/card/Card.jsx";
-import { useProducts } from "../../hooks/useProducts.jsx";
+import { Card } from "../../../common/card/Card.jsx";
+import { useProducts } from "../../../hooks/useProducts.jsx";
 
 const ProductCards = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const ProductCards = () => {
                     name={dataItem.name}
                     title={dataItem.title}
                     brand={dataItem.brand}
-                    collection={dataItem.collection}
+                    collection={dataItem.collectionTitle}
                     onClick={() => navigate(dataItem._id)}
                 />;
             })}

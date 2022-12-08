@@ -5,7 +5,7 @@ export const ProductInfoBlock = ({
     productInfoBlockClass,
     title,
     brand,
-    collection,
+    collectionTitle,
     productGroup,
     description,
     colors,
@@ -19,7 +19,7 @@ export const ProductInfoBlock = ({
         <div>
             <p className={productInfoBlockClass}>{title}</p>
             <p className={productInfoBlockClass}>Марка: {brand}</p>
-            <p className={productInfoBlockClass}>Коллекция: {collection}</p>
+            <p className={productInfoBlockClass}>Коллекция: {collectionTitle}</p>
             <p className={productInfoBlockClass}>Тип: {productGroup}</p>
             <p className={productInfoBlockClass}>Краткое описание: {description}</p>
             <p className={productInfoBlockClass}>Варианты расцветки: {
@@ -42,7 +42,7 @@ ProductInfoBlock.propTypes = {
     productInfoBlockClass: PropTypes.string,
     title: PropTypes.string,
     brand: PropTypes.string,
-    collection: PropTypes.string,
+    collectionTitle: PropTypes.string,
     productGroup: PropTypes.string,
     description: PropTypes.string,
     colors: PropTypes.arrayOf(PropTypes.string),

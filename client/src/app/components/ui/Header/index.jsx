@@ -11,7 +11,7 @@ const Header = () => {
                 <div className="flex flex-row justify-evenly items-center flex-wrap">
                     {metaContactsLinks.map(link => (
                         <a
-                            className="text-gray-700 text-opacity-95 p-6 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-200 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
+                            className="text-gray-700 text-opacity-95 p-6 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
                             key={link.id}
                             href={link.pathTo}
                         >
@@ -21,7 +21,7 @@ const Header = () => {
                 </div>
                 {metaLayerLinks.map(link => link.urlExternal ? (
                     <a
-                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-200 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
+                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
                         key={link.id}
                         href={link.pathTo}
                     >
@@ -32,7 +32,7 @@ const Header = () => {
                     </a>
                 ) : (
                     <NavLink
-                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-200 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
+                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
                         key={link.id}
                         to={link.pathTo}
                     >
@@ -46,7 +46,7 @@ const Header = () => {
             <nav className="h-[50%] flex flex-row justify-evenly items-center flex-wrap">
                 {headLayerLinks.map(link => (
                     <NavLink
-                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-200 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
+                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md"
                         key={link.id}
                         to={link.pathTo}
                     >

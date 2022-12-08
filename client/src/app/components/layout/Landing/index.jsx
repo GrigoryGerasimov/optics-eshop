@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Header, Footer } from "../../ui";
+import { Header, Footer, Catalog } from "../../ui";
 import { SearchBar } from "../../ui/common_ui/SearchBar.jsx";
 
 const Landing = ({ children }) => {
@@ -8,9 +8,12 @@ const Landing = ({ children }) => {
         <div className="w-full h-screen">
             <Header/>
             <SearchBar/>
-            <main>
-                {children}
-            </main>
+            <section className="w-full flex flex-row flex-wrap">
+                <Catalog/>
+                <main className="w-[85%]">
+                    {children}
+                </main>
+            </section>
             <Footer/>
         </div>
     );
