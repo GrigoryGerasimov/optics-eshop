@@ -5,6 +5,7 @@ import Button from "../../../common/Button.jsx";
 import { withAuthOption } from "../hoc/withAuthOption.jsx";
 import { setToStorage } from "../../../../utils/storage/setToStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
+import paths from "../../../../routes/paths.js";
 
 const RegisterForm = withAuthOption(Form);
 
@@ -26,11 +27,12 @@ const initialPasswordState = {
 };
 
 const Register = () => {
+    const { LOGIN } = paths;
     const navigate = useNavigate();
 
     const handleSubmit = data => {
         setToStorage(data._id, data).then(data => console.log(data));
-        navigate("/login", { replace: true });
+        navigate(`/${LOGIN}`, { replace: true });
     };
 
     return (
