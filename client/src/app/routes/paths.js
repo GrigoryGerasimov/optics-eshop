@@ -7,7 +7,9 @@ const paths = {
     AUTH: "auth",
     LOGIN: "login",
     REGISTER: "register",
-    AUTH_LOGIN: `${this.AUTH}/${this.LOGIN}`
+    AUTH_LOGIN() {
+        return `${this.AUTH}/${this.LOGIN}`;
+    }
 };
 
 export default paths;
