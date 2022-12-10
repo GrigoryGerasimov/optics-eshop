@@ -17,6 +17,8 @@ const schema = new Schema({
             required: true
         }
     }]
+}, {
+    timestamps: true
 });
 
 const FrameType = model("FrameType", schema);

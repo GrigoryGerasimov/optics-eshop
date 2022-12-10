@@ -11,6 +11,8 @@ const schema = new Schema({
         required: true,
         unique: true
     }
+}, {
+    timestamps: true
 });
 
 const Country = model("Country", schema);

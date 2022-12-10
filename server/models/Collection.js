@@ -67,6 +67,8 @@ const schema = new Schema({
             }
         }]
     }
+}, {
+    timestamps: true
 });
 
 const Collection = model("Collection", schema);

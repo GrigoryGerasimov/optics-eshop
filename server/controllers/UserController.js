@@ -34,13 +34,13 @@ class UserController {
 
     static async create(req, res) {
         if (!validationResult(req).isEmpty()) {
-            formatResponse(res, 401, "Проверка на валидацию обязательных данных завершилась ошибкой");
+            return formatResponse(res, 401, "Проверка на валидацию обязательных данных завершилась ошибкой");
         }
 
         if (!req.files || !Object.keys(req.files).length) {
-            formatResponse(res, 400, "Отсутствует прикреплённый файл");
+            return formatResponse(res, 400, "Отсутствует прикреплённый файл");
         } else if (req.files.file.size > 52_428_800) {
-            formatResponse(res, 413, "Объём загружаемого файла превысил установленный лимит в 50Mb. Попробуйте загрузить файл меньшего размера");
+            return formatResponse(res, 413, "Объём загружаемого файла превысил установленный лимит в 50Mb. Попробуйте загрузить файл меньшего размера");
         }
 
         try {
@@ -59,9 +59,9 @@ class UserController {
 
     static async update(req, res) {
         if (!req.files || !Object.keys(req.files).length) {
-            formatResponse(res, 400, "Отсутствует прикреплённый файл");
+            return formatResponse(res, 400, "Отсутствует прикреплённый файл");
         } else if (req.files.file.size > 52_428_800) {
-            formatResponse(res, 400, "Объём загружаемого файла превысил установленный лимит в 50Mb. Попробуйте загрузить файл меньшего размера");
+            return formatResponse(res, 400, "Объём загружаемого файла превысил установленный лимит в 50Mb. Попробуйте загрузить файл меньшего размера");
         }
 
         try {

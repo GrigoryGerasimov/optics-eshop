@@ -9,10 +9,10 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    imgSmall: {
-        type: Array,
+    imgSmall: [{
+        type: String,
         required: true
-    },
+    }],
     name: {
         type: String,
         required: true
@@ -27,6 +27,19 @@ const schema = new Schema({
     },
     params: [{
         type: Schema.Types.ObjectId,
+        ref: "Collection",
+        required: true
+    }, {
+        type: Schema.Types.ObjectId,
+        ref: "GlassType",
+        required: true
+    }, {
+        type: Schema.Types.ObjectId,
+        ref: "FrameType",
+        required: true
+    }, {
+        type: Schema.Types.ObjectId,
+        ref: "LenseType",
         required: true
     }],
     collectionTitle: {
@@ -41,12 +54,14 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    colors: [{
+    colours: [{
         type: Schema.Types.ObjectId,
+        ref: "Colour",
         required: true
     }],
     shipmentType: [{
         type: Schema.Types.ObjectId,
+        ref: "ShipmentType",
         required: true
     }],
     license: {
@@ -63,8 +78,11 @@ const schema = new Schema({
     },
     countryOfOrigin: {
         type: Schema.Types.ObjectId,
+        ref: "Country",
         required: true
     },
+}, {
+    timestamps: true
 });
 
 const Product = model("Product", schema);

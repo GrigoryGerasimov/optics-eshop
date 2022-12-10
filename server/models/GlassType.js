@@ -33,6 +33,8 @@ const schema = new Schema({
             required: true
         }
     }]
+}, {
+    timestamps: true
 });
 
 const GlassType = model("GlassType", schema);

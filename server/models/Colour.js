@@ -25,6 +25,8 @@ const schema = new Schema({
             unique: true
         }
     }]
+}, {
+    timestamps: true
 });
 
 const Colour = model("Colour", schema);
