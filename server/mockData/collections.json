@@ -1,0 +1,30 @@
+[
+  {
+    "season": {
+      "ss22": [
+        { "id": "#ss22mdeluxe", "code": "mdeluxe", "title": "Men's Collection Deluxe Spring-Summer 2022" },
+        { "id": "#ss22wdeluxe", "code": "wdeluxe", "title": "Women's Collection Deluxe Spring-Summer 2022" },
+        { "id": "#ss22kidsteens", "code": "kidsteens", "title": "Kids' & Teens' Collection Deluxe Spring-Summer 2022" },
+        { "id": "#ss22unisex", "code": "unisex", "title": "Unisex Collection Deluxe Spring-Summer 2022" }
+      ],
+      "fw22": [
+        { "id": "#fw22mdeluxe", "code": "mdeluxe", "title": "Men's Collection Deluxe Fall-Winter 2022" },
+        { "id": "#fw22wdeluxe", "code": "wdeluxe", "title": "Women's Collection Deluxe Fall-Winter 2022" },
+        { "id": "#fw22kidsteens", "code": "kidsteens", "title": "Kids' & Teens' Collection Deluxe Fall-Winter 2022" },
+        { "id": "#fw22unisex", "code": "unisex", "title": "Unisex Collection Deluxe Fall-Winter 2022" }
+      ],
+      "ss23": [
+        { "id": "#ss23mdeluxe", "code": "mdeluxe", "title": "Men's Collection Deluxe Spring-Summer 2023" },
+        { "id": "#ss23wdeluxe", "code": "wdeluxe", "title": "Women's Collection Deluxe Spring-Summer 2023" },
+        { "id": "#ss23kidsteens", "code": "kidsteens", "title": "Kids' & Teens' Collection Deluxe Spring-Summer 2023" },
+        { "id": "#ss23unisex", "code": "unisex", "title": "Unisex Collection Deluxe Spring-Summer 2023" }
+      ],
+      "fw23": [
+        { "id": "#fw23mdeluxe", "code": "mdeluxe", "title": "Men's Collection Deluxe Fall-Winter 2023" },
+        { "id": "#fw23wdeluxe", "code": "wdeluxe", "title": "Women's Collection Deluxe Fall-Winter 2023" },
+        { "id": "#fw23kidsteens", "code": "kidsteens", "title": "Kids' & Teens' Collection Deluxe Fall-Winter 2023" },
+        { "id": "#fw23unisex", "code": "unisex", "title": "Unisex Collection Deluxe Fall-Winter 2023" }
+      ]
+    }
+  }
+]

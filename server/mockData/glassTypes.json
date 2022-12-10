@@ -1,0 +1,24 @@
+[
+  {
+    "diopters": [
+      { "id": "#dmen", "code": "men", "title": "Glasses with diopters for men" },
+      { "id": "#dwomen", "code": "women", "title": "Glasses with diopters for women" },
+      { "id": "#dkids", "code": "kids", "title": "Glasses with diopters for kids and teens" },
+      { "id": "#dsports", "code": "sports", "title": "Sports glasses with diopters for active outdoor training" },
+      { "id": "#dphotochr", "code": "photochromic", "title": "Elegant photochromic glasses with diopters" },
+      { "id": "#dprogres", "code": "progressive", "title": "Progressive glasses with diopters" },
+      { "id": "#ddriver", "code": "driver", "title": "Glasses with diopters for driving" },
+      { "id": "#dcomp", "code": "computer", "title": "Glasses with diopters for working on computers and other tech gadgets" },
+      { "id": "#dread", "code": "reading", "title": "Glasses with diopters for long reading" }
+    ],
+    "dioptersFree": [
+      { "id": "#dfmen", "code": "men", "title": "Diopter-free glasses for men" },
+      { "id": "#dfwomen", "code": "women", "title": "Diopter-free glasses for women" },
+      { "id": "#dfkids", "code": "kids", "title": "Diopter-free glasses for kids and teens" },
+      { "id": "#dfstyle", "code": "style", "title": "Stylish diopter-free glasses for everyone" },
+      { "id": "#dfflat", "code": "flat", "title": "Flat diopter-free glasses" },
+      { "id": "#dfsun", "code": "sun", "title": "Diopter-free sun glasses" },
+      { "id": "#dfswimming", "code": "swimming", "title": "Diopter-free glasses for active swimming" }
+    ]
+  }
+]

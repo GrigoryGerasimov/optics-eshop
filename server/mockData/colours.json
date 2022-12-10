@@ -1,0 +1,38 @@
+[
+  {
+    "cold": [
+      { "code":  "#000000", "title":  "black" },
+      { "code":  "#6e4f29", "title":  "light brown" },
+      { "code":  "#4d1f17", "title":  "dark brown" },
+      { "code":  "#a5bcc4", "title":  "blue-grey" },
+      { "code":  "#402a6c", "title":  "indigo" },
+      { "code":  "#0f2963", "title":  "navy" },
+      { "code":  "#0b427b", "title":  "dark blue" },
+      { "code":  "#e50c8e", "title":  "magenta" },
+      { "code":  "#82102b", "title":  "burgundy" },
+      { "code":  "#ff65ff", "title":  "pink" },
+      { "code":  "#f7d4b6", "title":  "beige" },
+      { "code":  "#ff0066", "title":  "rose" },
+      { "code":  "#e53609", "title":  "amber" },
+      { "code":  "#414141", "title":  "charcoal" },
+      { "code":  "#6f7253", "title":  "pewter" },
+      { "code":  "#b2b2b2", "title":  "silver" },
+      { "code":  "#f3f1f5", "title":  "icy white" }
+    ]
+  },
+  {
+    "warm": [
+      { "code":  "#ce9800", "title":  "camel" },
+      { "code":  "#a39802", "title":  "khaki" },
+      { "code":  "#fdcc00", "title":  "gold" },
+      { "code":  "#e16620", "title":  "copper" },
+      { "code":  "#ffa87d", "title":  "peach" },
+      { "code":  "#ff9935", "title":  "orange" },
+      { "code":  "#fc583d", "title":  "coral" },
+      { "code":  "#fff3c9", "title":  "off-white" },
+      { "code":  "#f81a15", "title":  "fire engine red" },
+      { "code":  "#117396", "title":  "warm blue" },
+      { "code":  "#dcb896", "title":  "blonde tortoise" }
+    ]
+  }
+]

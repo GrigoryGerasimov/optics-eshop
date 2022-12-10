@@ -1,0 +1,10 @@
+[
+  {
+    "type": [
+      { "id": "#daily", "code": "daily", "title": "Lenses for daily use purpose" },
+      { "id": "#everyday", "code": "everyday", "title": "Lenses for everyday use" },
+      { "id": "#monthly", "code": "monthly", "title": "Lenses for monthly use only (ca. 1-3 months)" },
+      { "id": "#hygiene", "code": "hygiene", "title": "Tools for keeping your lenses clean and bacteria-free" }
+    ]
+  }
+]

@@ -310,7 +310,7 @@ export const ProductsProvider = ({ children }) => {
                     for (const cat of Object.keys(collection[category])) {
                         if (cat === type) {
                             for (const item of collection[category][cat]) {
-                                if (productUnit.params.includes(!subtype ? item._id : subtype)) return productUnit;
+                                if (productUnit.params.includes(!subtype ? item.id : subtype)) return productUnit;
                             }
                         }
                     }
@@ -318,19 +318,19 @@ export const ProductsProvider = ({ children }) => {
                 }
                 case "glassTypes": {
                     for (const item of glassTypes[category]) {
-                        if (productUnit.params.includes(!type ? item._id : type)) return productUnit;
+                        if (productUnit.params.includes(!type ? item.id : type)) return productUnit;
                     }
                     break;
                 }
                 case "frameTypes": {
                     for (const item of frameTypes[category]) {
-                        if (productUnit.params.includes(!type ? item._id : type)) return productUnit;
+                        if (productUnit.params.includes(!type ? item.id : type)) return productUnit;
                     }
                     break;
                 }
                 case "lenseTypes": {
                     for (const item of lenseTypes[category]) {
-                        if (productUnit.params.includes(!type ? item._id : type)) return productUnit;
+                        if (productUnit.params.includes(!type ? item.id : type)) return productUnit;
                     }
                     break;
                 }
