@@ -5,7 +5,7 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    productCardId: {
+    productId: {
         type: Schema.Types.ObjectId,
         ref: "Product"
     },
