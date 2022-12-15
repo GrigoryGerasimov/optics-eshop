@@ -1,5 +1,4 @@
-const bcrypt = require("bcryptjs");
-
 module.exports = {
-    "SALT": 12
+    "SALT": 12,
+    "FILE_SIZE_LIMIT": 52_428_800
 };

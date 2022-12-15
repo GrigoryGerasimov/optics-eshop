@@ -29,7 +29,7 @@ class AuthController {
 
         if (!req.files || !Object.keys(req.files).length) {
             return formatResponse(res, 400, "Отсутствует прикреплённый файл");
-        } else if (req.files.file.size > 52_428_800) {
+        } else if (req.files.file.size > controllerConfig["FILE_SIZE_LIMIT"]) {
             return formatResponse(res, 413, "Объём загружаемого файла превысил установленный лимит в 50Mb. Попробуйте загрузить файл меньшего размера");
         }
 

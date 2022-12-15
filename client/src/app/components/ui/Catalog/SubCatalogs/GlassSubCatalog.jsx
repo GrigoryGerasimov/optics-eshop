@@ -28,9 +28,9 @@ const GlassSubCatalog = ({ status, active, onAddActiveState }) => {
 
     return (
         <ul className={status ? "block leading-10 mb-[10px] text-center" : "hidden"}>
-            <li className={`${active === "diopters" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md`} id="diopters" onClick={handleCategoriesSwitch}>С диоптриями</li>
+            <li className={`${active === "diopters" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="diopters" onClick={handleCategoriesSwitch}>С диоптриями</li>
             <DiopterGlassCategories status={showCategories.diopters} active={active} onAddActiveState={onAddActiveState}/>
-            <li className={`${active === "dioptersFree" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md`} id="dioptersFree" onClick={handleCategoriesSwitch}>Без диоптрий</li>
+            <li className={`${active === "dioptersFree" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="dioptersFree" onClick={handleCategoriesSwitch}>Без диоптрий</li>
             <DiopterFreeGlassCategories status={showCategories.dioptersFree} active={active} onAddActiveState={onAddActiveState}/>
         </ul>
     );

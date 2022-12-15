@@ -11,6 +11,7 @@ const timeout = require("connect-timeout");
 const { connectToDB } = require("./dal/connectToDB");
 const { mw } = require("./middleware");
 const { router } = require("./routes")
+const controllerConfig = require("./controllers/controllerConfig");
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.use(fileUpload({
     createParentPath: true,
     safeFileNames: true,
     preserveExtension: true,
-    limits: { fileSize: 52_428_800 },
+    limits: { fileSize: controllerConfig["FILE_SIZE_LIMIT"] },
     abortOnLimit: true,
     parseNested: true,
     debug: true
