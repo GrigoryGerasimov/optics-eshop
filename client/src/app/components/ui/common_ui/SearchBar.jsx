@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "./icons";
 import { FormControl } from "../../common/form";
-import { useProducts } from "../../hooks/useProducts.jsx";
+import { useProducts } from "../../hooks";
 import paths from "../../../routes/paths.js";
 
 export const SearchBar = () => {

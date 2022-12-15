@@ -371,14 +371,37 @@ export const ProductsProvider = ({ children }) => {
         setProducts(filteredProducts);
     }, [collection, glassTypes, frameTypes, lenseTypes]);
 
+    const sortCatalogedProducts = useCallback((criteria, type) => {
+        const sortedProducts = [...products].sort((a, b) => {
+            switch (type) {
+                case "desc": {
+                    if (criteria === "price") {
+                        return b.price - a.price;
+                    } else return b.title.toLowerCase() === a.title.toLowerCase() ? 0 : b.title.toLowerCase() > a.title.toLowerCase() ? 1 : -1;
+                }
+                case "asc": {
+                    if (criteria === "price") {
+                        return a.price - b.price;
+                    } else return a.title.toLowerCase() === b.title.toLowerCase() ? 0 : a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+                }
+                default: {
+                    return false;
+                }
+            }
+        });
+        setProducts(sortedProducts);
+    }, [products]);
+
     return <ProductsContext.Provider value={useMemo(() => ({
         products,
         filterSearchedProducts,
-        filterCatalogedProducts
+        filterCatalogedProducts,
+        sortCatalogedProducts
     }), [
         products,
         filterSearchedProducts,
-        filterCatalogedProducts
+        filterCatalogedProducts,
+        sortCatalogedProducts
     ])}>{children}</ProductsContext.Provider>;
 };
 
