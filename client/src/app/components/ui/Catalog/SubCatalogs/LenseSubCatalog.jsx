@@ -17,10 +17,10 @@ const LenseSubCatalog = ({ status, active, onAddActiveState }) => {
 
     return (
         <ul className={status ? "block leading-10 mb-[10px] text-center" : "hidden"}>
-            <li className={`${active === "#daily" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md`} id="#daily" onClick={handleCategoriesFilter}>Однодневные</li>
-            <li className={`${active === "#everyday" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md`} id="#everyday" onClick={handleCategoriesFilter}>Двухдневные</li>
-            <li className={`${active === "#monthly" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md`} id="#monthly" onClick={handleCategoriesFilter}>От 1 до 3 месяцев</li>
-            <li className={`${active === "#hygiene" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-solid active:border-gray-700 active:border-opacity-75 active:rounded active:shadow-md`} id="#hygiene" onClick={handleCategoriesFilter}>Растворы и средства для очистки</li>
+            <li className={`${active === "#daily" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#daily" onClick={handleCategoriesFilter}>Однодневные</li>
+            <li className={`${active === "#everyday" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#everyday" onClick={handleCategoriesFilter}>Двухдневные</li>
+            <li className={`${active === "#monthly" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#monthly" onClick={handleCategoriesFilter}>От 1 до 3 месяцев</li>
+            <li className={`${active === "#hygiene" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#hygiene" onClick={handleCategoriesFilter}>Растворы и средства для очистки</li>
         </ul>
     );
 };
