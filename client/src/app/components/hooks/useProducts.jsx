@@ -21,7 +21,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 8700
+        price: 8700,
+        currencyCode: "RUB"
     },
     {
         _id: "0002",
@@ -41,7 +42,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 9990
+        price: 9990,
+        currencyCode: "EUR"
     },
     {
         _id: "0003",
@@ -61,7 +63,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 7200
+        price: 7200,
+        currencyCode: "ILS"
     },
     {
         _id: "0004",
@@ -81,7 +84,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 6900
+        price: 6900,
+        currencyCode: "RUB"
     },
     {
         _id: "0005",
@@ -101,7 +105,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 10500
+        price: 10500,
+        currencyCode: "GEL"
     },
     {
         _id: "0006",
@@ -121,7 +126,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 9200
+        price: 9200,
+        currencyCode: "AZN"
     },
     {
         _id: "0007",
@@ -141,7 +147,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 11600
+        price: 11600,
+        currencyCode: "KZT"
     },
     {
         _id: "0008",
@@ -161,7 +168,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 15100
+        price: 15100,
+        currencyCode: "ILS"
     },
     {
         _id: "0009",
@@ -181,7 +189,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 12700
+        price: 12700,
+        currencyCode: "EUR"
     },
     {
         _id: "0010",
@@ -201,7 +210,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 10400
+        price: 10400,
+        currencyCode: "RUB"
     },
     {
         _id: "0011",
@@ -221,7 +231,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 9000
+        price: 9000,
+        currencyCode: "EUR"
     },
     {
         _id: "0012",
@@ -241,7 +252,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 13500
+        price: 13500,
+        currencyCode: "ILS"
     },
     {
         _id: "0013",
@@ -261,7 +273,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 14900
+        price: 14900,
+        currencyCode: "KZT"
     },
     {
         _id: "0014",
@@ -281,7 +294,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 8100
+        price: 8100,
+        currencyCode: "AZN"
     },
     {
         _id: "0015",
@@ -301,7 +315,8 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
-        price: 7990
+        price: 7990,
+        currencyCode: "RUB"
     }
 ];
 
@@ -356,14 +371,37 @@ export const ProductsProvider = ({ children }) => {
         setProducts(filteredProducts);
     }, [collection, glassTypes, frameTypes, lenseTypes]);
 
+    const sortCatalogedProducts = useCallback((criteria, type) => {
+        const sortedProducts = [...products].sort((a, b) => {
+            switch (type) {
+                case "desc": {
+                    if (criteria === "price") {
+                        return b.price - a.price;
+                    } else return b.title.toLowerCase() === a.title.toLowerCase() ? 0 : b.title.toLowerCase() > a.title.toLowerCase() ? 1 : -1;
+                }
+                case "asc": {
+                    if (criteria === "price") {
+                        return a.price - b.price;
+                    } else return a.title.toLowerCase() === b.title.toLowerCase() ? 0 : a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+                }
+                default: {
+                    return false;
+                }
+            }
+        });
+        setProducts(sortedProducts);
+    }, [products]);
+
     return <ProductsContext.Provider value={useMemo(() => ({
         products,
         filterSearchedProducts,
-        filterCatalogedProducts
+        filterCatalogedProducts,
+        sortCatalogedProducts
     }), [
         products,
         filterSearchedProducts,
-        filterCatalogedProducts
+        filterCatalogedProducts,
+        sortCatalogedProducts
     ])}>{children}</ProductsContext.Provider>;
 };
 

@@ -15,9 +15,10 @@ export const ProductInfoBlock = ({
     additionalInfo,
     warrantyPeriod,
     countryOfOrigin,
-    price
+    price,
+    currencyCode
 }) => {
-    const { UNICODE: { CURRENCY: { RUB } } } = constants;
+    const { UNICODE: { CURRENCY } } = constants;
 
     return (
         <div>
@@ -34,7 +35,7 @@ export const ProductInfoBlock = ({
             <p className={productInfoBlockClass}>{additionalInfo}</p>
             <p className={productInfoBlockClass}>Заводская гарантия: {warrantyPeriod}</p>
             <p className={productInfoBlockClass}>Страна-производитель: {countryOfOrigin}</p>
-            <p className={productInfoBlockClass}>Цена (до вычета НДС): {price} {RUB}</p>
+            <p className={productInfoBlockClass}>Цена (до вычета НДС): {price} {CURRENCY[currencyCode]}</p>
         </div>
     );
 };
@@ -56,5 +57,6 @@ ProductInfoBlock.propTypes = {
     additionalInfo: PropTypes.string,
     warrantyPeriod: PropTypes.string,
     countryOfOrigin: PropTypes.string,
-    price: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    currencyCode: PropTypes.string
 };
