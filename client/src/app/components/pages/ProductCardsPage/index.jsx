@@ -20,6 +20,7 @@ const ProductCardsPage = () => {
                     brand={dataItem.brand}
                     collection={dataItem.collectionTitle}
                     price={dataItem.price}
+                    currencyCode={dataItem.currencyCode}
                     onClick={() => navigate(`${paramsToPath}/${dataItem._id}`)}
                 />;
             })}
