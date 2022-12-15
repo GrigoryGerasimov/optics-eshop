@@ -10,6 +10,9 @@ import PhoneIcon from "./contacts_icons/PhoneIcon.jsx";
 import TelegramIcon from "./contacts_icons/TelegramIcon.jsx";
 import TwitterIcon from "./contacts_icons/TwitterIcon.jsx";
 import WhatsappIcon from "./contacts_icons/WhatsappIcon.jsx";
+import SortingArrowDownIcon from "./sorting_icons/SortingArrowDownIcon.jsx";
+import SortingArrowUpIcon from "./sorting_icons/SortingArrowUpIcon.jsx";
+import SortingIcon from "./sorting_icons/SortingIcon.jsx";
 
 export {
     EyeIcon,
@@ -23,5 +26,8 @@ export {
     PhoneIcon,
     TelegramIcon,
     TwitterIcon,
-    WhatsappIcon
+    WhatsappIcon,
+    SortingArrowDownIcon,
+    SortingArrowUpIcon,
+    SortingIcon
 };

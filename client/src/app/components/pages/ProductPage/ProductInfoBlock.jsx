@@ -1,4 +1,5 @@
 import React from "react";
+import { constants } from "../../../constants";
 import PropTypes from "prop-types";
 
 export const ProductInfoBlock = ({
@@ -13,8 +14,11 @@ export const ProductInfoBlock = ({
     license,
     additionalInfo,
     warrantyPeriod,
-    countryOfOrigin
+    countryOfOrigin,
+    price
 }) => {
+    const { UNICODE: { CURRENCY: { RUB } } } = constants;
+
     return (
         <div>
             <p className={productInfoBlockClass}>{title}</p>
@@ -30,6 +34,7 @@ export const ProductInfoBlock = ({
             <p className={productInfoBlockClass}>{additionalInfo}</p>
             <p className={productInfoBlockClass}>Заводская гарантия: {warrantyPeriod}</p>
             <p className={productInfoBlockClass}>Страна-производитель: {countryOfOrigin}</p>
+            <p className={productInfoBlockClass}>Цена (до вычета НДС): {price} {RUB}</p>
         </div>
     );
 };
@@ -50,5 +55,6 @@ ProductInfoBlock.propTypes = {
     license: PropTypes.string,
     additionalInfo: PropTypes.string,
     warrantyPeriod: PropTypes.string,
-    countryOfOrigin: PropTypes.string
+    countryOfOrigin: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };

@@ -20,7 +20,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 8700
     },
     {
         _id: "0002",
@@ -39,7 +40,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 9990
     },
     {
         _id: "0003",
@@ -58,7 +60,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 7200
     },
     {
         _id: "0004",
@@ -77,7 +80,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 6900
     },
     {
         _id: "0005",
@@ -96,7 +100,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 10500
     },
     {
         _id: "0006",
@@ -115,7 +120,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 9200
     },
     {
         _id: "0007",
@@ -134,7 +140,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 11600
     },
     {
         _id: "0008",
@@ -153,7 +160,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 15100
     },
     {
         _id: "0009",
@@ -172,7 +180,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 12700
     },
     {
         _id: "0010",
@@ -191,7 +200,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 10400
     },
     {
         _id: "0011",
@@ -210,7 +220,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 9000
     },
     {
         _id: "0012",
@@ -229,7 +240,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 13500
     },
     {
         _id: "0013",
@@ -248,7 +260,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 14900
     },
     {
         _id: "0014",
@@ -267,7 +280,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 8100
     },
     {
         _id: "0015",
@@ -286,7 +300,8 @@ const initialProductData = [
         license: "Производственная и медицинская сертификация на территории РФ",
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
-        countryOfOrigin: "РФ"
+        countryOfOrigin: "РФ",
+        price: 7990
     }
 ];
 

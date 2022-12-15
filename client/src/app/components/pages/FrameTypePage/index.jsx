@@ -28,6 +28,7 @@ const FrameTypePage = () => {
                     title={dataItem.title}
                     brand={dataItem.brand}
                     collection={dataItem.collectionTitle}
+                    price={dataItem.price}
                     onClick={() => navigate(`${paramsToPath}/${dataItem._id}`)}
                 />;
             })}
