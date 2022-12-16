@@ -6,6 +6,8 @@ import paths from "../../../routes/paths";
 import { useNavigate } from "react-router-dom";
 import { constants } from "../../../constants";
 import PropTypes from "prop-types";
+import { useModal } from "../../hooks";
+import { Modal } from "../../common/Modal";
 
 const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmountCountUp }) => {
     const navigate = useNavigate();
@@ -13,6 +15,7 @@ const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmo
     const { UNICODE: { CURRENCY } } = constants;
 
     const [orderedQuantity, setOrderedQuantity] = useState(1);
+    const { showModal, handleModalOpen, handleModalClose } = useModal();
 
     const orderedAmount = computeVAT(reservedItem.price) * orderedQuantity;
 
@@ -45,7 +48,12 @@ const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmo
                 onClick={() => navigate(`/${PRODUCTS}/${paramsToPath}/${reservedItem._id}`)}
             />
             <div className="w-[15%] h-[150px] m-5 px-7">
-                <span className="text-gray-700 text-opacity-95 p-3 no-underline cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none" onClick={() => onDelete(reservedItem._id)}>Убрать из корзины</span>
+                <span
+                    className="text-gray-700 text-opacity-95 p-3 no-underline cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none"
+                    onClick={handleModalOpen}
+                >
+                    Убрать из корзины
+                </span>
                 <div className="flex flex-row flex-wrap p-6">
                     <ChevronUp onClick={handleIncrement}/>
                     <output className="mx-[15px]">
@@ -64,6 +72,14 @@ const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmo
                     </pre>
                 </span>
             </div>
+            <Modal
+                modalStatus={showModal}
+                onCloseModal={handleModalClose}
+                text="Вы действительно хотите удалить данный товар?"
+                actionBtnLabel="Удалить"
+                secondaryBtnLabel="Отмена"
+                onAction={() => onDelete(reservedItem._id)}
+            />
         </div>
     );
 };
