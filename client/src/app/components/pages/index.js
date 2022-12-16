@@ -4,5 +4,6 @@ import CollectionPage from "./CollectionPage";
 import GlassTypePage from "./GlassTypePage";
 import FrameTypePage from "./FrameTypePage";
 import LenseTypePage from "./LenseTypePage";
+import ShoppingCartPage from "./ShoppingCartPage";
 
-export { ProductCardsPage, ProductPage, CollectionPage, GlassTypePage, FrameTypePage, LenseTypePage };
+export { ProductCardsPage, ProductPage, CollectionPage, GlassTypePage, FrameTypePage, LenseTypePage, ShoppingCartPage };

@@ -15,7 +15,8 @@ const paths = {
     REGISTER: "register",
     AUTH_LOGIN() {
         return `${this.AUTH}/${this.LOGIN}`;
-    }
+    },
+    CART: "cart"
 };
 
 export default paths;
