@@ -35,7 +35,7 @@ const ProductPage = () => {
                 </div>
                 <div className="p-10 2xl:w-3/12">
                     <ProductInfoBlock {...currentItem}/>
-                    <Button buttonClass="w-full bg-gray-700 text-2xl text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] mt-[35px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50"
+                    <Button buttonClass="w-full bg-gray-700 text-xl text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] mt-[35px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50"
                         type="button" onClick={() => handleShoppingReservation(currentItem._id)}>Добавить в корзину</Button>
                 </div>
             </div>

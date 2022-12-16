@@ -3,6 +3,7 @@ import { useProducts } from "./useProducts.jsx";
 
 export const useShopping = () => {
     const [shoppingReservation, setShoppingReservation] = useState();
+    const [totalShoppingAmount, setTotalShoppingAmount] = useState({});
     const { products } = useProducts();
 
     useEffect(() => {
@@ -18,5 +19,22 @@ export const useShopping = () => {
         });
     };
 
-    return { shoppingReservation, handleShoppingReservation };
+    const handleRemoveFromCart = id => {
+        setShoppingReservation(prevState => {
+            const stateAfterDeletion = prevState.filter(item => item._id !== id);
+            localStorage.setItem("itemsToCart", JSON.stringify(stateAfterDeletion));
+            return stateAfterDeletion;
+        });
+        setTotalShoppingAmount(prevAmount => {
+            prevAmount[id] && delete prevAmount[id];
+            return prevAmount;
+        });
+    };
+
+    const handleTotalAmountCountUp = (id, amount) => setTotalShoppingAmount(prevAmount => ({
+        ...prevAmount,
+        [id]: amount
+    }));
+
+    return { shoppingReservation, totalShoppingAmount, handleShoppingReservation, handleRemoveFromCart, handleTotalAmountCountUp };
 };
