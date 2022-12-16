@@ -13,6 +13,8 @@ import WhatsappIcon from "./contacts_icons/WhatsappIcon.jsx";
 import SortingArrowDownIcon from "./sorting_icons/SortingArrowDownIcon.jsx";
 import SortingArrowUpIcon from "./sorting_icons/SortingArrowUpIcon.jsx";
 import SortingIcon from "./sorting_icons/SortingIcon.jsx";
+import ChevronUp from "./ChevronUp.jsx";
+import ChevronDown from "./ChevronDown.jsx";
 
 export {
     EyeIcon,
@@ -29,5 +31,7 @@ export {
     WhatsappIcon,
     SortingArrowDownIcon,
     SortingArrowUpIcon,
-    SortingIcon
+    SortingIcon,
+    ChevronUp,
+    ChevronDown
 };
