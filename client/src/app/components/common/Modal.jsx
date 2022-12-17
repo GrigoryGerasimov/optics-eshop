@@ -8,10 +8,8 @@ export const Modal = ({ modalStatus, onCloseModal, text, actionBtnLabel, seconda
             className={`${modalStatus ? "block" : "hidden"} w-full h-full z-999 fixed top-0 left-0 bg-gray-700 bg-opacity-50`}>
             <div
                 className={`w-[800px] bg-white rounded z-9999 absolute top-[35%] left-[35%] text-gray-700 text-opacity-95`}>
-                <div className="w-full text-center p-5 my-10">
-                    <strong className="text-xl">
-                        {text}
-                    </strong>
+                <div className="w-full text-xl text-center p-5 my-10">
+                    {text}
                 </div>
 
                 <div className={modalBtnGroupClass}>
@@ -42,7 +40,7 @@ Modal.defaultProps = {
 Modal.propTypes = {
     modalStatus: PropTypes.bool,
     onCloseModal: PropTypes.func,
-    text: PropTypes.string,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     actionBtnLabel: PropTypes.string,
     secondaryBtnLabel: PropTypes.string,
     onAction: PropTypes.func,

@@ -4,6 +4,7 @@ import { validatorConfig } from "./validatorConfig.js";
 import { FormControl, Form } from "../../../common/form";
 import Button from "../../../common/Button.jsx";
 import { Modal } from "../../../common/Modal.jsx";
+import { getRandomOrderId } from "../../../../utils/randomizer/getRandomOrderId.js";
 import PropTypes from "prop-types";
 
 const initialState = {
@@ -25,8 +26,16 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
         console.log(data);
         setShowModalConfirmation(true);
         onSubmit();
-        navigate(0);
+        setTimeout(() => navigate(0), 5000);
     };
+
+    const orderConfirmationText = (
+        <div className="leading-10">
+            <p className="mb-5">Благодарим за Вашу заявку!</p>
+            <p className="mb-5">Номер Вашей заявки: <strong>{getRandomOrderId()}</strong></p>
+            <p>В ближайшее время с Вами свяжутся наши специалисты для оформления индивидуального заказа на выбранный товар</p>
+        </div>
+    );
 
     return (
         <div
@@ -58,6 +67,7 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
                         id="email"
                         name="email"
                         type="email"
+                        placeholder="test@test.com"
                     />
                     <FormControl
                         formFieldClass="focus:bg-transparent mb-[35px]"
@@ -65,18 +75,21 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
                         id="phone"
                         name="phone"
                         type="phone"
+                        placeholder="+7 (___) ___-__-__"
                     />
                     <FormControl
                         formFieldClass="focus:bg-transparent mb-[35px]"
                         label="Адрес выставления счёта"
                         id="invoicingAddress"
                         name="invoicingAddress"
+                        placeholder="пр-кт Ленинский, ___-__, Москва 117198, РФ"
                     />
                     <FormControl
                         formFieldClass="focus:bg-transparent mb-[55px]"
                         label="Адрес доставки"
                         id="deliveryAddress"
                         name="deliveryAddress"
+                        placeholder="ул. Красная, __-__, Пенза 440000, РФ"
                     />
                     <Button
                         buttonClass="w-full md:w-[70%] lg:w-[60%] xl:w-[50%] bg-gray-700 text-xl text-yellow-200 font-[inherit] py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
@@ -96,7 +109,7 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
             <Modal
                 modalStatus={showModalConfirmation}
                 onCloseModal={handleCloseModalConfirmation}
-                text="Благодарим за Ваш заказ! В ближайшее время с Вами свяжутся наши специалисты для оформления индивидуального заказа на выбранный товар"
+                text={orderConfirmationText}
                 modalBtnGroupClass="hidden"
             />
         </div>

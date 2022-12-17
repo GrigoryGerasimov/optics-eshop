@@ -73,6 +73,7 @@ const ProductPage = () => {
                             </>
                         )
                     }
+                    <div className="text-end text-md italic mt-[95px]">№ артикула {currentItem._id}</div>
                 </div>
             </div>
             <Modal
