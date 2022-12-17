@@ -1,17 +1,13 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { useModal, useShopping } from "../../hooks";
 import ShoppingCardPosition from "./ShoppingCardPosition";
 import { Divider } from "../../common/Divider.jsx";
 import Button from "../../common/Button";
-import { Modal } from "../../common/Modal";
-import paths from "../../../routes/paths";
+import { ModalForm } from "./ModalForm";
 
 const ShoppingCartPage = () => {
     const { shoppingReservation, totalShoppingAmount, handleRemoveFromCart, handleTotalAmountCountUp, handleClearCart } = useShopping();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
-    const navigate = useNavigate();
-    const { PRODUCTS } = paths;
 
     if (!shoppingReservation?.length) return "Ваша корзина пуста";
 
@@ -25,8 +21,6 @@ const ShoppingCartPage = () => {
 
     const handleOrderAcceptance = () => {
         handleModalOpen();
-        handleClearCart();
-        navigate(0);
     };
 
     return (
@@ -62,13 +56,10 @@ const ShoppingCartPage = () => {
                     Оставить заявку для оформления заказа
                 </Button>
             </div>
-            <Modal
+            <ModalForm
                 modalStatus={showModal}
                 onCloseModal={handleModalClose}
-                text="Благодарим за Ваш заказ! В ближайшее время с Вами свяжутся наши специалисты для оформления индивидуального заказа на выбранный товар"
-                actionBtnLabel="Продолжить покупки"
-                secondaryBtnLabel="Остаться в корзине"
-                onAction={() => navigate(`/${PRODUCTS}`)}
+                onSubmit={handleClearCart}
             />
         </div>
     );
