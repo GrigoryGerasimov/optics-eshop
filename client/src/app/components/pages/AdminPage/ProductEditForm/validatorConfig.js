@@ -1,36 +1,40 @@
 export const validatorConfig = {
-    firstName: {
+    name: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }
     },
-    lastName: {
+    collection: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }
     },
-    email: {
-        isRequired: {
-            message: "Поле обязательно для заполнения"
-        },
-        isEmailValid: {
-            message: "Введите корректный адрес электронной почты"
-        }
-    },
-    phone: {
-        isRequired: {
-            message: "Поле обязательно для заполнения"
-        },
-        isPhone: {
-            message: "Введите корректный телефонный номер"
-        }
-    },
-    invoicingAddress: {
+    glassType: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }
     },
-    deliveryAddress: {
+    frameType: {
+        isRequired: {
+            message: "Поле обязательно для заполнения"
+        }
+    },
+    lenseType: {
+        isRequired: {
+            message: "Поле обязательно для заполнения"
+        }
+    },
+    totalQuantity: {
+        isRequired: {
+            message: "Поле обязательно для заполнения"
+        }
+    },
+    totalAmount: {
+        isRequired: {
+            message: "Поле обязательно для заполнения"
+        }
+    },
+    imgSrc: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }

@@ -4,5 +4,7 @@ import Collection from "./Collection";
 import GlassType from "./GlassType";
 import FrameType from "./FrameType";
 import LenseType from "./LenseType";
+import ShoppingCart from "./ShoppingCart";
+import AdminControl from "./AdminControl";
 
-export { ProductCard, ProductCardsList, Collection, GlassType, FrameType, LenseType };
+export { ProductCard, ProductCardsList, Collection, GlassType, FrameType, LenseType, ShoppingCart, AdminControl };

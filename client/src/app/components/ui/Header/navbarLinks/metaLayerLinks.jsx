@@ -37,6 +37,13 @@ export const metaLayerLinks = [
         urlExternal: false
     },
     {
+        id: "admin",
+        pathTo: "/admin",
+        icon: "",
+        label: "Кабинет",
+        urlExternal: false
+    },
+    {
         id: "cart",
         pathTo: "/cart",
         icon: <ShoppingCartIcon/>,

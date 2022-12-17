@@ -1,4 +1,4 @@
-export const ColumnHeadings = () => ({
+export const columnHeadings = {
     productId: {
         path: "id",
         name: "ID"
@@ -39,4 +39,4 @@ export const ColumnHeadings = () => ({
         path: "actions",
         name: "Действия"
     }
-});
+};
