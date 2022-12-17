@@ -2,11 +2,11 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 import { Main, Login, Register, AuthContainer } from "../components/layout";
 import { ProductCardsList, ProductCard, Collection, GlassType, FrameType, LenseType } from "../components/pages/page_outlets";
-import { ProductCardsPage, ProductPage, CollectionPage, GlassTypePage, FrameTypePage, LenseTypePage, ShoppingCartPage } from "../components/pages";
+import { ProductCardsPage, ProductPage, CollectionPage, GlassTypePage, FrameTypePage, LenseTypePage, ShoppingCartPage, AdminPage } from "../components/pages";
 import { PageNotFound } from "../components/common/PageNotFound.jsx";
 import paths from "./paths.js";
 
-const { BASE, REST, PRODUCTS, PRODUCT: { COLLECTION, GLASS_TYPE, FRAME_TYPE, LENSE_TYPE, ID }, AUTH, LOGIN, REGISTER, AUTH_LOGIN, CART } = paths;
+const { BASE, REST, PRODUCTS, PRODUCT: { COLLECTION, GLASS_TYPE, FRAME_TYPE, LENSE_TYPE, ID }, AUTH, LOGIN, REGISTER, AUTH_LOGIN, CART, ADMIN } = paths;
 const isSignedIn = true;
 
 export const routes = () => {
@@ -69,6 +69,7 @@ export const routes = () => {
             ]
         },
         { path: CART, element: <ShoppingCartPage/> },
+        { path: ADMIN, element: <AdminPage/> },
         {
             path: AUTH,
             element: <AuthContainer/>,
