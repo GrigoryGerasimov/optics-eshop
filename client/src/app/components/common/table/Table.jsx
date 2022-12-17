@@ -4,10 +4,10 @@ import { TableHeader } from "./TableHeader.jsx";
 import { TableFooter } from "./TableFooter.jsx";
 import PropTypes from "prop-types";
 
-export const Table = ({ tableClass }) => {
+export const Table = ({ tableClass, tableHeadings }) => {
     return (
         <table className={tableClass}>
-            <TableHeader/>
+            <TableHeader tableHeadings={tableHeadings}/>
             <TableFooter/>
             <TableBody/>
         </table>
@@ -15,5 +15,6 @@ export const Table = ({ tableClass }) => {
 };
 
 Table.propTypes = {
-    tableClass: PropTypes.string
+    tableClass: PropTypes.string,
+    tableHeadings: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
