@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProductMainImage = ({ productMainImgClass, productMainImgPath, productMainImgTitle }) => {
+const ProductMainImage = ({ productMainImgClass, productMainImgPath, productId }) => {
     return (
-        <img className={productMainImgClass} src={productMainImgPath} alt={productMainImgTitle}/>
+        <img className={productMainImgClass} src={productMainImgPath} alt={`Заглавное изображение артикула №${productId}`}/>
     );
 };
 
@@ -16,5 +16,5 @@ ProductMainImage.defaultProps = {
 ProductMainImage.propTypes = {
     productMainImgClass: PropTypes.string,
     productMainImgPath: PropTypes.string,
-    productMainImgTitle: PropTypes.string
+    productId: PropTypes.string
 };

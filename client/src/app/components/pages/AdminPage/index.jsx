@@ -9,11 +9,11 @@ import { Modal } from "../../common/Modal";
 
 const AdminPage = () => {
     const [currentForm, setCurrentForm] = useState("");
-    const { products, currentProduct, deleteProductUnit, findProductUnitById } = useProducts();
+    const { products, currentProduct, deleteProductUnit, findProductUnitById, updateProduct, isLoading } = useProducts();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
     const [currentId, setCurrentId] = useState("");
 
-    if (!products) return <Loader/>;
+    if (isLoading) return <Loader/>;
 
     const handleFormTypeToggler = type => setCurrentForm(type);
 
@@ -25,6 +25,15 @@ const AdminPage = () => {
     const handlePositionEdit = id => {
         findProductUnitById(id);
         handleFormTypeToggler("edit");
+    };
+
+    const handlePositionUpdate = (id, data) => {
+        updateProduct(id, data);
+    };
+
+    const handlePositionDelete = id => {
+        deleteProductUnit(id);
+        handleModalClose();
     };
 
     return (
@@ -44,7 +53,7 @@ const AdminPage = () => {
                     <ProductCreateForm/>
                 </div>
                 <div className={`${currentForm === "edit" ? "block" : "hidden"}`}>
-                    <ProductEditForm positionToEdit={currentProduct}/>
+                    <ProductEditForm positionToEdit={currentProduct} handlePositionUpdate={handlePositionUpdate}/>
                 </div>
             </section>
             <Modal
@@ -53,7 +62,7 @@ const AdminPage = () => {
                 text="Вы действительно хотите удалить данный товар?"
                 actionBtnLabel="Удалить"
                 secondaryBtnLabel="Отмена"
-                onAction={() => deleteProductUnit(currentId)}
+                onAction={() => handlePositionDelete(currentId)}
             />
         </main>
     );

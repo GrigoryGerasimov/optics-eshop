@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProductSideImage = ({ productSideImgClass, productSideImgPath, productSideImgTitle }) => {
+const ProductSideImage = ({ productSideImgClass, productSideImgPath, productId }) => {
     return (
-        <img className={productSideImgClass} src={productSideImgPath} alt={productSideImgTitle}/>
+        <img className={productSideImgClass} src={productSideImgPath} alt={`Заглавное изображение артикула №${productId}`}/>
     );
 };
 
@@ -16,5 +16,5 @@ ProductSideImage.defaultProps = {
 ProductSideImage.propTypes = {
     productSideImgClass: PropTypes.string,
     productSideImgPath: PropTypes.string,
-    productSideImgTitle: PropTypes.string
+    productId: PropTypes.string
 };

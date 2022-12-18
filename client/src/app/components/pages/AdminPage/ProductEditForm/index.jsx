@@ -5,8 +5,9 @@ import Button from "../../../common/Button.jsx";
 import Loader from "../../../common/Loader";
 import PropTypes from "prop-types";
 
-export const ProductEditForm = ({ positionToEdit }) => {
+export const ProductEditForm = ({ positionToEdit, handlePositionUpdate }) => {
     const currentProductUnitToEdit = {
+        _id: positionToEdit._id,
         title: positionToEdit.title,
         collection: positionToEdit.params?.[0],
         glassType: positionToEdit.params?.[1],
@@ -15,18 +16,24 @@ export const ProductEditForm = ({ positionToEdit }) => {
         quantity: String(positionToEdit.quantity),
         price: String(positionToEdit.price),
         currencyCode: positionToEdit.currencyCode,
-        imgSrc: positionToEdit.img
+        img: positionToEdit.img
     };
 
     const handleSubmit = data => {
-        console.log(data);
+        const transformedData = {
+            params: [data.collection, data.glassType, data.frameType, data.lenseType],
+            quantity: Number(data.quantity),
+            price: Number(data.price),
+            lastEdited: Date.now()
+        };
+        handlePositionUpdate(data._id, { ...data, ...transformedData });
     };
 
     return Object.keys(positionToEdit).length ? (
         <Form
             initialState={currentProductUnitToEdit}
             formClass="w-full h-max p-[70px] text-lg text-gray-700 border-none outline-none"
-            title={`Изменить артикул ${positionToEdit._id}`}
+            title={`Изменить артикул ${currentProductUnitToEdit._id}`}
             onSubmit={handleSubmit}
             config={validatorConfig}
         >
@@ -75,8 +82,8 @@ export const ProductEditForm = ({ positionToEdit }) => {
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Фото"
-                id="imgSrc"
-                name="imgSrc"
+                id="img"
+                name="img"
             />
             <Button
                 buttonClass="w-full md:w-[70%] lg:w-[60%] xl:w-[50%] bg-gray-700 text-lg text-yellow-200 font-[inherit] py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
@@ -95,5 +102,6 @@ export const ProductEditForm = ({ positionToEdit }) => {
 };
 
 ProductEditForm.propTypes = {
-    positionToEdit: PropTypes.object
+    positionToEdit: PropTypes.object,
+    handlePositionUpdate: PropTypes.func
 };

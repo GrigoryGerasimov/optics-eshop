@@ -1,4 +1,5 @@
 import React from "react";
+import { getTimestampFormat } from "../../../utils/timestamp/getTimestampFormat.js";
 import PropTypes from "prop-types";
 
 export const CardFooter = ({ cardFooterClass, cardCreatedAt, cardEditedAt }) => {
@@ -8,7 +9,7 @@ export const CardFooter = ({ cardFooterClass, cardCreatedAt, cardEditedAt }) => 
                 <output>{cardCreatedAt}</output>
             </p>
             <p className="text-sm text-opacity-50">Последнее обновление:{" "}
-                <output>{cardEditedAt}</output>
+                <output>{getTimestampFormat(cardEditedAt)}</output>
             </p>
         </div>
     );
@@ -20,6 +21,6 @@ CardFooter.defaultProps = {
 
 CardFooter.propTypes = {
     cardFooterClass: PropTypes.string,
-    cardCreatedAt: PropTypes.string,
-    cardEditedAt: PropTypes.string
+    cardCreatedAt: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string]),
+    cardEditedAt: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string])
 };

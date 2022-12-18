@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const CardImage = ({ cardImgClass, cardImgPath, cardImgTitle }) => {
+const CardImage = ({ cardImgClass, cardImgPath, cardImgProductId }) => {
     return (
         <img
             className={cardImgClass}
             src={cardImgPath}
-            alt={cardImgTitle}
+            alt={`Титульное изображение артикула №${cardImgProductId}`}
         />
     );
 };
@@ -20,5 +20,5 @@ CardImage.defaultProps = {
 CardImage.propTypes = {
     cardImgClass: PropTypes.string,
     cardImgPath: PropTypes.string,
-    cardImgTitle: PropTypes.string
+    cardImgProductId: PropTypes.string
 };

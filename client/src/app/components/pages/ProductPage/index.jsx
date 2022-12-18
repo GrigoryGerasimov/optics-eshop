@@ -8,14 +8,17 @@ import { Breadcrumbs } from "../../ui/common_ui/Breadcrumbs.jsx";
 import Button from "../../common/Button";
 import { Modal } from "../../common/Modal";
 import paths from "../../../routes/paths";
+import Loader from "../../common/Loader";
 
 const ProductPage = () => {
     const { productId } = useParams();
-    const { products: productData } = useProducts();
+    const { products: productData, isLoading } = useProducts();
     const { shoppingReservation, totalShoppingAmount, handleShoppingReservation, isPresentInCart, handleCheckPresenceInCart } = useShopping();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
     const navigate = useNavigate();
     const { CART } = paths;
+
+    if (isLoading) return <Loader/>;
 
     const currentItem = productData.find(productItem => productItem._id === productId);
 
@@ -34,15 +37,15 @@ const ProductPage = () => {
             <div className="flex flex-row flex-wrap justify-evenly items-center mt-[50px]">
                 <div className="2xl:w-6/12">
                     <ProductMainImage
-                        productMainImgPath={currentItem.imgBig}
-                        productMainImgTitle={currentItem.name}
+                        productMainImgPath={currentItem.img}
+                        productId={currentItem._id}
                     />
                     <div className="flex flex-row flex-wrap mt-1">
-                        {currentItem.imgSmall.map(img => (
+                        {currentItem.imgAddit.map(img => (
                             <ProductSideImage
                                 key={img.slice(img.lastIndexOf("-") + 1)}
                                 productSideImgPath={img}
-                                productSideImgTitle={currentItem.name}
+                                productId={currentItem._id}
                             />
                         ))}
                     </div>
