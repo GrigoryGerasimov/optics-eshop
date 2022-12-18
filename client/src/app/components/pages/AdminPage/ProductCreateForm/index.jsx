@@ -2,13 +2,12 @@ import React from "react";
 import { validatorConfig } from "./validatorConfig.js";
 import { FormControl, Form } from "../../../common/form";
 import Button from "../../../common/Button.jsx";
+import PropTypes from "prop-types";
 
 const initialState = {
-    _id: Math.floor(Math.random() * (1000 - 100) + 100),
+    _id: String(Math.floor(Math.random() * (1000 - 100) + 100)),
     img: "",
-    imgBig: "",
-    imgSmall: "",
-    name: "",
+    imgAddit: "",
     title: "",
     brand: "",
     collection: "",
@@ -24,13 +23,23 @@ const initialState = {
     additionalInfo: "",
     warrantyPeriod: "",
     countryOfOrigin: "",
+    quantity: "",
     price: "",
     currencyCode: ""
 };
 
-export const ProductCreateForm = () => {
+export const ProductCreateForm = ({ handlePositionCreate }) => {
     const handleSubmit = data => {
-        console.log(data);
+        const transformedData = {
+            imgAddit: data.imgAddit.split(",").map(url => url.trim()),
+            params: [data.collection, data.glassType, data.frameType, data.lenseType],
+            colors: data.colors.split(",").map(color => color.trim()),
+            shipmentType: data.shipmentType.split(",").map(sht => sht.trim()),
+            quantity: Number(data.quantity),
+            price: Number(data.price),
+            lastCreated: Date.now()
+        };
+        handlePositionCreate({ ...data, ...transformedData });
     };
 
     return (
@@ -50,23 +59,10 @@ export const ProductCreateForm = () => {
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[35px]"
-                label="Основная фотография"
-                id="imgBig"
-                name="imgBig"
-                placeholder="URL:..."
-            />
-            <FormControl
-                formFieldClass="focus:bg-transparent mb-[35px]"
                 label="Дополнительные фотографии"
-                id="imgSmall"
-                name="imgSmall"
-                placeholder="Напр., https://images.com/photo-1, https://images.com/photo-2..."
-            />
-            <FormControl
-                formFieldClass="focus:bg-transparent mb-[35px]"
-                label="Название фотографии"
-                id="name"
-                name="name"
+                id="imgAddit"
+                name="imgAddit"
+                placeholder="URL нескольких фото через запятую, напр.: https://images.com/photo-1, https://images.com/photo-2, https://images.com/photo-3..."
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[35px]"
@@ -127,12 +123,14 @@ export const ProductCreateForm = () => {
                 label="Цветовая гамма оправы"
                 id="colors"
                 name="colors"
+                placeholder="Несколько цветов через запятую, напр.: коричневый, серый, тёмно-синий..."
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип доставки"
                 id="shipmentType"
                 name="shipmentType"
+                placeholder="Несколько типов доставки через запятую, напр.: доставка на дом, почта, курьер..."
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
@@ -161,8 +159,8 @@ export const ProductCreateForm = () => {
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Количество"
-                id="totalQuantity"
-                name="totalQuantity"
+                id="quantity"
+                name="quantity"
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
@@ -190,4 +188,8 @@ export const ProductCreateForm = () => {
             </Button>
         </Form>
     );
+};
+
+ProductCreateForm.propTypes = {
+    handlePositionCreate: PropTypes.func
 };

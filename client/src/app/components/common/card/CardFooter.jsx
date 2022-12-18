@@ -6,7 +6,7 @@ export const CardFooter = ({ cardFooterClass, cardCreatedAt, cardEditedAt }) => 
     return (
         <div className={cardFooterClass}>
             <p className="text-sm text-opacity-50">Карточка создана:{" "}
-                <output>{cardCreatedAt}</output>
+                <output>{getTimestampFormat(cardCreatedAt)}</output>
             </p>
             <p className="text-sm text-opacity-50">Последнее обновление:{" "}
                 <output>{getTimestampFormat(cardEditedAt)}</output>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useMemo, useCallback } from "re
 import { useCategories } from "./useCategories.jsx";
 import PropTypes from "prop-types";
 
-const initialProductData = [
+let initialProductData = [
     {
         _id: "0001",
         img: "https://images.unsplash.com/photo-1556306510-31ca015374b0",
@@ -384,9 +384,16 @@ export const ProductsProvider = ({ children }) => {
         setProducts(sortedProducts);
     }, [products]);
 
-    const deleteProductUnit = id => setProducts(prevState => prevState.filter(item => item._id !== id));
+    const deleteProductUnit = id => {
+        initialProductData = initialProductData.filter(item => item._id !== id);
+        setProducts(initialProductData);
+    };
 
     const findProductUnitById = id => setCurrentProduct(products.find(item => item._id === id));
+
+    const createProduct = payload => {
+        initialProductData.push(payload);
+    };
 
     const updateProduct = (id, payload) => {
         const productUnitToUpdateIndex = initialProductData.findIndex(item => item._id === id);
@@ -405,7 +412,8 @@ export const ProductsProvider = ({ children }) => {
         currentProduct,
         deleteProductUnit,
         findProductUnitById,
-        updateProduct
+        updateProduct,
+        createProduct
     }), [
         products,
         isLoading,
@@ -415,7 +423,8 @@ export const ProductsProvider = ({ children }) => {
         currentProduct,
         deleteProductUnit,
         findProductUnitById,
-        updateProduct
+        updateProduct,
+        createProduct
     ])}
     >
         {children}
