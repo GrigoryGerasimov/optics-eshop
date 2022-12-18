@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "../../common/card/Card.jsx";
 import { useProducts } from "../../hooks";
 import Sorting from "../../ui/Sorting";
+import Loader from "../../common/Loader";
 
 const ProductCardsPage = () => {
     const navigate = useNavigate();
-    const { products: productData } = useProducts();
+    const { products: productData, isLoading } = useProducts();
+
+    if (isLoading) return <Loader/>;
 
     return (
         <>
@@ -18,12 +21,13 @@ const ProductCardsPage = () => {
                     return <Card
                         key={dataItem._id}
                         img={dataItem.img}
-                        name={dataItem.name}
+                        id={dataItem._id}
                         title={dataItem.title}
                         brand={dataItem.brand}
                         collection={dataItem.collectionTitle}
                         price={dataItem.price}
                         currencyCode={dataItem.currencyCode}
+                        lastEdited={dataItem.lastEdited}
                         onClick={() => navigate(`${paramsToPath}/${dataItem._id}`)}
                     />;
                 })}

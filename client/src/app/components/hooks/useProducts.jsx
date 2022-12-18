@@ -1,14 +1,12 @@
-import React, { useState, useContext, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
 import { useCategories } from "./useCategories.jsx";
 import PropTypes from "prop-types";
 
 const initialProductData = [
     {
         _id: "0001",
-        img: "https://images.unsplash.com/photo-1556306510-31ca015374b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1556306510-31ca015374b0",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 1",
+        img: "https://images.unsplash.com/photo-1556306510-31ca015374b0",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Brand New Day",
         brand: "Personal Brand",
         params: ["#ss23mdeluxe", "#dprogres", "#round", "#everyday"],
@@ -27,10 +25,8 @@ const initialProductData = [
     },
     {
         _id: "0002",
-        img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 2",
+        img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Super Glasses 2022",
         brand: "Personal Brand",
         params: ["#fw23mdeluxe", "#dfmen", "#thick", "#monthly"],
@@ -45,14 +41,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 850,
         price: 9990,
-        currencyCode: "EUR"
+        currencyCode: "RUB"
     },
     {
         _id: "0003",
-        img: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 3",
+        img: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Collection FW2021",
         brand: "Personal Brand",
         params: ["#fw23mdeluxe", "#dmen", "#square", "#everyday"],
@@ -67,14 +61,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 1800,
         price: 7200,
-        currencyCode: "ILS"
+        currencyCode: "RUB"
     },
     {
         _id: "0004",
-        img: "https://images.unsplash.com/photo-1591643529995-aef2e1e6f281?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1591643529995-aef2e1e6f281",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 4",
+        img: "https://images.unsplash.com/photo-1591643529995-aef2e1e6f281",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Perfect choice!",
         brand: "Personal Brand",
         params: ["#fw23mdeluxe", "#dcomp", "#thin", "#daily"],
@@ -93,10 +85,8 @@ const initialProductData = [
     },
     {
         _id: "0005",
-        img: "https://images.unsplash.com/photo-1602703522866-fb486308da5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1602703522866-fb486308da5d",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 5",
+        img: "https://images.unsplash.com/photo-1602703522866-fb486308da5d",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Fantastic Tale",
         brand: "Personal Brand",
         params: ["#fw23unisex", "#dfsun", "#thin", "#daily"],
@@ -111,14 +101,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 670,
         price: 10500,
-        currencyCode: "GEL"
+        currencyCode: "RUB"
     },
     {
         _id: "0006",
-        img: "https://images.unsplash.com/photo-1603578119639-798b8413d8d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1603578119639-798b8413d8d7",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 6",
+        img: "https://images.unsplash.com/photo-1603578119639-798b8413d8d7",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Women Collection SS22",
         brand: "Personal Brand",
         params: ["#fw22wdeluxe", "#dwomen", "#thin", "#everyday"],
@@ -133,14 +121,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 8900,
         price: 9200,
-        currencyCode: "AZN"
+        currencyCode: "RUB"
     },
     {
         _id: "0007",
-        img: "https://images.unsplash.com/photo-1483412468200-72182dbbc544?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1483412468200-72182dbbc544",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 7",
+        img: "https://images.unsplash.com/photo-1483412468200-72182dbbc544",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Kids Choice",
         brand: "Personal Brand",
         params: ["#ss23kidsteens", "#dfkids", "#thick", "#monthly"],
@@ -155,14 +141,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 11100,
         price: 11600,
-        currencyCode: "KZT"
+        currencyCode: "RUB"
     },
     {
         _id: "0008",
-        img: "https://images.unsplash.com/photo-1556306510-31ca015374b0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1556306510-31ca015374b0",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 8",
+        img: "https://images.unsplash.com/photo-1556306510-31ca015374b0",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Brand New Day",
         brand: "Personal Brand",
         params: ["#ss22wdeluxe", "#ddriver", "#thin", "#everyday"],
@@ -177,14 +161,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 2000,
         price: 15100,
-        currencyCode: "ILS"
+        currencyCode: "RUB"
     },
     {
         _id: "0009",
-        img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 9",
+        img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Super Glasses 2022",
         brand: "Personal Brand",
         params: ["#fw22mdeluxe", "#dfflat", "#classic", "#everyday"],
@@ -199,14 +181,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 4200,
         price: 12700,
-        currencyCode: "EUR"
+        currencyCode: "RUB"
     },
     {
         _id: "0010",
-        img: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 10",
+        img: "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Collection SS2023",
         brand: "Personal Brand",
         params: ["#ss23kidsteens", "#dmen", "#thin", "#daily"],
@@ -225,10 +205,8 @@ const initialProductData = [
     },
     {
         _id: "0011",
-        img: "https://images.unsplash.com/photo-1591643529995-aef2e1e6f281?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1591643529995-aef2e1e6f281",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 11",
+        img: "https://images.unsplash.com/photo-1591643529995-aef2e1e6f281",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Perfect choice!",
         brand: "Personal Brand",
         params: ["#fw23unisex", "#dfstyle", "#round", "#daily"],
@@ -243,14 +221,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 20000,
         price: 9000,
-        currencyCode: "EUR"
+        currencyCode: "RUB"
     },
     {
         _id: "0012",
-        img: "https://images.unsplash.com/photo-1602703522866-fb486308da5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1602703522866-fb486308da5d",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 12",
+        img: "https://images.unsplash.com/photo-1602703522866-fb486308da5d",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Fantastic Tale",
         brand: "Personal Brand",
         params: ["#fw22mdeluxe", "#dphotochr", "#square", "#monthly"],
@@ -265,14 +241,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 8000,
         price: 13500,
-        currencyCode: "ILS"
+        currencyCode: "RUB"
     },
     {
         _id: "0013",
-        img: "https://images.unsplash.com/photo-1603578119639-798b8413d8d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1603578119639-798b8413d8d7",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 13",
+        img: "https://images.unsplash.com/photo-1603578119639-798b8413d8d7",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Women Collection SS22",
         brand: "Personal Brand",
         params: ["#ss22wdeluxe", "#dwomen", "#semi", "#everyday"],
@@ -287,14 +261,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 290,
         price: 14900,
-        currencyCode: "KZT"
+        currencyCode: "RUB"
     },
     {
         _id: "0014",
-        img: "https://images.unsplash.com/photo-1483412468200-72182dbbc544?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1483412468200-72182dbbc544",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 14",
+        img: "https://images.unsplash.com/photo-1483412468200-72182dbbc544",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Kids Choice",
         brand: "Personal Brand",
         params: ["#ss23kidsteens", "#dkids", "#thick", "#daily"],
@@ -309,14 +281,12 @@ const initialProductData = [
         countryOfOrigin: "РФ",
         quantity: 260,
         price: 8100,
-        currencyCode: "AZN"
+        currencyCode: "RUB"
     },
     {
         _id: "0015",
-        img: "https://images.unsplash.com/photo-1483412468200-72182dbbc544?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=250",
-        imgBig: "https://images.unsplash.com/photo-1483412468200-72182dbbc544",
-        imgSmall: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
-        name: "glasses img 15",
+        img: "https://images.unsplash.com/photo-1483412468200-72182dbbc544",
+        imgAddit: ["https://images.unsplash.com/photo-1511499767150-a48a237f0083", "https://images.unsplash.com/photo-1608906709312-fe17f7c1a5a6", "https://images.unsplash.com/photo-1602703522866-fb486308da5d"],
         title: "Kids Choice",
         brand: "Personal Brand",
         params: ["#fw22kidsteens", "#dfkids", "#thin", "#everyday"],
@@ -340,9 +310,15 @@ const ProductsContext = React.createContext();
 export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
-    const [products, setProducts] = useState(initialProductData);
+    const [products, setProducts] = useState([]);
+    const [isLoading, setLoading] = useState(true);
     const [currentProduct, setCurrentProduct] = useState({});
     const { collection, glassTypes, frameTypes, lenseTypes } = useCategories();
+
+    useEffect(() => {
+        setProducts(initialProductData);
+        setLoading(false);
+    });
 
     const filterSearchedProducts = useCallback(data => {
         const searchedProducts = products.filter(productUnit => productUnit.title.toLowerCase().includes(data.toLowerCase()));
@@ -412,23 +388,38 @@ export const ProductsProvider = ({ children }) => {
 
     const findProductUnitById = id => setCurrentProduct(products.find(item => item._id === id));
 
+    const updateProduct = (id, payload) => {
+        const productUnitToUpdateIndex = initialProductData.findIndex(item => item._id === id);
+        if (productUnitToUpdateIndex !== -1) {
+            initialProductData[productUnitToUpdateIndex] = { ...initialProductData[productUnitToUpdateIndex], ...payload };
+            setCurrentProduct(initialProductData[productUnitToUpdateIndex]);
+        }
+    };
+
     return <ProductsContext.Provider value={useMemo(() => ({
         products,
+        isLoading,
         filterSearchedProducts,
         filterCatalogedProducts,
         sortCatalogedProducts,
         currentProduct,
         deleteProductUnit,
-        findProductUnitById
+        findProductUnitById,
+        updateProduct
     }), [
         products,
+        isLoading,
         filterSearchedProducts,
         filterCatalogedProducts,
         sortCatalogedProducts,
         currentProduct,
         deleteProductUnit,
-        findProductUnitById
-    ])}>{children}</ProductsContext.Provider>;
+        findProductUnitById,
+        updateProduct
+    ])}
+    >
+        {children}
+    </ProductsContext.Provider>;
 };
 
 ProductsProvider.propTypes = {

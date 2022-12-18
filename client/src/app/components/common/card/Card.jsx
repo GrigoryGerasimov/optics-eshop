@@ -5,13 +5,13 @@ import { CardBody } from "./CardBody.jsx";
 import { CardFooter } from "./CardFooter.jsx";
 import PropTypes from "prop-types";
 
-export const Card = ({ cardClass, cardImgClass, cardTitleClass, cardBodyClass, cardFooterClass, img, name, title, brand, collection, price, currencyCode, ...rest }) => {
+export const Card = ({ cardClass, cardImgClass, cardTitleClass, cardBodyClass, cardFooterClass, img, id, title, brand, collection, price, currencyCode, lastEdited, ...rest }) => {
     return (
         <div className={cardClass} {...rest} >
             <CardImage
                 cardImgClass={cardImgClass}
                 cardImgPath={img}
-                cardImgTitle={name}
+                cardImgProductId={id}
             />
             <CardTitle
                 cardTitleClass={cardTitleClass}
@@ -25,6 +25,7 @@ export const Card = ({ cardClass, cardImgClass, cardTitleClass, cardBodyClass, c
             />
             <CardFooter
                 cardFooterClass={cardFooterClass}
+                cardEditedAt={lastEdited}
             />
         </div>
     );
@@ -41,10 +42,11 @@ Card.propTypes = {
     cardBodyClass: PropTypes.string,
     cardFooterClass: PropTypes.string,
     img: PropTypes.string,
-    name: PropTypes.string,
+    id: PropTypes.string,
     title: PropTypes.string,
     brand: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     currencyCode: PropTypes.string,
-    collection: PropTypes.string
+    collection: PropTypes.string,
+    lastEdited: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.string])
 };
