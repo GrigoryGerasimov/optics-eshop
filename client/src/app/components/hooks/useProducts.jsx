@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
 import { useCategories } from "./useCategories.jsx";
+import { useReceiveProductsQuery } from "../../store/api.js";
 import PropTypes from "prop-types";
 
 let initialProductData = [
@@ -311,13 +312,17 @@ export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
-    const [isLoading, setLoading] = useState(true);
     const [currentProduct, setCurrentProduct] = useState({});
     const { collection, glassTypes, frameTypes, lenseTypes } = useCategories();
 
+    const { isLoading, isSuccess, data } = useReceiveProductsQuery({
+        refetchOnFocus: true
+    });
+
     useEffect(() => {
-        setProducts(initialProductData);
-        setLoading(false);
+        if (!isLoading && isSuccess) {
+            setProducts(data.data);
+        }
     });
 
     const filterSearchedProducts = useCallback(data => {
@@ -406,6 +411,7 @@ export const ProductsProvider = ({ children }) => {
     return <ProductsContext.Provider value={useMemo(() => ({
         products,
         isLoading,
+        isSuccess,
         filterSearchedProducts,
         filterCatalogedProducts,
         sortCatalogedProducts,
@@ -417,6 +423,7 @@ export const ProductsProvider = ({ children }) => {
     }), [
         products,
         isLoading,
+        isSuccess,
         filterSearchedProducts,
         filterCatalogedProducts,
         sortCatalogedProducts,

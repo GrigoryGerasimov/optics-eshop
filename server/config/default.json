@@ -1,11 +1,11 @@
 {
   "server": {
-    "S_PROTOCOL": "https",
+    "S_PROTOCOL": "http",
     "S_HOST": "localhost",
     "S_PORT": 5000
   },
   "client": {
-    "C_PROTOCOL": "https",
+    "C_PROTOCOL": "http",
     "C_HOST": "localhost",
     "C_PORT": 3000
   },

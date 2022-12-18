@@ -54,7 +54,7 @@ ProductInfoBlock.propTypes = {
     productGroup: PropTypes.string,
     description: PropTypes.string,
     colors: PropTypes.arrayOf(PropTypes.string),
-    shipmentType: PropTypes.string,
+    shipmentType: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
     license: PropTypes.string,
     additionalInfo: PropTypes.string,
     warrantyPeriod: PropTypes.string,

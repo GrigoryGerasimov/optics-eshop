@@ -1,14 +1,14 @@
 const { Router } = require("express");
 const productRoutes = Router();
 const { ProductController } = require("../controllers/ProductController");
-const { mw } = require("../middleware");
-
-const { onTokenAccessCheck, onRoleAccessCheck } = mw;
+// const { mw } = require("../middleware");
+//
+// const { onTokenAccessCheck, onRoleAccessCheck } = mw;
 
 productRoutes
     .route("/")
-    .get(onTokenAccessCheck, ProductController.read)
-    .post(onTokenAccessCheck, onRoleAccessCheck(["admin", "retailer"]), ProductController.create);
+    .get(ProductController.read)
+    .post(ProductController.create);
 
 productRoutes
     .route("/:productId")
