@@ -31,7 +31,7 @@ const FormControl = ({ formFieldClass, label, id, type, name, value, onChange, i
     );
 };
 
-export default React.memo(FormControl);
+export default FormControl;
 
 FormControl.defaultProps = {
     type: "text"

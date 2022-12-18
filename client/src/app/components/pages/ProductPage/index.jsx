@@ -52,7 +52,7 @@ const ProductPage = () => {
                     {
                         !isPresentInCart ? (
                             <Button
-                                buttonClass="w-full bg-gray-700 text-xl text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] mt-[35px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
+                                buttonClass="w-full bg-gray-700 text-lg text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] mt-[35px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
                                 type="button"
                                 onClick={() => processShoppingReservation(currentItem._id)}
                             >
@@ -60,11 +60,11 @@ const ProductPage = () => {
                             </Button>
                         ) : (
                             <>
-                                <div className="w-full text-xl text-center py-5 mt-10">
+                                <div className="w-full text-lg text-center py-5 mt-10">
                                     Данный артикул уже добавлен в Вашу корзину покупок. Вы всегда можете задать необходимое количество непосредственно в корзине.
                                 </div>
                                 <Button
-                                    buttonClass="w-full bg-gray-700 text-xl text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] mt-[35px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
+                                    buttonClass="w-full bg-gray-700 text-lg text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] mt-[35px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
                                     type="button"
                                     onClick={() => navigate(`/${CART}`)}
                                 >

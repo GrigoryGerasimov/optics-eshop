@@ -4,7 +4,7 @@ export const columnHeadings = {
         name: "ID"
     },
     productName: {
-        path: "name",
+        path: "title",
         name: "Наименование"
     },
     collection: {
@@ -23,13 +23,17 @@ export const columnHeadings = {
         path: "lenseType",
         name: "Тип линз"
     },
-    totalQuantity: {
-        path: "totalQuantity",
+    quantity: {
+        path: "quantity",
         name: "Количество"
     },
-    totalAmount: {
-        path: "totalAmount",
-        name: "Стоимость"
+    price: {
+        path: "price",
+        name: "Цена"
+    },
+    currencyCode: {
+        path: "currencyCode",
+        name: "Валюта"
     },
     imgSrc: {
         path: "imgSrc",

@@ -41,7 +41,7 @@ export const ProductInfoBlock = ({
 };
 
 ProductInfoBlock.defaultProps = {
-    productInfoBlockClass: "text-xl text-gray-700 text-opacity-95 leading-10 my-7"
+    productInfoBlockClass: "text-lg text-gray-700 text-opacity-95 leading-10 my-7"
 };
 
 ProductInfoBlock.propTypes = {

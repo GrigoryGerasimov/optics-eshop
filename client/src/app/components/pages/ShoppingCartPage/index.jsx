@@ -39,7 +39,7 @@ const ShoppingCartPage = () => {
                 );
             })}
             <Divider/>
-            <div className="h-[100px] flex flex-row flex-wrap text-xl justify-evenly items-center my-[95px]">
+            <div className="h-[100px] flex flex-row flex-wrap text-lg justify-evenly items-center my-[95px]">
                 <div className="h-[inherit] flex flex-row flex-wrap justify-evenly self-center items-center">
                     <span className="mr-[15px]">Итого к оплате (с учётом НДС):{" "}</span>
                     <output>

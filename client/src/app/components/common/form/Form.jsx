@@ -8,6 +8,10 @@ const Form = ({ formClass, title, children, initialState, initialPasswordState, 
     const [isDisabled, setIsDisabled] = useState(true);
     const [showPassword, setShowPassword] = useState(initialPasswordState || {});
 
+    useEffect(() => {
+        setData(initialState);
+    }, [initialState]);
+
     const handleChange = ({ target }) => {
         const { name, value } = target;
         setData(prevData => ({

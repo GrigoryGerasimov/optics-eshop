@@ -15,6 +15,9 @@ import SortingArrowUpIcon from "./sorting_icons/SortingArrowUpIcon.jsx";
 import SortingIcon from "./sorting_icons/SortingIcon.jsx";
 import ChevronUp from "./ChevronUp.jsx";
 import ChevronDown from "./ChevronDown.jsx";
+import PlusIcon from "./PlusIcon.jsx";
+import EditIcon from "./EditIcon.jsx";
+import CloseIcon from "./CloseIcon.jsx";
 
 export {
     EyeIcon,
@@ -33,5 +36,8 @@ export {
     SortingArrowUpIcon,
     SortingIcon,
     ChevronUp,
-    ChevronDown
+    ChevronDown,
+    PlusIcon,
+    EditIcon,
+    CloseIcon
 };
