@@ -1,5 +1,5 @@
 export const validatorConfig = {
-    name: {
+    title: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }
@@ -24,12 +24,12 @@ export const validatorConfig = {
             message: "Поле обязательно для заполнения"
         }
     },
-    totalQuantity: {
+    quantity: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }
     },
-    totalAmount: {
+    price: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }

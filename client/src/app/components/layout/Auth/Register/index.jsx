@@ -39,7 +39,7 @@ const Register = () => {
         <RegisterForm
             initialState={initialState}
             initialPasswordState={initialPasswordState}
-            formClass="w-max h-max p-[70px] text-xl text-gray-700 border-none outline-none"
+            formClass="w-max h-max p-[70px] text-lg text-gray-700 border-none outline-none"
             title="Регистрация"
             onSubmit={handleSubmit}
             config={validatorConfig}

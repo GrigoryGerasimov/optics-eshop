@@ -21,6 +21,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 200,
         price: 8700,
         currencyCode: "RUB"
     },
@@ -42,6 +43,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 850,
         price: 9990,
         currencyCode: "EUR"
     },
@@ -63,6 +65,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 1800,
         price: 7200,
         currencyCode: "ILS"
     },
@@ -84,6 +87,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 3500,
         price: 6900,
         currencyCode: "RUB"
     },
@@ -105,6 +109,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 670,
         price: 10500,
         currencyCode: "GEL"
     },
@@ -126,6 +131,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 8900,
         price: 9200,
         currencyCode: "AZN"
     },
@@ -147,6 +153,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 11100,
         price: 11600,
         currencyCode: "KZT"
     },
@@ -168,6 +175,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 2000,
         price: 15100,
         currencyCode: "ILS"
     },
@@ -189,6 +197,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 4200,
         price: 12700,
         currencyCode: "EUR"
     },
@@ -210,6 +219,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 5500,
         price: 10400,
         currencyCode: "RUB"
     },
@@ -231,6 +241,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 20000,
         price: 9000,
         currencyCode: "EUR"
     },
@@ -252,6 +263,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 8000,
         price: 13500,
         currencyCode: "ILS"
     },
@@ -273,6 +285,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 290,
         price: 14900,
         currencyCode: "KZT"
     },
@@ -294,6 +307,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 260,
         price: 8100,
         currencyCode: "AZN"
     },
@@ -315,6 +329,7 @@ const initialProductData = [
         additionalInfo: "В комплекте поставки: оправа, фирменный футляр, салфетка для очистки линз",
         warrantyPeriod: "12",
         countryOfOrigin: "РФ",
+        quantity: 3300,
         price: 7990,
         currencyCode: "RUB"
     }
@@ -326,6 +341,7 @@ export const useProducts = () => useContext(ProductsContext);
 
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState(initialProductData);
+    const [currentProduct, setCurrentProduct] = useState({});
     const { collection, glassTypes, frameTypes, lenseTypes } = useCategories();
 
     const filterSearchedProducts = useCallback(data => {
@@ -392,16 +408,26 @@ export const ProductsProvider = ({ children }) => {
         setProducts(sortedProducts);
     }, [products]);
 
+    const deleteProductUnit = id => setProducts(prevState => prevState.filter(item => item._id !== id));
+
+    const findProductUnitById = id => setCurrentProduct(products.find(item => item._id === id));
+
     return <ProductsContext.Provider value={useMemo(() => ({
         products,
         filterSearchedProducts,
         filterCatalogedProducts,
-        sortCatalogedProducts
+        sortCatalogedProducts,
+        currentProduct,
+        deleteProductUnit,
+        findProductUnitById
     }), [
         products,
         filterSearchedProducts,
         filterCatalogedProducts,
-        sortCatalogedProducts
+        sortCatalogedProducts,
+        currentProduct,
+        deleteProductUnit,
+        findProductUnitById
     ])}>{children}</ProductsContext.Provider>;
 };
 

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const CardTitle = ({ cardTitleClass, cardTitleText }) => {
     return (
         <div className={cardTitleClass}>
-            <p className="text-2xl text-gray-700 text-opacity-95">{cardTitleText}</p>
+            <p className="text-xl text-gray-700 text-opacity-95">{cardTitleText}</p>
         </div>
     );
 };

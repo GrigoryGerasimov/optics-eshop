@@ -31,7 +31,7 @@ const Login = () => {
     return Object.keys(initialState).length ? (
         <LoginForm
             initialState={initialState}
-            formClass="w-max h-max p-[70px] text-xl text-gray-700 border-none outline-none"
+            formClass="w-max h-max p-[70px] text-lg text-gray-700 border-none outline-none"
             title="Авторизация"
             onSubmit={handleSubmit}
             config={validatorConfig}
