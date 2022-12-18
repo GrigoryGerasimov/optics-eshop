@@ -81,24 +81,28 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
                 label="Коллекция"
                 id="collection"
                 name="collection"
+                placeholder="Код коллекции по сезону, напр. #fw23mdeluxe"
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип очков"
                 id="glassType"
                 name="glassType"
+                placeholder="Код типа очков, напр. #dcomp"
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип оправы"
                 id="frameType"
                 name="frameType"
+                placeholder="Код типа оправы, напр. #thin"
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип линз"
                 id="lenseType"
                 name="lenseType"
+                placeholder="Код типа оправы, напр. #daily"
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
