@@ -7,9 +7,9 @@ import Loader from "../../common/Loader";
 
 const ProductCardsPage = () => {
     const navigate = useNavigate();
-    const { products: productData, isLoading } = useProducts();
+    const { products: productData, isLoading, isSuccess } = useProducts();
 
-    if (isLoading) return <Loader/>;
+    if (isLoading || !isSuccess || !productData?.length) return <Loader/>;
 
     return (
         <>
@@ -27,8 +27,8 @@ const ProductCardsPage = () => {
                         collection={dataItem.collectionTitle}
                         price={dataItem.price}
                         currencyCode={dataItem.currencyCode}
-                        lastEdited={dataItem.lastEdited}
-                        lastCreated={dataItem.lastCreated}
+                        lastEdited={dataItem.updatedAt}
+                        lastCreated={dataItem.createdAt}
                         onClick={() => navigate(`${paramsToPath}/${dataItem._id}`)}
                     />;
                 })}

@@ -12,17 +12,15 @@ import Loader from "../../common/Loader";
 
 const ProductPage = () => {
     const { productId } = useParams();
-    const { products: productData, isLoading } = useProducts();
+    const { products: productData, isLoading, isSuccess } = useProducts();
     const { shoppingReservation, totalShoppingAmount, handleShoppingReservation, isPresentInCart, handleCheckPresenceInCart } = useShopping();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
     const navigate = useNavigate();
     const { CART } = paths;
 
-    if (isLoading) return <Loader/>;
+    if (isLoading || !isSuccess || !productData?.length) return <Loader/>;
 
     const currentItem = productData.find(productItem => productItem._id === productId);
-
-    console.log(currentItem);
 
     const processShoppingReservation = id => {
         handleModalOpen();

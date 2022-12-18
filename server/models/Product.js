@@ -5,18 +5,10 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    imgBig: {
-        type: String,
-        required: true
-    },
-    imgSmall: [{
+    imgAddit: [{
         type: String,
         required: true
     }],
-    name: {
-        type: String,
-        required: true
-    },
     title: {
         type: String,
         required: true
@@ -81,6 +73,18 @@ const schema = new Schema({
         ref: "Country",
         required: true
     },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    currencyCode: {
+        type: String,
+        required: true
+    }
 }, {
     timestamps: true
 });
