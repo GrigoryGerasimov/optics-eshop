@@ -22,6 +22,8 @@ const ProductPage = () => {
 
     const currentItem = productData.find(productItem => productItem._id === productId);
 
+    console.log(currentItem);
+
     const processShoppingReservation = id => {
         handleModalOpen();
         handleShoppingReservation(id);

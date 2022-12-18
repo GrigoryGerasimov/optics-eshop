@@ -28,6 +28,7 @@ const ProductCardsPage = () => {
                         price={dataItem.price}
                         currencyCode={dataItem.currencyCode}
                         lastEdited={dataItem.lastEdited}
+                        lastCreated={dataItem.lastCreated}
                         onClick={() => navigate(`${paramsToPath}/${dataItem._id}`)}
                     />;
                 })}

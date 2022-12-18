@@ -30,7 +30,9 @@ export const ProductInfoBlock = ({
             <p className={productInfoBlockClass}>Варианты расцветки: {
                 Array.isArray(colors) ? colors.reduce((acc, val) => acc + ", " + val) : typeof colors === "string" ? colors : null
             }</p>
-            <p className={productInfoBlockClass}>Доставка: {shipmentType}</p>
+            <p className={productInfoBlockClass}>Доставка: {
+                Array.isArray(shipmentType) ? shipmentType.reduce((acc, val) => acc + ", " + val) : typeof shipmentType === "string" ? shipmentType : null
+            }</p>
             <p className={productInfoBlockClass}>Лицензия: {license}</p>
             <p className={productInfoBlockClass}>{additionalInfo}</p>
             <p className={productInfoBlockClass}>Заводская гарантия: {warrantyPeriod}</p>

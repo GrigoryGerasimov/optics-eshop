@@ -4,17 +4,7 @@ export const validatorConfig = {
             message: "Поле обязательно для заполнения"
         }
     },
-    imgBig: {
-        isRequired: {
-            message: "Поле обязательно для заполнения"
-        }
-    },
-    imgSmall: {
-        isRequired: {
-            message: "Поле обязательно для заполнения"
-        }
-    },
-    name: {
+    imgAddit: {
         isRequired: {
             message: "Поле обязательно для заполнения"
         }
