@@ -5,7 +5,6 @@ import Button from "../../../common/Button.jsx";
 import PropTypes from "prop-types";
 
 const initialState = {
-    _id: String(Math.floor(Math.random() * (1000 - 100) + 100)),
     img: "",
     imgAddit: "",
     title: "",
@@ -33,11 +32,10 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
         const transformedData = {
             imgAddit: data.imgAddit.split(",").map(url => url.trim()),
             params: [data.collection, data.glassType, data.frameType, data.lenseType],
-            colors: data.colors.split(",").map(color => color.trim()),
+            colours: data.colors.split(",").map(color => color.trim()),
             shipmentType: data.shipmentType.split(",").map(sht => sht.trim()),
             quantity: Number(data.quantity),
-            price: Number(data.price),
-            lastCreated: Date.now()
+            price: Number(data.price)
         };
         handlePositionCreate({ ...data, ...transformedData });
     };

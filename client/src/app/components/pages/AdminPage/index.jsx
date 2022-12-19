@@ -3,46 +3,75 @@ import { Table } from "../../common/table";
 import { ProductEditForm } from "./ProductEditForm";
 import { ProductCreateForm } from "./ProductCreateForm";
 import { columnHeadings } from "./columnHeadings.js";
-import { useModal, useProducts } from "../../hooks";
+import { useModal } from "../../hooks";
 import Loader from "../../common/Loader";
 import { Modal } from "../../common/Modal";
+import { useReceiveProductsQuery, useUpdateProductMutation, useCreateProductMutation, useDeleteProductMutation } from "../../../store/backendApi.js";
+import { toast } from "react-toastify";
 
 const AdminPage = () => {
     const [currentForm, setCurrentForm] = useState("");
-    const { products, currentProduct, deleteProductUnit, findProductUnitById, updateProduct, createProduct, isLoading } = useProducts();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
     const [currentId, setCurrentId] = useState("");
+    const [currentProduct, setCurrentProduct] = useState({});
     const [currentModalFlag, setCurrentModalFlag] = useState("");
 
-    if (isLoading) return <Loader/>;
+    const { isLoading, isSuccess, data } = useReceiveProductsQuery({ refetchOnFocus: true });
+    if (isLoading && !isSuccess) return <Loader/>;
+    const products = data.data;
+
+    const [updateProduct] = useUpdateProductMutation();
+    const [createProduct] = useCreateProductMutation();
+    const [deleteProduct] = useDeleteProductMutation();
+
+    const errorCatcher = error => toast.error(error);
+
+    const modalActionSwitcher = action => {
+        setCurrentModalFlag(action);
+        handleModalOpen();
+        setTimeout(() => handleModalClose(), 4000);
+    };
+
+    const findProductUnitById = id => setCurrentProduct(products.find(item => item._id === id));
 
     const handleFormTypeToggler = type => setCurrentForm(type);
 
-    const handleCheckBeforePositionDelete = id => {
-        setCurrentId(id);
-        setCurrentModalFlag("delete");
-        handleModalOpen();
-    };
-
-    const handlePositionCreate = data => {
-        setCurrentModalFlag("create");
-        handleModalOpen();
-        createProduct(data);
-        setTimeout(() => handleModalClose(), 5000);
+    const handlePositionCreate = payload => {
+        try {
+            createProduct(payload);
+            modalActionSwitcher("create");
+        } catch (err) {
+            errorCatcher(err);
+        }
     };
 
     const handlePositionEdit = id => {
         findProductUnitById(id);
         handleFormTypeToggler("edit");
     };
-
-    const handlePositionUpdate = (id, data) => {
-        updateProduct(id, data);
+    const handlePositionUpdate = async (id, payload) => {
+        try {
+            const { data } = await updateProduct({ id, payload }).unwrap();
+            setCurrentProduct(data);
+            modalActionSwitcher("update");
+        } catch (err) {
+            errorCatcher(err);
+        }
     };
 
+    const handleCheckBeforePositionDelete = id => {
+        setCurrentId(id);
+        setCurrentModalFlag("deleteCheck");
+        handleModalOpen();
+    };
     const handlePositionDelete = id => {
-        deleteProductUnit(id);
-        handleModalClose();
+        try {
+            deleteProduct(id);
+            handleModalClose();
+            modalActionSwitcher("delete");
+        } catch (err) {
+            errorCatcher(err);
+        }
     };
 
     return (
@@ -65,7 +94,7 @@ const AdminPage = () => {
                     <ProductEditForm positionToEdit={currentProduct} handlePositionUpdate={handlePositionUpdate}/>
                 </div>
             </section>
-            {currentModalFlag === "delete" ? (
+            {currentModalFlag === "deleteCheck" ? (
                 <Modal
                     modalStatus={showModal}
                     onCloseModal={handleModalClose}
@@ -74,10 +103,22 @@ const AdminPage = () => {
                     secondaryBtnLabel="Отмена"
                     onAction={() => handlePositionDelete(currentId)}
                 />
-            ) : (
+            ) : currentModalFlag === "delete" ? (
+                <Modal
+                    modalStatus={showModal}
+                    text="Артикул успешно удалён!"
+                    modalBtnGroupClass="hidden"
+                />
+            ) : currentModalFlag === "create" ? (
                 <Modal
                     modalStatus={showModal}
                     text="Новый артикул успешно создан!"
+                    modalBtnGroupClass="hidden"
+                />
+            ) : (
+                <Modal
+                    modalStatus={showModal}
+                    text="Артикул успешно обновлён!"
                     modalBtnGroupClass="hidden"
                 />
             )}

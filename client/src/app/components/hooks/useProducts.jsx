@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
 import { useCategories } from "./useCategories.jsx";
-import { useReceiveProductsQuery } from "../../store/api.js";
+import { useReceiveProductsQuery } from "../../store/backendApi.js";
 import PropTypes from "prop-types";
 
 let initialProductData = [
