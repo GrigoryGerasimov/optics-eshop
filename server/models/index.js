@@ -8,8 +8,9 @@ const { FrameType } = require("./FrameType");
 const { LenseType } = require("./LenseType");
 const { Product } = require("./Product");
 const { Country } = require("./Country");
-const { Colour } = require("./Colour");
+const { Color } = require("./Color");
 const { ShipmentType } = require("./ShipmentType");
+const { Currency } = require("./Currency");
 
 const models = {};
 
@@ -23,8 +24,9 @@ models.FrameType = FrameType;
 models.LenseType = LenseType;
 models.Product = Product;
 models.Country = Country;
-models.Colour = Colour;
+models.Color = Color;
 models.ShipmentType = ShipmentType;
+models.Currency = Currency;
 
 module.exports = {
     models

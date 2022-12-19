@@ -46,7 +46,7 @@ const schema = new Schema({
         type: String,
         required: true
     },
-    colours: [{
+    colors: [{
         type: Schema.Types.ObjectId,
         ref: "Colour",
         required: true
@@ -82,7 +82,8 @@ const schema = new Schema({
         required: true
     },
     currencyCode: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "Currency",
         required: true
     }
 }, {

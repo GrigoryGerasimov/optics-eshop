@@ -15,6 +15,12 @@ export const backendApi = createApi({
             }),
             providesTags: ["Products"]
         }),
+        receiveProductById: build.query({
+            query: id => ({
+                url: `products/${id}`
+            }),
+            providesTags: ["Products"]
+        }),
         createProduct: build.mutation({
             query: payload => ({
                 url: "products",
@@ -39,13 +45,49 @@ export const backendApi = createApi({
                 method: "DELETE"
             }),
             invalidatesTags: ["Products"]
+        }),
+        receiveShipmentTypeById: build.query({
+            query: shtId => ({
+                url: `shipmenttypes/${shtId}`
+            }),
+            providesTags: ["Products"]
+        }),
+        receiveColorById: build.query({
+            query: colorId => ({
+                url: `colors/${colorId}`
+            }),
+            providesTags: ["Products"]
+        }),
+        receiveCountryById: build.query({
+            query: countryId => ({
+                url: `countries/${countryId}`
+            }),
+            providesTags: ["Products"]
+        }),
+        receiveCurrency: build.query({
+            query: () => ({
+                url: "currencies"
+            }),
+            providesTags: ["Products"]
+        }),
+        receiveCurrencyById: build.query({
+            query: currencyId => ({
+                url: `currencies/${currencyId}`
+            }),
+            providesTags: ["Products"]
         })
     })
 });
 
 export const {
     useReceiveProductsQuery,
+    useReceiveProductByIdQuery,
     useCreateProductMutation,
     useUpdateProductMutation,
-    useDeleteProductMutation
+    useDeleteProductMutation,
+    useReceiveShipmentTypeByIdQuery,
+    useReceiveColorByIdQuery,
+    useReceiveCountryByIdQuery,
+    useReceiveCurrencyQuery,
+    useReceiveCurrencyByIdQuery
 } = backendApi;

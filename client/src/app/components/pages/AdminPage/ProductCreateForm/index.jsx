@@ -32,7 +32,7 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
         const transformedData = {
             imgAddit: data.imgAddit.split(",").map(url => url.trim()),
             params: [data.collection, data.glassType, data.frameType, data.lenseType],
-            colours: data.colors.split(",").map(color => color.trim()),
+            colors: data.colors.split(",").map(color => color.trim()),
             shipmentType: data.shipmentType.split(",").map(sht => sht.trim()),
             quantity: Number(data.quantity),
             price: Number(data.price)

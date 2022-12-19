@@ -5,9 +5,11 @@ import { computeVAT } from "../../../utils/computation/computeVAT.js";
 import paths from "../../../routes/paths";
 import { useNavigate } from "react-router-dom";
 import { constants } from "../../../constants";
-import PropTypes from "prop-types";
 import { useModal } from "../../hooks";
 import { Modal } from "../../common/Modal";
+import { useReceiveCurrencyByIdQuery } from "../../../store/backendApi.js";
+import PropTypes from "prop-types";
+import Loader from "../../common/Loader";
 
 const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmountCountUp }) => {
     const navigate = useNavigate();
@@ -16,6 +18,7 @@ const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmo
 
     const [orderedQuantity, setOrderedQuantity] = useState(1);
     const { showModal, handleModalOpen, handleModalClose } = useModal();
+    const { isLoading: isCurrencyDataLoading, isSuccess: isCurrencyDataLoadSuccessful, data: currencyData } = useReceiveCurrencyByIdQuery(reservedItem.currencyCode, { refetchOnFocus: true });
 
     const orderedAmount = computeVAT(reservedItem.price) * orderedQuantity;
 
@@ -66,7 +69,7 @@ const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmo
                     <pre className="text-end">
                         <strong className="text-lg">
                             {orderedAmount}{" "}
-                            {CURRENCY[reservedItem.currencyCode]}
+                            {!isCurrencyDataLoading && isCurrencyDataLoadSuccessful ? CURRENCY[currencyData?.data?.code] : <Loader/>}
                         </strong>
                     </pre>
                 </span>
