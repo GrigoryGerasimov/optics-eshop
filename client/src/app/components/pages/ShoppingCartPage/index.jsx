@@ -4,12 +4,17 @@ import ShoppingCardPosition from "./ShoppingCardPosition";
 import { Divider } from "../../common/Divider.jsx";
 import Button from "../../common/Button";
 import { ModalForm } from "./ModalForm";
+import { useReceiveCurrencyQuery } from "../../../store/backendApi.js";
+import Loader from "../../common/Loader.jsx";
+import { constants } from "../../../constants.jsx";
 
 const ShoppingCartPage = () => {
     const { shoppingReservation, totalShoppingAmount, handleRemoveFromCart, handleTotalAmountCountUp, handleClearCart } = useShopping();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
+    const { UNICODE: { CURRENCY } } = constants;
+    const { isLoading: isCurrencyDataLoading, isSuccess: isCurrencyDataLoadSuccessful, data: currencyData } = useReceiveCurrencyQuery({ refetchOnFocus: true });
 
-    if (!shoppingReservation?.length) return "Ваша корзина пуста";
+    if (!shoppingReservation?.length) return (<div className="w-[inherit] flex justify-center">Ваша корзина пуста</div>);
 
     const handleDelete = id => handleRemoveFromCart(id);
 
@@ -44,7 +49,7 @@ const ShoppingCartPage = () => {
                     <span className="mr-[15px]">Итого к оплате (с учётом НДС):{" "}</span>
                     <output>
                         <pre className="text-end">
-                            <strong>{totalAmountOutput}</strong>
+                            <strong>{totalAmountOutput} {!isCurrencyDataLoading && isCurrencyDataLoadSuccessful ? CURRENCY[currencyData?.data.find(currency => currency._id === shoppingReservation[0].currencyCode).code] : <Loader/>}</strong>
                         </pre>
                     </output>
                 </div>

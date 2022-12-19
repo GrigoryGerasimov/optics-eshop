@@ -6,7 +6,7 @@ const Loader = () => {
             {Array.from("123", item => (
                 <div
                     key={item}
-                    className='inline-block w-2.5 h-2.5 m-2.5 rounded-sm bg-yellow-100 bg-opacity-60 animate-loader'
+                    className='inline-block w-2 h-2 m-2 rounded-sm bg-yellow-100 bg-opacity-60 animate-loader'
                 ></div>
             ))}
         </div>

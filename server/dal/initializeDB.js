@@ -7,8 +7,9 @@ const frameTypesMock = require("../mockData/frameTypes.json");
 const lenseTypesMock = require("../mockData/lenseTypes.json");
 const productsMock = require("../mockData/products.json");
 const countriesMock = require("../mockData/countries.json");
-const coloursMock = require("../mockData/colours.json");
+const colorsMock = require("../mockData/colors.json");
 const shipmentTypesMock = require("../mockData/shipmentTypes.json");
+const currenciesMock = require("../mockData/currencies.json");
 
 const { models } = require("../models");
 const chalk = require("chalk");
@@ -37,8 +38,9 @@ const initializeDB = async () => {
     const lenseTypes = await models.LenseType.find().exec();
     const products = await models.Product.find().exec();
     const countries = await models.Country.find().exec();
-    const colours = await models.Colour.find().exec();
+    const colors = await models.Color.find().exec();
     const shipmentTypes = await models.ShipmentType.find().exec();
+    const currencies = await models.Currency.find().exec();
 
     if (users.length < usersMock.length) {
         await initModel(models.User, usersMock);
@@ -67,11 +69,14 @@ const initializeDB = async () => {
     if (countries.length < countriesMock.length) {
         await initModel(models.Country, countriesMock);
     }
-    if (colours.length < coloursMock.length) {
-        await initModel(models.Colour, coloursMock);
+    if (colors.length < colorsMock.length) {
+        await initModel(models.Color, colorsMock);
     }
     if (shipmentTypes.length < shipmentTypesMock.length) {
         await initModel(models.ShipmentType, shipmentTypesMock);
+    }
+    if (currencies.length < currenciesMock.length) {
+        await initModel(models.Currency, currenciesMock);
     }
 };
 

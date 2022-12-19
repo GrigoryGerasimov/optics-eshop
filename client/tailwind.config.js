@@ -24,6 +24,9 @@ module.exports = {
             animation: {
                 loader: "loader 2.5s infinite"
             }
+        },
+        listStyleType: {
+            square: "square"
         }
     },
     plugins: []

@@ -1,14 +1,18 @@
 import React from "react";
 import { constants } from "../../../constants.jsx";
+import { useReceiveCurrencyByIdQuery } from "../../../store/backendApi";
+import Loader from "../Loader.jsx";
 import PropTypes from "prop-types";
 
 export const CardBody = ({ cardBodyClass, cardBodyMainText, cardBodyAdditionalText, currencyCode }) => {
     const { UNICODE: { CURRENCY } } = constants;
 
+    const { isLoading: isCurrencyDataLoading, isSuccess: isCurrencyDataLoadSuccessful, data: currencyData } = useReceiveCurrencyByIdQuery(currencyCode, { refetchOnFocus: true });
+
     return (
         <div className={cardBodyClass}>
             <p className="text-lg text-gray-700 text-opacity-95">{cardBodyMainText}</p>
-            <pre className="text-lg text-gray-700 text-opacity-95 text-end italic">{cardBodyAdditionalText} {CURRENCY[currencyCode]}</pre>
+            <pre className="text-lg text-gray-700 text-opacity-95 text-end italic">{cardBodyAdditionalText} {!isCurrencyDataLoading && isCurrencyDataLoadSuccessful ? CURRENCY[currencyData?.data?.code] : <Loader/>}</pre>
         </div>
     );
 };

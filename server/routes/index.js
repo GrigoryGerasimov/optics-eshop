@@ -7,6 +7,10 @@ router.use("/users", require("./userRoutes"));
 router.use("/auth", require("./authRoutes"));
 router.use("/products", require("./productRoutes"));
 router.use("/feedbacks", require("./feedbackRoutes"));
+router.use("/shipmenttypes", require("./shipmentTypeRoutes"));
+router.use("/colors", require("./colorRoutes"));
+router.use("/countries", require("./countryRoutes"));
+router.use("/currencies", require("./currencyRoutes"));
 
 module.exports = {
     router

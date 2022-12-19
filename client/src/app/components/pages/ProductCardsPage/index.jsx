@@ -9,7 +9,7 @@ const ProductCardsPage = () => {
     const navigate = useNavigate();
     const { products: productData, isLoading, isSuccess } = useProducts();
 
-    if (isLoading || !isSuccess || !productData?.length) return <Loader/>;
+    if (isLoading || !isSuccess || !productData?.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     return (
         <>
