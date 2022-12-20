@@ -13,7 +13,7 @@ import Loader from "../../../common/Loader.jsx";
 import PropTypes from "prop-types";
 
 export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
-    const { frameTypes, lenseTypes } = useCategories();
+    const { frameTypes, lenseTypes, glassTypes } = useCategories();
     const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
     const { isLoading: isCountriesDataLoading, isSuccess: isCountriesDataLoadSuccessful, data: countriesData } = useReceiveCountriesQuery({ refetchOnFocus: true });
     const { isLoading: isShipmentTypesDataLoading, isSuccess: isShipmentTypesDataLoadSuccessful, data: shipmentTypesData } = useReceiveShipmentTypesQuery({ refetchOnFocus: true });
@@ -84,26 +84,26 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
                 name="collection"
                 placeholder="Код коллекции по сезону, напр. #fw23mdeluxe"
             />
-            <FormControl
+            <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип очков"
                 id="glassType"
                 name="glassType"
-                placeholder="Код типа очков, напр. #dcomp"
+                options={Object.values(glassTypes).flat()}
             />
             <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип оправы"
                 id="frameType"
                 name="frameType"
-                options={frameTypes.type}
+                options={Object.values(frameTypes).flat()}
             />
             <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип линз"
                 id="lenseType"
                 name="lenseType"
-                options={lenseTypes.type}
+                options={Object.values(lenseTypes).flat()}
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"

@@ -1,13 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../common/card/Card.jsx";
-import { useProducts } from "../../hooks";
+import { useCategories, useProducts } from "../../hooks";
 import Sorting from "../../ui/Sorting";
 import Loader from "../../common/Loader";
 
 const ProductCardsPage = () => {
     const navigate = useNavigate();
     const { products: productData, isLoading, isSuccess } = useProducts();
+    const { findCategoryTitleById } = useCategories();
 
     if (isLoading || !isSuccess || !productData?.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
@@ -16,7 +17,7 @@ const ProductCardsPage = () => {
             <Sorting/>
             <div className="grid grid-cols-[repeat(auto-fill,_minmax(400px,_1fr))] gap-x-3 gap-y-8">
                 {productData.map(dataItem => {
-                    const paramsToPath = dataItem.params.map(param => param.slice(1)).reduce((acc, val) => acc + "/" + val);
+                    const paramsToPath = dataItem.params.map((param, i) => findCategoryTitleById(param)[i]()).reduce((acc, val) => acc + "/" + val);
 
                     return <Card
                         key={dataItem._id}
