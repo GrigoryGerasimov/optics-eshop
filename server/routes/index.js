@@ -12,7 +12,8 @@ router.use("/colors", require("./colorRoutes"));
 router.use("/countries", require("./countryRoutes"));
 router.use("/currencies", require("./currencyRoutes"));
 router.use("/lensetypes", require("./lenseTypeRoutes"));
-router.use("/frametypes", require("./frameTypeRoutes"))
+router.use("/frametypes", require("./frameTypeRoutes"));
+router.use("/glasstypes", require("./glassTypeRoutes"));
 
 module.exports = {
     router

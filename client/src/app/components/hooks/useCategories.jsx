@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
-import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery } from "../../store/backendApi.js";
+import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery, useReceiveGlassTypesQuery } from "../../store/backendApi.js";
 import PropTypes from "prop-types";
 
 const CategoriesContext = React.createContext();
@@ -35,58 +35,95 @@ const collectionInitState = {
     }
 };
 
-const glassTypesInitState = {
-    diopters: [
-        { id: "#dmen", code: "men", title: "Glasses with diopters for men" },
-        { id: "#dwomen", code: "women", title: "Glasses with diopters for women" },
-        { id: "#dkids", code: "kids", title: "Glasses with diopters for kids and teens" },
-        { id: "#dsports", code: "sports", title: "Sports glasses with diopters for active outdoor training" },
-        { id: "#dphotochr", code: "photochromic", title: "Elegant photochromic glasses with diopters" },
-        { id: "#dprogres", code: "progressive", title: "Progressive glasses with diopters" },
-        { id: "#ddriver", code: "driver", title: "Glasses with diopters for driving" },
-        { id: "#dcomp", code: "computer", title: "Glasses with diopters for working on computers and other tech gadgets" },
-        { id: "#dread", code: "reading", title: "Glasses with diopters for long reading" }
-    ],
-    dioptersFree: [
-        { id: "#dfmen", code: "men", title: "Diopter-free glasses for men" },
-        { id: "#dfwomen", code: "women", title: "Diopter-free glasses for women" },
-        { id: "#dfkids", code: "kids", title: "Diopter-free glasses for kids and teens" },
-        { id: "#dfstyle", code: "style", title: "Stylish diopter-free glasses for everyone" },
-        { id: "#dfflat", code: "flat", title: "Flat diopter-free glasses" },
-        { id: "#dfsun", code: "sun", title: "Diopter-free sun glasses" },
-        { id: "#dfswimming", code: "swimming", title: "Diopter-free glasses for active swimming" }
-    ]
-};
-
 export const CategoriesProvider = ({ children }) => {
     const [collection] = useState(collectionInitState);
-    const [glassTypes] = useState(glassTypesInitState);
+    const [glassTypes, setGlassTypes] = useState({});
     const [frameTypes, setFrameTypes] = useState({});
     const [lenseTypes, setLenseTypes] = useState({});
 
     const { isLoading: isLenseTypesDataLoading, isSuccess: isLenseTypesDataLoadSuccessul, data: lenseTypesData } = useReceiveLenseTypesQuery({ refetchOnFocus: true });
     const { isLoading: isFrameTypesDataLoading, isSuccess: isFrameTypesDataLoadSuccessul, data: frameTypesData } = useReceiveFrameTypesQuery({ refetchOnFocus: true });
+    const { isLoading: isGlassTypesDataLoading, isSuccess: isGlassTypesDataLoadSuccessul, data: glassTypesData } = useReceiveGlassTypesQuery({ refetchOnFocus: true });
 
     const dataInit = useCallback(() => {
         if (!isLenseTypesDataLoading && isLenseTypesDataLoadSuccessul) {
-            const receivedLenseTypes = lenseTypesData.data.find(dataItem => Object.hasOwn(dataItem, "type"));
+            const receivedLenseTypes = {};
+            lenseTypesData.data.forEach(dataItem => {
+                for (const key in dataItem) {
+                    if (key === "type") receivedLenseTypes[key] = dataItem[key];
+                }
+            });
             setLenseTypes(receivedLenseTypes);
         }
         if (!isFrameTypesDataLoading && isFrameTypesDataLoadSuccessul) {
-            const receivedFrameTypes = frameTypesData.data.find(dataItem => Object.hasOwn(dataItem, "type"));
+            const receivedFrameTypes = {};
+            frameTypesData.data.forEach(dataItem => {
+                for (const key in dataItem) {
+                    if (key === "type") receivedFrameTypes[key] = dataItem[key];
+                }
+            });
             setFrameTypes(receivedFrameTypes);
         }
-    }, [isLenseTypesDataLoading, isLenseTypesDataLoadSuccessul, lenseTypesData, isFrameTypesDataLoading, isFrameTypesDataLoadSuccessul, frameTypesData]);
+        if (!isGlassTypesDataLoading && isGlassTypesDataLoadSuccessul) {
+            const receivedGlassTypes = {};
+            for (const dataItem of glassTypesData.data) {
+                for (const key in dataItem) {
+                    if (key === "diopters" || key === "dioptersFree") receivedGlassTypes[key] = dataItem[key];
+                }
+            }
+            setGlassTypes(receivedGlassTypes);
+        }
+    }, [
+        isLenseTypesDataLoading,
+        isLenseTypesDataLoadSuccessul,
+        lenseTypesData,
+        isFrameTypesDataLoading,
+        isFrameTypesDataLoadSuccessul,
+        frameTypesData,
+        isGlassTypesDataLoading,
+        isGlassTypesDataLoadSuccessul,
+        glassTypesData
+    ]);
 
     useEffect(() => {
         dataInit();
     }, [dataInit]);
 
+    const findCategoryTitleById = useCallback(id => [
+        () => {
+            return "not-ready-yet";
+        },
+        () => {
+            for (const key in glassTypes) {
+                if (Array.isArray(glassTypes[key])) {
+                    const categoryItemFound = glassTypes[key].find(item => item._id === id);
+                    if (categoryItemFound) return categoryItemFound.code;
+                }
+            }
+        },
+        () => {
+            for (const key in frameTypes) {
+                if (Array.isArray(frameTypes[key])) {
+                    const categoryItemFound = frameTypes[key].find(item => item._id === id);
+                    if (categoryItemFound) return categoryItemFound.code;
+                }
+            }
+        },
+        () => {
+            for (const key in lenseTypes) {
+                if (Array.isArray(lenseTypes[key])) {
+                    const categoryItemFound = lenseTypes[key].find(item => item._id === id);
+                    if (categoryItemFound) return categoryItemFound.code;
+                }
+            }
+        }
+    ], [lenseTypes, frameTypes]);
+
     return (
         <CategoriesContext.Provider value={useMemo(() => ({
-            collection, glassTypes, frameTypes, lenseTypes
+            collection, glassTypes, frameTypes, lenseTypes, findCategoryTitleById
         }), [
-            collection, glassTypes, frameTypes, lenseTypes
+            collection, glassTypes, frameTypes, lenseTypes, findCategoryTitleById
         ])}>
             {children}
         </CategoriesContext.Provider>
