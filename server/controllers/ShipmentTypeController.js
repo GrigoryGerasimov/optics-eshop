@@ -4,11 +4,11 @@ const { formatResponse } = require("../utils/formatResponse");
 class ShipmentTypeController {
     static async read(req, res) {
         try {
-            const feedbacks = await ShipmentTypeService.read();
+            const shipmentTypes = await ShipmentTypeService.read();
             res.status(200).json({
                 code: 200,
                 message: "Полный список типов доставки успешно получен",
-                data: feedbacks
+                data: shipmentTypes
             });
         } catch (err) {
             formatResponse(res, 400, err);

@@ -7,7 +7,7 @@ export const backendApi = createApi({
         baseUrl: config.baseApiEndpoint
     }),
     refetchOnFocus: true,
-    tagTypes: ["Products"],
+    tagTypes: ["Products", "ShipmentTypes", "Colors", "Countries", "Currencies", "LenseTypes", "FrameTypes"],
     endpoints: (build) => ({
         receiveProducts: build.query({
             query: () => ({
@@ -50,49 +50,61 @@ export const backendApi = createApi({
             query: () => ({
                 url: "shipmenttypes"
             }),
-            providesTags: ["Products"]
+            providesTags: ["ShipmentTypes"]
         }),
         receiveShipmentTypeById: build.query({
             query: shtId => ({
                 url: `shipmenttypes/${shtId}`
             }),
-            providesTags: ["Products"]
+            providesTags: ["ShipmentTypes"]
         }),
         receiveColors: build.query({
             query: () => ({
                 url: "colors"
             }),
-            providesTags: ["Products"]
+            providesTags: ["Colors"]
         }),
         receiveColorById: build.query({
             query: colorId => ({
                 url: `colors/${colorId}`
             }),
-            providesTags: ["Products"]
+            providesTags: ["Colors"]
         }),
         receiveCountries: build.query({
             query: () => ({
                 url: "countries"
             }),
-            providesTags: ["Products"]
+            providesTags: ["Countries"]
         }),
         receiveCountryById: build.query({
             query: countryId => ({
                 url: `countries/${countryId}`
             }),
-            providesTags: ["Products"]
+            providesTags: ["Countries"]
         }),
         receiveCurrencies: build.query({
             query: () => ({
                 url: "currencies"
             }),
-            providesTags: ["Products"]
+            providesTags: ["Currencies"]
         }),
         receiveCurrencyById: build.query({
             query: currencyId => ({
                 url: `currencies/${currencyId}`
             }),
-            providesTags: ["Products"]
+            providesTags: ["Currencies"]
+        }),
+        receiveLenseTypes: build.query({
+            query: () => ({
+                url: "lensetypes"
+            }),
+            providesTags: ["LenseTypes"]
+        }),
+        receiveFrameTypes: build.query({
+            query: () => ({
+                url: "frametypes"
+            }),
+            providesTags: ["FrameTypes"]
         })
     })
 });
@@ -110,5 +122,7 @@ export const {
     useReceiveCountriesQuery,
     useReceiveCountryByIdQuery,
     useReceiveCurrenciesQuery,
-    useReceiveCurrencyByIdQuery
+    useReceiveCurrencyByIdQuery,
+    useReceiveLenseTypesQuery,
+    useReceiveFrameTypesQuery
 } = backendApi;

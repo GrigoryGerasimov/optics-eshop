@@ -3,9 +3,8 @@ import Select from "react-select";
 import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray";
 import PropTypes from "prop-types";
 
-const FormMultiSelect = ({ formFieldClass, label, id, options, onChange, name, defaultValue, error }) => {
+const FormMultiSelect = ({ formFieldClass, label, id, options, onChange, name, value, error }) => {
     const optionsData = convertObjectToArray(options);
-
     const handleChange = value => {
         onChange({ target: { name, value } });
     };
@@ -22,7 +21,7 @@ const FormMultiSelect = ({ formFieldClass, label, id, options, onChange, name, d
                 classNamePrefix="select"
                 onChange={handleChange}
                 name={name}
-                defaultValue={defaultValue}
+                value={value}
                 closeMenuOnSelect={false}
                 closeMenuOnScroll={false}
                 placeholder="Выбрать варианты..."
@@ -41,6 +40,6 @@ FormMultiSelect.propTypes = {
     options: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     onChange: PropTypes.func,
     name: PropTypes.string,
-    defaultValue: PropTypes.array,
+    value: PropTypes.any,
     error: PropTypes.string
 };
