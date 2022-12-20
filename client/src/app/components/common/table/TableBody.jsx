@@ -1,10 +1,15 @@
 import React from "react";
 import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray.js";
 import { EditIcon, CloseIcon } from "../../ui/common_ui/icons";
+import { useReceiveCurrenciesQuery } from "../../../store/backendApi.js";
+import Loader from "../Loader.jsx";
+import { constants } from "../../../constants.jsx";
 import PropTypes from "prop-types";
 
 export const TableBody = ({ tableBodyClass, bodyContent, onEdit, onDelete }) => {
     const body = convertObjectToArray(bodyContent);
+    const { UNICODE: { CURRENCY } } = constants;
+    const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
 
     return (
         <tbody className={tableBodyClass}>
@@ -18,7 +23,7 @@ export const TableBody = ({ tableBodyClass, bodyContent, onEdit, onDelete }) => 
                     <td className="p-5">{position.params[3]}</td>
                     <td className="p-5">{position.quantity}</td>
                     <td className="p-5">{position.price}</td>
-                    <td className="p-5">{position.currencyCode}</td>
+                    <td className="p-5">{!isCurrenciesDataLoading && isCurrenciesDataLoadSuccessful ? CURRENCY[currenciesData?.data.find(currency => currency._id === position.currencyCode).code] : <Loader/>}</td>
                     <td className="p-5">{position.img}</td>
                     <td className="p-5 flex flex-row justify-evenly">
                         <EditIcon onClick={() => onEdit(position._id)}/>

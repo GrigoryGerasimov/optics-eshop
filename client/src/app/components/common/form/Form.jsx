@@ -25,6 +25,10 @@ const Form = ({ formClass, title, children, initialState, initialPasswordState, 
         onSubmit(data);
     };
 
+    const handleReset = () => {
+        setData(initialState);
+    };
+
     const toggleShowPassword = (name, value) => {
         setShowPassword(prevState => ({
             ...prevState,
@@ -59,6 +63,13 @@ const Form = ({ formClass, title, children, initialState, initialPasswordState, 
                             config = {
                                 ...child.props,
                                 disabled: isDisabled
+                            };
+                            break;
+                        }
+                        case "reset": {
+                            config = {
+                                ...child.props,
+                                onClick: handleReset
                             };
                             break;
                         }

@@ -1,50 +1,41 @@
 import React from "react";
+import { FormControl, Form, FormSelect, FormMultiSelect } from "../../../common/form";
 import { validatorConfig } from "./validatorConfig.js";
-import { FormControl, Form } from "../../../common/form";
 import Button from "../../../common/Button.jsx";
+import {
+    useReceiveCountriesQuery,
+    useReceiveCurrenciesQuery,
+    useReceiveShipmentTypesQuery,
+    useReceiveColorsQuery
+} from "../../../../store/backendApi.js";
+import Loader from "../../../common/Loader.jsx";
 import PropTypes from "prop-types";
 
-const initialState = {
-    img: "",
-    imgAddit: "",
-    title: "",
-    brand: "",
-    collection: "",
-    glassType: "",
-    frameType: "",
-    lenseType: "",
-    collectionTitle: "",
-    productGroup: "",
-    description: "",
-    colors: "",
-    shipmentType: "",
-    license: "",
-    additionalInfo: "",
-    warrantyPeriod: "",
-    countryOfOrigin: "",
-    quantity: "",
-    price: "",
-    currencyCode: ""
-};
+export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
+    const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
+    const { isLoading: isCountriesDataLoading, isSuccess: isCountriesDataLoadSuccessful, data: countriesData } = useReceiveCountriesQuery({ refetchOnFocus: true });
+    const { isLoading: isShipmentTypesDataLoading, isSuccess: isShipmentTypesDataLoadSuccessful, data: shipmentTypesData } = useReceiveShipmentTypesQuery({ refetchOnFocus: true });
+    const { isLoading: isColorsDataLoading, isSuccess: isColorsDataLoadSuccessful, data: colorsData } = useReceiveColorsQuery({ refetchOnFocus: true });
 
-export const ProductCreateForm = ({ handlePositionCreate }) => {
+    if ((isCurrenciesDataLoading && !isCurrenciesDataLoadSuccessful) || (isCountriesDataLoading && !isCountriesDataLoadSuccessful) || (isShipmentTypesDataLoading && !isShipmentTypesDataLoadSuccessful) || (isColorsDataLoading && !isColorsDataLoadSuccessful)) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+
     const handleSubmit = data => {
         const transformedData = {
             imgAddit: data.imgAddit.split(",").map(url => url.trim()),
             params: [data.collection, data.glassType, data.frameType, data.lenseType],
-            colors: data.colors.split(",").map(color => color.trim()),
-            shipmentType: data.shipmentType.split(",").map(sht => sht.trim()),
+            colors: data.colors.map(color => color.value),
+            shipmentType: data.shipmentType.map(type => type.value),
             quantity: Number(data.quantity),
             price: Number(data.price)
         };
-        handlePositionCreate({ ...data, ...transformedData });
+        onSubmit({ ...data, ...transformedData });
     };
 
     return (
         <Form
             initialState={initialState}
             formClass="w-full h-max p-[70px] text-lg text-gray-700 border-none outline-none"
-            title="Создать"
+            title={formTitle}
             onSubmit={handleSubmit}
             config={validatorConfig}
         >
@@ -120,23 +111,31 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
                 id="description"
                 name="description"
             />
-            <FormControl
+            <FormMultiSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Цветовая гамма оправы"
                 id="colors"
                 name="colors"
-                placeholder="Несколько цветов через запятую, напр.: коричневый, серый, тёмно-синий..."
+                defaultValue={initialState.colors.map(color => {
+                    const colorParam = colorsData.data.find(dataItem => dataItem._id === color);
+                    return ({ label: colorParam.title, value: colorParam._id });
+                })}
+                options={colorsData.data.map(color => ({ label: color.title, value: color._id }))}
             />
-            <FormControl
+            <FormMultiSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип доставки"
                 id="shipmentType"
                 name="shipmentType"
-                placeholder="Несколько типов доставки через запятую, напр.: доставка на дом, почта, курьер..."
+                defaultValue={initialState.shipmentType.map(sht => {
+                    const shtParam = shipmentTypesData.data.find(dataItem => dataItem._id === sht);
+                    return ({ label: shtParam.title, value: shtParam._id });
+                })}
+                options={shipmentTypesData.data.map(type => ({ label: type.title, value: type._id }))}
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
-                label="Тип лицензии"
+                label="Лицензия"
                 id="license"
                 name="license"
             />
@@ -152,11 +151,12 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
                 id="warrantyPeriod"
                 name="warrantyPeriod"
             />
-            <FormControl
+            <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Страна-производитель"
                 id="countryOfOrigin"
                 name="countryOfOrigin"
+                options={countriesData.data}
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
@@ -170,11 +170,12 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
                 id="price"
                 name="price"
             />
-            <FormControl
+            <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Валюта"
                 id="currencyCode"
                 name="currencyCode"
+                options={currenciesData.data.map(currency => ({ ...currency, title: currency.code }))}
             />
             <Button
                 buttonClass="w-full md:w-[70%] lg:w-[60%] xl:w-[50%] bg-gray-700 text-lg text-yellow-200 font-[inherit] py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"
@@ -192,6 +193,9 @@ export const ProductCreateForm = ({ handlePositionCreate }) => {
     );
 };
 
-ProductCreateForm.propTypes = {
-    handlePositionCreate: PropTypes.func
+ProductFormLayout.propTypes = {
+    initialState: PropTypes.object,
+    formTitle: PropTypes.string,
+    onSubmit: PropTypes.func,
+    validatorConfig: PropTypes.object
 };

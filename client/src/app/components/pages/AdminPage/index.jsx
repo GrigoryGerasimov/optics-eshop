@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table } from "../../common/table";
-import { ProductEditForm } from "./ProductEditForm";
-import { ProductCreateForm } from "./ProductCreateForm";
+import { ProductEditForm } from "./productForms/ProductEditForm";
+import { ProductCreateForm } from "./productForms/ProductCreateForm";
 import { columnHeadings } from "./columnHeadings.js";
 import { useModal } from "../../hooks";
 import Loader from "../../common/Loader";
