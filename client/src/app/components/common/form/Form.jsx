@@ -20,13 +20,14 @@ const Form = ({ formClass, title, children, initialState, initialPasswordState, 
         }));
     };
 
+    const handleReset = () => {
+        setData(initialState);
+    };
+
     const handleSubmit = evt => {
         evt.preventDefault();
         onSubmit(data);
-    };
-
-    const handleReset = () => {
-        setData(initialState);
+        handleReset();
     };
 
     const toggleShowPassword = (name, value) => {

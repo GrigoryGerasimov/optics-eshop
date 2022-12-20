@@ -1,4 +1,5 @@
-import React, { useState, useContext, useMemo } from "react";
+import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
+import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery } from "../../store/backendApi.js";
 import PropTypes from "prop-types";
 
 const CategoriesContext = React.createContext();
@@ -57,31 +58,29 @@ const glassTypesInitState = {
     ]
 };
 
-const frameTypesInitState = {
-    type: [
-        { id: "#classic", code: "classic", title: "Classic glass frame" },
-        { id: "#square", code: "square", title: "Square glass frame" },
-        { id: "#round", code: "round", title: "Round glass frame" },
-        { id: "#thick", code: "thick", title: "Thick glass frame" },
-        { id: "#thin", code: "thin", title: "Thin glass frame" },
-        { id: "#semi", code: "semi", title: "Semi-frame" }
-    ]
-};
-
-const lenseTypesInitState = {
-    type: [
-        { id: "#daily", code: "daily", title: "Lenses for daily use purpose" },
-        { id: "#everyday", code: "everyday", title: "Lenses for everyday use" },
-        { id: "#monthly", code: "monthly", title: "Lenses for monthly use only (ca. 1-3 months)" },
-        { id: "#hygiene", code: "hygiene", title: "Tools for keeping your lenses clean and bacteria-free" }
-    ]
-};
-
 export const CategoriesProvider = ({ children }) => {
     const [collection] = useState(collectionInitState);
     const [glassTypes] = useState(glassTypesInitState);
-    const [frameTypes] = useState(frameTypesInitState);
-    const [lenseTypes] = useState(lenseTypesInitState);
+    const [frameTypes, setFrameTypes] = useState({});
+    const [lenseTypes, setLenseTypes] = useState({});
+
+    const { isLoading: isLenseTypesDataLoading, isSuccess: isLenseTypesDataLoadSuccessul, data: lenseTypesData } = useReceiveLenseTypesQuery({ refetchOnFocus: true });
+    const { isLoading: isFrameTypesDataLoading, isSuccess: isFrameTypesDataLoadSuccessul, data: frameTypesData } = useReceiveFrameTypesQuery({ refetchOnFocus: true });
+
+    const dataInit = useCallback(() => {
+        if (!isLenseTypesDataLoading && isLenseTypesDataLoadSuccessul) {
+            const receivedLenseTypes = lenseTypesData.data.find(dataItem => Object.hasOwn(dataItem, "type"));
+            setLenseTypes(receivedLenseTypes);
+        }
+        if (!isFrameTypesDataLoading && isFrameTypesDataLoadSuccessul) {
+            const receivedFrameTypes = frameTypesData.data.find(dataItem => Object.hasOwn(dataItem, "type"));
+            setFrameTypes(receivedFrameTypes);
+        }
+    }, [isLenseTypesDataLoading, isLenseTypesDataLoadSuccessul, lenseTypesData, isFrameTypesDataLoading, isFrameTypesDataLoadSuccessul, frameTypesData]);
+
+    useEffect(() => {
+        dataInit();
+    }, [dataInit]);
 
     return (
         <CategoriesContext.Provider value={useMemo(() => ({

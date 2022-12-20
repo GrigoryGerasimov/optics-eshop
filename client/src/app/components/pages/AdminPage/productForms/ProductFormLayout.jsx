@@ -1,5 +1,6 @@
 import React from "react";
 import { FormControl, Form, FormSelect, FormMultiSelect } from "../../../common/form";
+import { useCategories } from "../../../hooks";
 import { validatorConfig } from "./validatorConfig.js";
 import Button from "../../../common/Button.jsx";
 import {
@@ -12,6 +13,7 @@ import Loader from "../../../common/Loader.jsx";
 import PropTypes from "prop-types";
 
 export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
+    const { frameTypes, lenseTypes } = useCategories();
     const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
     const { isLoading: isCountriesDataLoading, isSuccess: isCountriesDataLoadSuccessful, data: countriesData } = useReceiveCountriesQuery({ refetchOnFocus: true });
     const { isLoading: isShipmentTypesDataLoading, isSuccess: isShipmentTypesDataLoadSuccessful, data: shipmentTypesData } = useReceiveShipmentTypesQuery({ refetchOnFocus: true });
@@ -23,8 +25,8 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
         const transformedData = {
             imgAddit: data.imgAddit.split(",").map(url => url.trim()),
             params: [data.collection, data.glassType, data.frameType, data.lenseType],
-            colors: data.colors.map(color => color.value),
-            shipmentType: data.shipmentType.map(type => type.value),
+            colors: data.colors.map(color => color.value ?? color),
+            shipmentType: data.shipmentType.map(type => type.value ?? type),
             quantity: Number(data.quantity),
             price: Number(data.price)
         };
@@ -33,7 +35,17 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
 
     return (
         <Form
-            initialState={initialState}
+            initialState={formTitle.startsWith("Изменить") ? {
+                ...initialState,
+                colors: initialState.colors.map(color => {
+                    const colorParam = colorsData.data.find(dataItem => dataItem._id === color);
+                    return ({ label: colorParam.title, value: colorParam._id });
+                }),
+                shipmentType: initialState.shipmentType.map(sht => {
+                    const shtParam = shipmentTypesData.data.find(dataItem => dataItem._id === sht);
+                    return ({ label: shtParam.title, value: shtParam._id });
+                })
+            } : initialState}
             formClass="w-full h-max p-[70px] text-lg text-gray-700 border-none outline-none"
             title={formTitle}
             onSubmit={handleSubmit}
@@ -79,19 +91,19 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
                 name="glassType"
                 placeholder="Код типа очков, напр. #dcomp"
             />
-            <FormControl
+            <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип оправы"
                 id="frameType"
                 name="frameType"
-                placeholder="Код типа оправы, напр. #thin"
+                options={frameTypes.type}
             />
-            <FormControl
+            <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип линз"
                 id="lenseType"
                 name="lenseType"
-                placeholder="Код типа оправы, напр. #daily"
+                options={lenseTypes.type}
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
@@ -116,10 +128,6 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
                 label="Цветовая гамма оправы"
                 id="colors"
                 name="colors"
-                defaultValue={initialState.colors.map(color => {
-                    const colorParam = colorsData.data.find(dataItem => dataItem._id === color);
-                    return ({ label: colorParam.title, value: colorParam._id });
-                })}
                 options={colorsData.data.map(color => ({ label: color.title, value: color._id }))}
             />
             <FormMultiSelect
@@ -127,10 +135,6 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
                 label="Тип доставки"
                 id="shipmentType"
                 name="shipmentType"
-                defaultValue={initialState.shipmentType.map(sht => {
-                    const shtParam = shipmentTypesData.data.find(dataItem => dataItem._id === sht);
-                    return ({ label: shtParam.title, value: shtParam._id });
-                })}
                 options={shipmentTypesData.data.map(type => ({ label: type.title, value: type._id }))}
             />
             <FormControl

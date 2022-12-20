@@ -34,7 +34,7 @@ export const ProductEditForm = ({ positionToEdit, handlePositionUpdate }) => {
     return Object.keys(positionToEdit).length ? (
         <ProductFormLayout
             initialState={currentProductUnitToEdit}
-            formTitle="Изменить"
+            formTitle={`Изменить артикул №${positionToEdit._id}`}
             onSubmit={handleSubmit}
         />
     ) : <Loader/>;
