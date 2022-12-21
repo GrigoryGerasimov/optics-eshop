@@ -3,7 +3,7 @@ import { convertObjectToArray } from "../../../utils/transformation/convertObjec
 import { EditIcon, CloseIcon } from "../../ui/common_ui/icons";
 import { useReceiveCurrenciesQuery } from "../../../store/backendApi.js";
 import Loader from "../Loader.jsx";
-import { useCategories } from "../../hooks";
+import { useCategories } from "../../../hooks";
 import { constants } from "../../../constants.jsx";
 import PropTypes from "prop-types";
 

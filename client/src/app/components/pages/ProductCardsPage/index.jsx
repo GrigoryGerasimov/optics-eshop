@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../common/card/Card.jsx";
-import { useCategories, useProducts } from "../../hooks";
+import { useCategories, useProducts } from "../../../hooks";
 import Sorting from "../../ui/Sorting";
 import Loader from "../../common/Loader";
 

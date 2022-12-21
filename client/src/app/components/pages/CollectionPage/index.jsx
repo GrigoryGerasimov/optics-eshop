@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCategories, useProducts } from "../../hooks";
+import { useCategories, useProducts } from "../../../hooks";
 import { Card } from "../../common/card/Card";
 import Loader from "../../common/Loader";
 import Sorting from "../../ui/Sorting";

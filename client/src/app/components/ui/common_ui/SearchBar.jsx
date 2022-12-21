@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SearchIcon } from "./icons";
 import { FormControl } from "../../common/form";
-import { useProducts, useCatalogs } from "../../hooks";
+import { useProducts, useCatalogs } from "../../../hooks";
 
 export const SearchBar = () => {
     const [searchValue, setSearchValue] = useState("");

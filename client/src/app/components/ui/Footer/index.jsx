@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { navbarLinks } from "./navbarLinks";
-import { useCatalogs } from "../../hooks";
+import { useCatalogs } from "../../../hooks";
 
 const Footer = () => {
     const { handleSubCatalogsReset } = useCatalogs();

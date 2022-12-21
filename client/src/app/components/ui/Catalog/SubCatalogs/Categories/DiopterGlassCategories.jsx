@@ -1,5 +1,5 @@
 import React from "react";
-import { useProducts, useCategories } from "../../../../hooks";
+import { useProducts, useCategories } from "../../../../../hooks";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../../../routes/paths";
 import Loader from "../../../../common/Loader";

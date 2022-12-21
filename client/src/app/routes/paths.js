@@ -9,7 +9,6 @@ const paths = {
         LENSE_TYPE: ":lensetype",
         ID: ":productId"
     },
-    EDIT: "edit",
     AUTH: "auth",
     LOGIN: "login",
     REGISTER: "register",

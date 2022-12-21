@@ -1,7 +1,7 @@
 import React from "react";
 import { useRoutes } from "react-router-dom";
-import { Landing } from "./components/layout";
-import { ProductsProvider, CategoriesProvider, CatalogsProvider } from "./components/hooks";
+import { Landing } from "./layouts";
+import { ProductsProvider, CategoriesProvider, CatalogsProvider } from "./hooks";
 import { ToastContainer } from "react-toastify";
 import { routes } from "./routes/routes.jsx";
 

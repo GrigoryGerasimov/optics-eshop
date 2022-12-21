@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DiopterGlassCategories, DiopterFreeGlassCategories } from "./Categories";
 import PropTypes from "prop-types";
-import { useProducts } from "../../../hooks";
+import { useProducts } from "../../../../hooks";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../../routes/paths";
 

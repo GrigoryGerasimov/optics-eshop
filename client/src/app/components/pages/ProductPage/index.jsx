@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProductMainImage from "./ProductMainImage.jsx";
 import ProductSideImage from "./ProductSideImage.jsx";
 import { ProductInfoBlock } from "./ProductInfoBlock.jsx";
-import { useShopping, useModal } from "../../hooks";
+import { useShopping, useModal } from "../../../hooks";
 import { Breadcrumbs } from "../../ui/common_ui/Breadcrumbs.jsx";
 import Button from "../../common/Button";
 import { Modal } from "../../common/Modal";

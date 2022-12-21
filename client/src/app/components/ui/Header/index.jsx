@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { metaContactsLinks, metaLayerLinks, headLayerLinks } from "./navbarLinks";
 import { NavLogo } from "./NavLogo.jsx";
-import { useCatalogs } from "../../hooks";
+import { useCatalogs } from "../../../hooks";
 
 const Header = () => {
     const { handleSubCatalogsReset } = useCatalogs();

@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, FormControl, FormCheckboxSingle } from "../../../common/form";
-import Button from "../../../common/Button.jsx";
-import { withAuthOption } from "../../../hoc/withAuthOption.jsx";
-import { setToStorage } from "../../../../utils/storage/setToStorage.js";
+import { Form, FormControl, FormCheckboxSingle } from "../../../components/common/form";
+import Button from "../../../components/common/Button.jsx";
+import { withAuthOption } from "../../../components/hoc/withAuthOption.jsx";
+import { setToStorage } from "../../../utils/storage/setToStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
-import paths from "../../../../routes/paths.js";
+import paths from "../../../routes/paths.js";
 
 const RegisterForm = withAuthOption(Form);
 

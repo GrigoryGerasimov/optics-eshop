@@ -1,6 +1,6 @@
 import React from "react";
 import { FormControl, Form, FormSelect, FormMultiSelect } from "../../../common/form";
-import { useCategories } from "../../../hooks";
+import { useCategories } from "../../../../hooks";
 import { validatorConfig } from "./validatorConfig.js";
 import Button from "../../../common/Button.jsx";
 import {

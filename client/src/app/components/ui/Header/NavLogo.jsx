@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useProducts } from "../../hooks";
+import { useProducts } from "../../../hooks";
 
 export const NavLogo = () => {
     const { filterCatalogedProducts } = useProducts();
