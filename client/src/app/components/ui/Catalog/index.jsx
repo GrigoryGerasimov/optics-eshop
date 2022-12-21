@@ -1,45 +1,9 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { CollectionSubCatalog, GlassSubCatalog, FrameSubCatalog, LenseSubCatalog } from "./SubCatalogs";
-import { useProducts } from "../../hooks";
-import paths from "../../../routes/paths.js";
-
-const initialState = {
-    collectionSubCatalog: false,
-    glassSubCatalog: false,
-    frameSubCatalog: false,
-    lenseSubCatalog: false
-};
+import { useCatalogs } from "../../hooks";
 
 const Catalog = () => {
-    const [showSubCatalogs, setShowSubCatalogs] = useState(initialState);
-    const [active, setActive] = useState(null);
-    const { filterCatalogedProducts } = useProducts();
-    const navigate = useNavigate();
-    const { PRODUCTS } = paths;
-
-    const handleAddActiveState = (id) => {
-        setActive(id);
-    };
-
-    const handleRemoveActiveState = () => {
-        setActive(null);
-    };
-
-    const handleSubCatalogsSwitch = ({ target }) => {
-        setShowSubCatalogs(prevState => ({
-            ...prevState,
-            [target.id]: !showSubCatalogs[target.id]
-        }));
-        handleAddActiveState(target.id);
-    };
-
-    const handleSubCatalogsReset = () => {
-        setShowSubCatalogs(initialState);
-        navigate(`/${PRODUCTS}`);
-        filterCatalogedProducts("_");
-        handleRemoveActiveState();
-    };
+    const { showSubCatalogs, active, handleAddActiveState, handleSubCatalogsSwitch, handleSubCatalogsReset } = useCatalogs();
 
     return (
         <aside className="w-[13%] text-gray-700 text-opacity-95 p-[2%] pb-[50%] md:pb-[40%] lg:pb-[30%] xl:pb-[20%] 2xl:pb-[10%]">

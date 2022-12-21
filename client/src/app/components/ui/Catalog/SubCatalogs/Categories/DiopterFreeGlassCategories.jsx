@@ -1,11 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useProducts } from "../../../../hooks";
+import { useCategories, useProducts } from "../../../../hooks";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../../../routes/paths";
+import Loader from "../../../../common/Loader";
+import PropTypes from "prop-types";
 
 const DiopterFreeGlassCategories = ({ status, active, onAddActiveState }) => {
     const { filterCatalogedProducts } = useProducts();
+    const { glassTypes, isGlassTypesLoading } = useCategories();
     const navigate = useNavigate();
     const { PRODUCTS } = paths;
 
@@ -15,15 +17,20 @@ const DiopterFreeGlassCategories = ({ status, active, onAddActiveState }) => {
         onAddActiveState(target.id);
     };
 
+    if (isGlassTypesLoading) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+
     return (
         <ul className={status ? "block leading-10 mb-[10px] text-end" : "hidden"}>
-            <li className={`${active === "#dfwomen" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfwomen" onClick={handleCategoriesFilter}>Женские</li>
-            <li className={`${active === "#dfmen" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfmen" onClick={handleCategoriesFilter}>Мужские</li>
-            <li className={`${active === "#dfkids" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfkids" onClick={handleCategoriesFilter}>Детские</li>
-            <li className={`${active === "#dfstyle" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfstyle" onClick={handleCategoriesFilter}>Имиджевые</li>
-            <li className={`${active === "#dfflat" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfflat" onClick={handleCategoriesFilter}>Плоские</li>
-            <li className={`${active === "#dfsun" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfsun" onClick={handleCategoriesFilter}>Солнцезащитные</li>
-            <li className={`${active === "#dfswimming" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dfswimming" onClick={handleCategoriesFilter}>Для плавания</li>
+            {glassTypes.dioptersFree.map(glassType => (
+                <li
+                    key={glassType._id}
+                    className={`${active === glassType.code ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`}
+                    id={glassType.code}
+                    onClick={handleCategoriesFilter}
+                >
+                    {glassType.title.replace(/\s+без\s+диоптрий/gi, "")}
+                </li>
+            ))}
         </ul>
     );
 };

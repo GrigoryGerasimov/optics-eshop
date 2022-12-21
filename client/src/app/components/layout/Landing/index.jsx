@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Header, Footer, Catalog } from "../../ui";
 import { SearchBar } from "../../ui/common_ui/SearchBar.jsx";
+import PropTypes from "prop-types";
 
 const Landing = ({ children }) => {
     return (

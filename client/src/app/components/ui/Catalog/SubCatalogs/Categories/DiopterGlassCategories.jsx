@@ -1,11 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useProducts } from "../../../../hooks";
+import { useProducts, useCategories } from "../../../../hooks";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../../../routes/paths";
+import Loader from "../../../../common/Loader";
+import PropTypes from "prop-types";
 
 const DiopterGlassCategories = ({ status, active, onAddActiveState }) => {
     const { filterCatalogedProducts } = useProducts();
+    const { glassTypes, isGlassTypesLoading } = useCategories();
     const navigate = useNavigate();
     const { PRODUCTS } = paths;
 
@@ -15,17 +17,20 @@ const DiopterGlassCategories = ({ status, active, onAddActiveState }) => {
         onAddActiveState(target.id);
     };
 
+    if (isGlassTypesLoading) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+
     return (
         <ul className={status ? "block leading-10 mb-[10px] text-end" : "hidden"}>
-            <li className={`${active === "#dwomen" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dwomen" onClick={handleCategoriesFilter}>Женские</li>
-            <li className={`${active === "#dmen" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dmen" onClick={handleCategoriesFilter}>Мужские</li>
-            <li className={`${active === "#dkids" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dkids" onClick={handleCategoriesFilter}>Детские</li>
-            <li className={`${active === "#dsports" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dsports" onClick={handleCategoriesFilter}>Спортивные</li>
-            <li className={`${active === "#dphotochr" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dphotochr" onClick={handleCategoriesFilter}>Фотохромные</li>
-            <li className={`${active === "#dprogres" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dprogres" onClick={handleCategoriesFilter}>Прогрессивные</li>
-            <li className={`${active === "#ddriver" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#ddriver" onClick={handleCategoriesFilter}>Для вождения</li>
-            <li className={`${active === "#dcomp" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dcomp" onClick={handleCategoriesFilter}>Для компьютера</li>
-            <li className={`${active === "#dread" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#dread" onClick={handleCategoriesFilter}>Для чтения</li>
+            {glassTypes.diopters.map(glassType => (
+                <li
+                    key={glassType._id}
+                    className={`${active === glassType.code ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`}
+                    id={glassType.code}
+                    onClick={handleCategoriesFilter}
+                >
+                    {glassType.title.replace(/\s+с\s+диоптриями/gi, "")}
+                </li>
+            ))}
         </ul>
     );
 };

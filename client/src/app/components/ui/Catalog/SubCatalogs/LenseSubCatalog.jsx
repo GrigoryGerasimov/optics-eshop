@@ -1,11 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { useProducts } from "../../../hooks";
+import { useCategories, useProducts } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import paths from "../../../../routes/paths";
+import Loader from "../../../common/Loader";
+import PropTypes from "prop-types";
 
 const LenseSubCatalog = ({ status, active, onAddActiveState }) => {
     const { filterCatalogedProducts } = useProducts();
+    const { lenseTypes, isLenseTypesLoading } = useCategories();
     const navigate = useNavigate();
     const { PRODUCTS } = paths;
 
@@ -15,12 +17,20 @@ const LenseSubCatalog = ({ status, active, onAddActiveState }) => {
         onAddActiveState(target.id);
     };
 
+    if (isLenseTypesLoading) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+
     return (
         <ul className={status ? "block leading-10 mb-[10px] text-center" : "hidden"}>
-            <li className={`${active === "#daily" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#daily" onClick={handleCategoriesFilter}>Однодневные</li>
-            <li className={`${active === "#everyday" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#everyday" onClick={handleCategoriesFilter}>Двухдневные</li>
-            <li className={`${active === "#monthly" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#monthly" onClick={handleCategoriesFilter}>От 1 до 3 месяцев</li>
-            <li className={`${active === "#hygiene" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="#hygiene" onClick={handleCategoriesFilter}>Растворы и средства для очистки</li>
+            {lenseTypes.type.map(lenseType => (
+                <li
+                    key={lenseType._id}
+                    className={`${active === lenseType.code ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`}
+                    id={lenseType.code}
+                    onClick={handleCategoriesFilter}
+                >
+                    {lenseType.title.replace(/\s+линзы/gi, "")}
+                </li>
+            ))}
         </ul>
     );
 };
