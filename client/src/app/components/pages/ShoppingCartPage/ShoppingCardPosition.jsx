@@ -5,7 +5,7 @@ import { computeVAT } from "../../../utils/computation/computeVAT.js";
 import paths from "../../../routes/paths";
 import { useNavigate } from "react-router-dom";
 import { constants } from "../../../constants";
-import { useModal } from "../../hooks";
+import { useModal } from "../../../hooks";
 import { Modal } from "../../common/Modal";
 import { useReceiveCurrencyByIdQuery } from "../../../store/backendApi.js";
 import PropTypes from "prop-types";

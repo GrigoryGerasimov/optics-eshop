@@ -1,5 +1,5 @@
 import React from "react";
-import { useModal, useShopping } from "../../hooks";
+import { useModal, useShopping } from "../../../hooks";
 import ShoppingCardPosition from "./ShoppingCardPosition";
 import { Divider } from "../../common/Divider.jsx";
 import Button from "../../common/Button";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
-import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery, useReceiveGlassTypesQuery, useReceiveCollectionsQuery } from "../../store/backendApi.js";
+import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery, useReceiveGlassTypesQuery, useReceiveCollectionsQuery } from "../store/backendApi.js";
 import PropTypes from "prop-types";
 
 const CategoriesContext = React.createContext();

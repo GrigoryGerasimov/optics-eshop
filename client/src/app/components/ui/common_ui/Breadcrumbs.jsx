@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useCategories } from "../../hooks";
+import { useCategories } from "../../../hooks";
 import PropTypes from "prop-types";
 
 export const Breadcrumbs = ({ itemId, itemPath }) => {

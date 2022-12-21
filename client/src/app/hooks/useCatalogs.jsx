@@ -1,7 +1,7 @@
 import React, { useState, useContext, useMemo } from "react";
 import { useProducts } from "./useProducts";
 import { useNavigate } from "react-router-dom";
-import paths from "../../routes/paths";
+import paths from "../routes/paths";
 import PropTypes from "prop-types";
 
 const initialState = {

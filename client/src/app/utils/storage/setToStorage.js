@@ -1,8 +1,1 @@
-export const setToStorage = (key, data) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            localStorage.setItem(key, JSON.stringify(data));
-            resolve([key, data]);
-        }, 2000);
-    });
-};
+export const setToStorage = (key, payload) => localStorage.setItem(key, JSON.stringify(payload));

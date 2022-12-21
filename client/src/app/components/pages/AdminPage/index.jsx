@@ -3,7 +3,7 @@ import { Table } from "../../common/table";
 import { ProductEditForm } from "./productForms/ProductEditForm";
 import { ProductCreateForm } from "./productForms/ProductCreateForm";
 import { columnHeadings } from "./columnHeadings.js";
-import { useModal, useProducts } from "../../hooks";
+import { useModal, useProducts } from "../../../hooks";
 import Loader from "../../common/Loader";
 import { Modal } from "../../common/Modal";
 import { useUpdateProductMutation, useCreateProductMutation, useDeleteProductMutation } from "../../../store/backendApi.js";

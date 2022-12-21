@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Form, FormControl } from "../../../common/form";
-import Button from "../../../common/Button.jsx";
-import { withAuthOption } from "../../../hoc/withAuthOption.jsx";
-import { getFromStorage } from "../../../../utils/storage/getFromStorage.js";
+import { Form, FormControl } from "../../../components/common/form";
+import Button from "../../../components/common/Button.jsx";
+import { withAuthOption } from "../../../components/hoc/withAuthOption.jsx";
+import { getFromStorage } from "../../../utils/storage/getFromStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
-import Loader from "../../../common/Loader.jsx";
+import Loader from "../../../components/common/Loader.jsx";
 
 const LoginForm = withAuthOption(Form);
 

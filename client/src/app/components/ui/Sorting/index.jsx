@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SortingIcon, SortingArrowDownIcon, SortingArrowUpIcon } from "../common_ui/icons";
-import { useProducts } from "../../hooks";
+import { useProducts } from "../../../hooks";
 
 const Sorting = () => {
     const [showSortingOptions, setShowSortingOptions] = useState(false);

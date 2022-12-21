@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { Main, Login, Register, AuthContainer } from "../components/layout";
+import { Main, Login, Register, AuthContainer } from "../layouts";
 import { ProductCardsList, ProductCard, Collection, GlassType, FrameType, LenseType, ShoppingCart, AdminControl } from "../components/pages/page_outlets";
 import { ProductCardsPage, ProductPage, CollectionPage, GlassTypePage, FrameTypePage, LenseTypePage, ShoppingCartPage, AdminPage } from "../components/pages";
 import { PageNotFound } from "../components/common/PageNotFound.jsx";
@@ -49,7 +49,6 @@ export const routes = () => {
                                                     element: <ProductCard/>,
                                                     children: [
                                                         { path: BASE, element: <ProductPage/> },
-                                                        // { path: EDIT, element: <ProductCardEditPage/> },
                                                         { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
                                                     ]
                                                 },

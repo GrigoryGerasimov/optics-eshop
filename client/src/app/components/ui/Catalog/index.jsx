@@ -1,6 +1,6 @@
 import React from "react";
 import { CollectionSubCatalog, GlassSubCatalog, FrameSubCatalog, LenseSubCatalog } from "./SubCatalogs";
-import { useCatalogs } from "../../hooks";
+import { useCatalogs } from "../../../hooks";
 
 const Catalog = () => {
     const { showSubCatalogs, active, handleAddActiveState, handleSubCatalogsSwitch, handleSubCatalogsReset } = useCatalogs();
