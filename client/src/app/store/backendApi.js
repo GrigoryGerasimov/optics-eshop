@@ -7,7 +7,7 @@ export const backendApi = createApi({
         baseUrl: config.baseApiEndpoint
     }),
     refetchOnFocus: true,
-    tagTypes: ["Products", "ShipmentTypes", "Colors", "Countries", "Currencies", "LenseTypes", "FrameTypes", "GlassTypes"],
+    tagTypes: ["Products", "ShipmentTypes", "Colors", "Countries", "Currencies", "LenseTypes", "FrameTypes", "GlassTypes", "Collections"],
     endpoints: (build) => ({
         receiveProducts: build.query({
             query: () => ({
@@ -111,6 +111,12 @@ export const backendApi = createApi({
                 url: "glasstypes"
             }),
             providesTags: ["GlassTypes"]
+        }),
+        receiveCollections: build.query({
+            query: () => ({
+                url: "collections"
+            }),
+            providesTags: ["Collections"]
         })
     })
 });
@@ -131,5 +137,6 @@ export const {
     useReceiveCurrencyByIdQuery,
     useReceiveLenseTypesQuery,
     useReceiveFrameTypesQuery,
-    useReceiveGlassTypesQuery
+    useReceiveGlassTypesQuery,
+    useReceiveCollectionsQuery
 } = backendApi;

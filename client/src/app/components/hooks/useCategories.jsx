@@ -1,42 +1,13 @@
 import React, { useState, useEffect, useContext, useMemo, useCallback } from "react";
-import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery, useReceiveGlassTypesQuery } from "../../store/backendApi.js";
+import { useReceiveLenseTypesQuery, useReceiveFrameTypesQuery, useReceiveGlassTypesQuery, useReceiveCollectionsQuery } from "../../store/backendApi.js";
 import PropTypes from "prop-types";
 
 const CategoriesContext = React.createContext();
 
 export const useCategories = () => useContext(CategoriesContext);
 
-const collectionInitState = {
-    season: {
-        ss22: [
-            { id: "#ss22mdeluxe", code: "mdeluxe", title: "Men's Collection Deluxe Spring-Summer 2022" },
-            { id: "#ss22wdeluxe", code: "wdeluxe", title: "Women's Collection Deluxe Spring-Summer 2022" },
-            { id: "#ss22kidsteens", code: "kidsteens", title: "Kids' & Teens' Collection Deluxe Spring-Summer 2022" },
-            { id: "#ss22unisex", code: "unisex", title: "Unisex Collection Deluxe Spring-Summer 2022" }
-        ],
-        fw22: [
-            { id: "#fw22mdeluxe", code: "mdeluxe", title: "Men's Collection Deluxe Fall-Winter 2022" },
-            { id: "#fw22wdeluxe", code: "wdeluxe", title: "Women's Collection Deluxe Fall-Winter 2022" },
-            { id: "#fw22kidsteens", code: "kidsteens", title: "Kids' & Teens' Collection Deluxe Fall-Winter 2022" },
-            { id: "#fw22unisex", code: "unisex", title: "Unisex Collection Deluxe Fall-Winter 2022" }
-        ],
-        ss23: [
-            { id: "#ss23mdeluxe", code: "mdeluxe", title: "Men's Collection Deluxe Spring-Summer 2023" },
-            { id: "#ss23wdeluxe", code: "wdeluxe", title: "Women's Collection Deluxe Spring-Summer 2023" },
-            { id: "#ss23kidsteens", code: "kidsteens", title: "Kids' & Teens' Collection Deluxe Spring-Summer 2023" },
-            { id: "#ss23unisex", code: "unisex", title: "Unisex Collection Deluxe Spring-Summer 2023" }
-        ],
-        fw23: [
-            { id: "#fw23mdeluxe", code: "mdeluxe", title: "Men's Collection Deluxe Fall-Winter 2023" },
-            { id: "#fw23wdeluxe", code: "wdeluxe", title: "Women's Collection Deluxe Fall-Winter 2023" },
-            { id: "#fw23kidsteens", code: "kidsteens", title: "Kids' & Teens' Collection Deluxe Fall-Winter 2023" },
-            { id: "#fw23unisex", code: "unisex", title: "Unisex Collection Deluxe Fall-Winter 2023" }
-        ]
-    }
-};
-
 export const CategoriesProvider = ({ children }) => {
-    const [collection] = useState(collectionInitState);
+    const [collection, setCollection] = useState({});
     const [glassTypes, setGlassTypes] = useState({});
     const [frameTypes, setFrameTypes] = useState({});
     const [lenseTypes, setLenseTypes] = useState({});
@@ -44,6 +15,7 @@ export const CategoriesProvider = ({ children }) => {
     const { isLoading: isLenseTypesDataLoading, isSuccess: isLenseTypesDataLoadSuccessul, data: lenseTypesData } = useReceiveLenseTypesQuery({ refetchOnFocus: true });
     const { isLoading: isFrameTypesDataLoading, isSuccess: isFrameTypesDataLoadSuccessul, data: frameTypesData } = useReceiveFrameTypesQuery({ refetchOnFocus: true });
     const { isLoading: isGlassTypesDataLoading, isSuccess: isGlassTypesDataLoadSuccessul, data: glassTypesData } = useReceiveGlassTypesQuery({ refetchOnFocus: true });
+    const { isLoading: isCollectionsDataLoading, isSuccess: isCollectionsDataLoadSuccessul, data: collectionsData } = useReceiveCollectionsQuery({ refetchOnFocus: true });
 
     const dataInit = useCallback(() => {
         if (!isLenseTypesDataLoading && isLenseTypesDataLoadSuccessul) {
@@ -73,6 +45,15 @@ export const CategoriesProvider = ({ children }) => {
             }
             setGlassTypes(receivedGlassTypes);
         }
+        if (!isCollectionsDataLoading && isCollectionsDataLoadSuccessul) {
+            const receivedCollections = {};
+            for (const dataItem of collectionsData.data) {
+                for (const key in dataItem) {
+                    if (key === "season") receivedCollections[key] = dataItem[key];
+                }
+            }
+            setCollection(receivedCollections);
+        }
     }, [
         isLenseTypesDataLoading,
         isLenseTypesDataLoadSuccessul,
@@ -82,7 +63,10 @@ export const CategoriesProvider = ({ children }) => {
         frameTypesData,
         isGlassTypesDataLoading,
         isGlassTypesDataLoadSuccessul,
-        glassTypesData
+        glassTypesData,
+        isCollectionsDataLoading,
+        isCollectionsDataLoadSuccessul,
+        collectionsData
     ]);
 
     useEffect(() => {
@@ -91,7 +75,16 @@ export const CategoriesProvider = ({ children }) => {
 
     const findCategoryTitleById = useCallback(id => [
         () => {
-            return "not-ready-yet";
+            for (const extKey in collection) {
+                if (!Array.isArray(collection[extKey]) && typeof collection[extKey] === "object") {
+                    for (const intKey in collection[extKey]) {
+                        if (Array.isArray(collection[extKey][intKey])) {
+                            const categoryItemFound = collection[extKey][intKey].find(item => item._id === id);
+                            if (categoryItemFound) return categoryItemFound.code;
+                        }
+                    }
+                }
+            }
         },
         () => {
             for (const key in glassTypes) {

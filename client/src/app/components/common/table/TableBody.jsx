@@ -1,5 +1,5 @@
 import React from "react";
-import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray.js";
+import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray.js";
 import { EditIcon, CloseIcon } from "../../ui/common_ui/icons";
 import { useReceiveCurrenciesQuery } from "../../../store/backendApi.js";
 import Loader from "../Loader.jsx";

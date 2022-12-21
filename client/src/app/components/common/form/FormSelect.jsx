@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray.js";
+import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray.js";
 
 const FormSelect = ({ formFieldClass, options, label, id, name, defaultValue, value, onChange, error }) => {
     const optionsData = convertObjectToArray(options);

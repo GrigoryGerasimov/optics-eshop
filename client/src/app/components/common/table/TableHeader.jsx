@@ -1,5 +1,5 @@
 import React from "react";
-import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray";
+import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray";
 import PropTypes from "prop-types";
 
 export const TableHeader = ({ tableHeaderClass, tableHeadings }) => {

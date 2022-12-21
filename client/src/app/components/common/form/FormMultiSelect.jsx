@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray";
+import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray";
 import PropTypes from "prop-types";
 
 const FormMultiSelect = ({ formFieldClass, label, id, options, onChange, name, value, error }) => {

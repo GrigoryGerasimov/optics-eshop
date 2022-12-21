@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray.js";
+import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray.js";
 
 const FormRadio = ({ options, label, name, value, onChange, error }) => {
     const optionsData = convertObjectToArray(options);

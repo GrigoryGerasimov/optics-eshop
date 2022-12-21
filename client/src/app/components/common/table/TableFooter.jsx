@@ -1,5 +1,5 @@
 import React from "react";
-import { convertObjectToArray } from "../../../utils/formatConversion/convertObjectToArray";
+import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray";
 import Button from "../Button";
 import { PlusIcon } from "../../ui/common_ui/icons";
 import PropTypes from "prop-types";

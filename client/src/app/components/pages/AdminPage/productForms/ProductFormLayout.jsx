@@ -10,10 +10,11 @@ import {
     useReceiveColorsQuery
 } from "../../../../store/backendApi.js";
 import Loader from "../../../common/Loader.jsx";
+import { flattenObjectToArray } from "../../../../utils/transformation/flattenObjectToArray.js";
 import PropTypes from "prop-types";
 
 export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
-    const { frameTypes, lenseTypes, glassTypes } = useCategories();
+    const { frameTypes, lenseTypes, glassTypes, collection } = useCategories();
     const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
     const { isLoading: isCountriesDataLoading, isSuccess: isCountriesDataLoadSuccessful, data: countriesData } = useReceiveCountriesQuery({ refetchOnFocus: true });
     const { isLoading: isShipmentTypesDataLoading, isSuccess: isShipmentTypesDataLoadSuccessful, data: shipmentTypesData } = useReceiveShipmentTypesQuery({ refetchOnFocus: true });
@@ -77,33 +78,33 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
                 id="brand"
                 name="brand"
             />
-            <FormControl
+            <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Коллекция"
                 id="collection"
                 name="collection"
-                placeholder="Код коллекции по сезону, напр. #fw23mdeluxe"
+                options={flattenObjectToArray(collection)}
             />
             <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип очков"
                 id="glassType"
                 name="glassType"
-                options={Object.values(glassTypes).flat()}
+                options={flattenObjectToArray(glassTypes)}
             />
             <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип оправы"
                 id="frameType"
                 name="frameType"
-                options={Object.values(frameTypes).flat()}
+                options={flattenObjectToArray(frameTypes)}
             />
             <FormSelect
                 formFieldClass="focus:bg-transparent mb-[55px]"
                 label="Тип линз"
                 id="lenseType"
                 name="lenseType"
-                options={Object.values(lenseTypes).flat()}
+                options={flattenObjectToArray(lenseTypes)}
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
