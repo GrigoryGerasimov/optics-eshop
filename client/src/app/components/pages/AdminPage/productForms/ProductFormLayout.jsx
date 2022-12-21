@@ -14,13 +14,13 @@ import { flattenObjectToArray } from "../../../../utils/transformation/flattenOb
 import PropTypes from "prop-types";
 
 export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
-    const { frameTypes, lenseTypes, glassTypes, collection } = useCategories();
+    const { frameTypes, lenseTypes, glassTypes, collection, isCollectionLoading, isGlassTypesLoading, isFrameTypesLoading, isLenseTypesLoading } = useCategories();
     const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
     const { isLoading: isCountriesDataLoading, isSuccess: isCountriesDataLoadSuccessful, data: countriesData } = useReceiveCountriesQuery({ refetchOnFocus: true });
     const { isLoading: isShipmentTypesDataLoading, isSuccess: isShipmentTypesDataLoadSuccessful, data: shipmentTypesData } = useReceiveShipmentTypesQuery({ refetchOnFocus: true });
     const { isLoading: isColorsDataLoading, isSuccess: isColorsDataLoadSuccessful, data: colorsData } = useReceiveColorsQuery({ refetchOnFocus: true });
 
-    if ((isCurrenciesDataLoading && !isCurrenciesDataLoadSuccessful) || (isCountriesDataLoading && !isCountriesDataLoadSuccessful) || (isShipmentTypesDataLoading && !isShipmentTypesDataLoadSuccessful) || (isColorsDataLoading && !isColorsDataLoadSuccessful)) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+    if ((isCurrenciesDataLoading && !isCurrenciesDataLoadSuccessful) || (isCountriesDataLoading && !isCountriesDataLoadSuccessful) || (isShipmentTypesDataLoading && !isShipmentTypesDataLoadSuccessful) || (isColorsDataLoading && !isColorsDataLoadSuccessful) || isCollectionLoading || isGlassTypesLoading || isFrameTypesLoading || isLenseTypesLoading) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     const handleSubmit = data => {
         const transformedData = {
@@ -108,7 +108,7 @@ export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {
             />
             <FormControl
                 formFieldClass="focus:bg-transparent mb-[55px]"
-                label="Наименование коллекции"
+                label="Дополнительное название коллекции"
                 id="collectionTitle"
                 name="collectionTitle"
             />

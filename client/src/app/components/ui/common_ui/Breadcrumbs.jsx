@@ -1,15 +1,21 @@
 import React from "react";
-import { useLocation, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useCategories } from "../../hooks";
+import PropTypes from "prop-types";
 
-export const Breadcrumbs = () => {
-    const { pathname } = useLocation();
+export const Breadcrumbs = ({ itemId, itemPath }) => {
     const pathCompounds = [];
+    const { findCategoryTitleById } = useCategories();
 
-    pathname.split("/").filter(path => path).reduce((acc, val) => {
+    const transformedPathArray = itemPath.map((param, i) => findCategoryTitleById(param)[i]());
+
+    transformedPathArray.push(itemId);
+
+    transformedPathArray.reduce((acc, val) => {
         acc = acc + "/" + val;
         pathCompounds.push(acc);
         return acc;
-    }, "");
+    }, "products");
 
     return (
         <div className="w-[70%] flex flex-row flex-wrap justify-center">
@@ -18,7 +24,7 @@ export const Breadcrumbs = () => {
 
                 return index < pathCompounds.length - 1 ? (
                     <React.Fragment key={path}>
-                        <NavLink to={path}>{pathName}</NavLink>
+                        <NavLink to={`/${path}`}>{pathName}</NavLink>
                         <span className="mx-[15px]">&gt;</span>
                     </React.Fragment>
                 ) : (
@@ -27,4 +33,9 @@ export const Breadcrumbs = () => {
             })}
         </div>
     );
+};
+
+Breadcrumbs.propTypes = {
+    itemId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    itemPath: PropTypes.array
 };

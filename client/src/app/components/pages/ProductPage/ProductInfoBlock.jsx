@@ -41,7 +41,7 @@ export const ProductInfoBlock = ({
         <div>
             <div className={productInfoBlockClass}>{title}</div>
             <div className={productInfoBlockClass}>Марка: {brand}</div>
-            <div className={productInfoBlockClass}>Коллекция: {collectionTitle}</div>
+            <div className={productInfoBlockClass}>Дополнительное название коллекции: {collectionTitle}</div>
             <div className={productInfoBlockClass}>Тип: {productGroup}</div>
             <div className={productInfoBlockClass}>Краткое описание: {description}</div>
             <div className={productInfoBlockClass}>Варианты расцветки:{" "}

@@ -8,14 +8,13 @@ import Sorting from "../../ui/Sorting";
 const LenseTypePage = () => {
     const navigate = useNavigate();
     const { lensetype } = useParams();
-    const lensetypeId = `#${lensetype}`;
-    const { products: productData, filterCatalogedProducts } = useProducts();
+    const { products: productData, isProductsLoading, filterCatalogedProducts } = useProducts();
 
     useEffect(() => {
-        filterCatalogedProducts("lenseTypes", "type", lensetypeId);
+        filterCatalogedProducts("lenseTypes", "type", lensetype);
     }, []);
 
-    if (!productData.length) return <Loader/>;
+    if (isProductsLoading && !productData.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     return (
         <>

@@ -13,13 +13,13 @@ import { useReceiveProductByIdQuery } from "../../../store/backendApi.js";
 
 const ProductPage = () => {
     const { productId } = useParams();
-    const { isLoading, isSuccess, data } = useReceiveProductByIdQuery(productId, { refetchOnFocus: true });
+    const { isLoading: isProductDataLoading, isSuccess: isProductDataLoadSuccessul, data: productData } = useReceiveProductByIdQuery(productId, { refetchOnFocus: true });
     const { shoppingReservation, totalShoppingAmount, handleShoppingReservation, isPresentInCart, handleCheckPresenceInCart } = useShopping();
     const { showModal, handleModalOpen, handleModalClose } = useModal();
     const navigate = useNavigate();
     const { CART } = paths;
 
-    const currentItem = data?.data;
+    const currentItem = productData?.data;
 
     const processShoppingReservation = id => {
         handleModalOpen();
@@ -30,11 +30,11 @@ const ProductPage = () => {
         handleCheckPresenceInCart(currentItem?._id);
     }, [shoppingReservation, totalShoppingAmount, processShoppingReservation]);
 
-    if (isLoading || !isSuccess || !Object.keys(currentItem).length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+    if (isProductDataLoading || !isProductDataLoadSuccessul || !Object.keys(currentItem).length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     return (
         <>
-            <Breadcrumbs/>
+            <Breadcrumbs itemId={currentItem._id} itemPath={currentItem.params}/>
             <div className="flex flex-row flex-wrap justify-evenly items-center mt-[50px]">
                 <div className="2xl:w-6/12">
                     <ProductMainImage

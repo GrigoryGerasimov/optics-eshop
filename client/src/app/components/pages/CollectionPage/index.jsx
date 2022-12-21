@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useProducts } from "../../hooks";
+import { useCategories, useProducts } from "../../hooks";
 import { Card } from "../../common/card/Card";
 import Loader from "../../common/Loader";
 import Sorting from "../../ui/Sorting";
@@ -9,21 +9,21 @@ const CollectionPage = () => {
     const navigate = useNavigate();
     const { collection } = useParams();
     const season = collection.slice(0, 4);
-    const collectionId = `#${collection}`;
-    const { products: productData, filterCatalogedProducts } = useProducts();
+    const { products: productData, isProductsLoading, filterCatalogedProducts } = useProducts();
+    const { findCategoryTitleById } = useCategories();
 
     useEffect(() => {
-        filterCatalogedProducts("collection", "season", season, collectionId);
+        filterCatalogedProducts("collection", "season", season, collection);
     }, []);
 
-    if (!productData.length) return <Loader/>;
+    if (isProductsLoading && !productData.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     return (
         <>
             <Sorting/>
             <div className="grid grid-cols-[repeat(auto-fill,_minmax(400px,_1fr))] gap-x-3 gap-y-8">
                 {productData.map(dataItem => {
-                    const paramsToPath = dataItem.params.slice(1).map(param => param.slice(1)).reduce((acc, val) => acc + "/" + val);
+                    const paramsToPath = dataItem.params.slice(1).map((param, i) => findCategoryTitleById(param)[i + 1]()).reduce((acc, val) => acc + "/" + val);
 
                     return <Card
                         key={dataItem._id}

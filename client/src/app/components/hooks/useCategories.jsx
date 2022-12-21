@@ -12,6 +12,11 @@ export const CategoriesProvider = ({ children }) => {
     const [frameTypes, setFrameTypes] = useState({});
     const [lenseTypes, setLenseTypes] = useState({});
 
+    const [isCollectionLoading, setCollectionLoading] = useState(true);
+    const [isGlassTypesLoading, setGlassTypesLoading] = useState(true);
+    const [isFrameTypesLoading, setFrameTypesLoading] = useState(true);
+    const [isLenseTypesLoading, setLenseTypesLoading] = useState(true);
+
     const { isLoading: isLenseTypesDataLoading, isSuccess: isLenseTypesDataLoadSuccessul, data: lenseTypesData } = useReceiveLenseTypesQuery({ refetchOnFocus: true });
     const { isLoading: isFrameTypesDataLoading, isSuccess: isFrameTypesDataLoadSuccessul, data: frameTypesData } = useReceiveFrameTypesQuery({ refetchOnFocus: true });
     const { isLoading: isGlassTypesDataLoading, isSuccess: isGlassTypesDataLoadSuccessul, data: glassTypesData } = useReceiveGlassTypesQuery({ refetchOnFocus: true });
@@ -26,6 +31,7 @@ export const CategoriesProvider = ({ children }) => {
                 }
             });
             setLenseTypes(receivedLenseTypes);
+            setLenseTypesLoading(false);
         }
         if (!isFrameTypesDataLoading && isFrameTypesDataLoadSuccessul) {
             const receivedFrameTypes = {};
@@ -35,6 +41,7 @@ export const CategoriesProvider = ({ children }) => {
                 }
             });
             setFrameTypes(receivedFrameTypes);
+            setFrameTypesLoading(false);
         }
         if (!isGlassTypesDataLoading && isGlassTypesDataLoadSuccessul) {
             const receivedGlassTypes = {};
@@ -44,6 +51,7 @@ export const CategoriesProvider = ({ children }) => {
                 }
             }
             setGlassTypes(receivedGlassTypes);
+            setGlassTypesLoading(false);
         }
         if (!isCollectionsDataLoading && isCollectionsDataLoadSuccessul) {
             const receivedCollections = {};
@@ -53,6 +61,7 @@ export const CategoriesProvider = ({ children }) => {
                 }
             }
             setCollection(receivedCollections);
+            setCollectionLoading(false);
         }
     }, [
         isLenseTypesDataLoading,
@@ -114,9 +123,9 @@ export const CategoriesProvider = ({ children }) => {
 
     return (
         <CategoriesContext.Provider value={useMemo(() => ({
-            collection, glassTypes, frameTypes, lenseTypes, findCategoryTitleById
+            collection, glassTypes, frameTypes, lenseTypes, findCategoryTitleById, isCollectionLoading, isGlassTypesLoading, isFrameTypesLoading, isLenseTypesLoading
         }), [
-            collection, glassTypes, frameTypes, lenseTypes, findCategoryTitleById
+            collection, glassTypes, frameTypes, lenseTypes, findCategoryTitleById, isCollectionLoading, isGlassTypesLoading, isFrameTypesLoading, isLenseTypesLoading
         ])}>
             {children}
         </CategoriesContext.Provider>

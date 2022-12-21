@@ -7,16 +7,16 @@ import Loader from "../../common/Loader";
 
 const ProductCardsPage = () => {
     const navigate = useNavigate();
-    const { products: productData, isLoading, isSuccess } = useProducts();
+    const { products: productsData, isProductsLoading } = useProducts();
     const { findCategoryTitleById } = useCategories();
 
-    if (isLoading || !isSuccess || !productData?.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+    if (isProductsLoading || !productsData?.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     return (
         <>
             <Sorting/>
             <div className="grid grid-cols-[repeat(auto-fill,_minmax(400px,_1fr))] gap-x-3 gap-y-8">
-                {productData.map(dataItem => {
+                {productsData.map(dataItem => {
                     const paramsToPath = dataItem.params.map((param, i) => findCategoryTitleById(param)[i]()).reduce((acc, val) => acc + "/" + val);
 
                     return <Card

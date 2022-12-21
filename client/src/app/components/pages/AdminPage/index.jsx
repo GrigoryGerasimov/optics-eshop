@@ -3,10 +3,10 @@ import { Table } from "../../common/table";
 import { ProductEditForm } from "./productForms/ProductEditForm";
 import { ProductCreateForm } from "./productForms/ProductCreateForm";
 import { columnHeadings } from "./columnHeadings.js";
-import { useModal } from "../../hooks";
+import { useModal, useProducts } from "../../hooks";
 import Loader from "../../common/Loader";
 import { Modal } from "../../common/Modal";
-import { useReceiveProductsQuery, useUpdateProductMutation, useCreateProductMutation, useDeleteProductMutation } from "../../../store/backendApi.js";
+import { useUpdateProductMutation, useCreateProductMutation, useDeleteProductMutation } from "../../../store/backendApi.js";
 import { toast } from "react-toastify";
 
 const AdminPage = () => {
@@ -15,10 +15,9 @@ const AdminPage = () => {
     const [currentId, setCurrentId] = useState("");
     const [currentProduct, setCurrentProduct] = useState({});
     const [currentModalFlag, setCurrentModalFlag] = useState("");
+    const { products, isProductsLoading } = useProducts();
 
-    const { isLoading, isSuccess, data } = useReceiveProductsQuery({ refetchOnFocus: true });
-    if (isLoading && !isSuccess) return <Loader/>;
-    const products = data.data;
+    if (isProductsLoading) return <Loader/>;
 
     const [updateProduct] = useUpdateProductMutation();
     const [createProduct] = useCreateProductMutation();
