@@ -12,9 +12,9 @@ const paths = {
     AUTH: "auth",
     LOGIN: "login",
     REGISTER: "register",
-    AUTH_LOGIN() {
-        return `${this.AUTH}/${this.LOGIN}`;
-    },
+    LOGOUT: "logout",
+    AUTH_LOGIN: "auth/login",
+    AUTH_LOGOUT: "auth/logout",
     CART: "cart",
     ADMIN: "admin"
 };

@@ -7,7 +7,7 @@ const JWT = {
     userIdKey: "jwt-user-id"
 };
 
-export const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
+export const setTokens = ({ accessToken, refreshToken, expiresIn, userId }) => {
     const { accessTokenKey, refreshTokenKey, expireDateKey, userIdKey } = JWT;
     const expireDate = Date.now() + (expiresIn * 1000);
     setToStorage(accessTokenKey, accessToken);

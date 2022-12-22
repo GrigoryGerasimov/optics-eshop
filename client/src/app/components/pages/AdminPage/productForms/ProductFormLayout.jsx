@@ -8,9 +8,9 @@ import {
     useReceiveCurrenciesQuery,
     useReceiveShipmentTypesQuery,
     useReceiveColorsQuery
-} from "../../../../store/backendApi.js";
-import Loader from "../../../common/Loader.jsx";
+} from "../../../../store/apiEndpoints";
 import { flattenObjectToArray } from "../../../../utils/transformation/flattenObjectToArray.js";
+import Loader from "../../../common/Loader.jsx";
 import PropTypes from "prop-types";
 
 export const ProductFormLayout = ({ initialState, formTitle, onSubmit }) => {

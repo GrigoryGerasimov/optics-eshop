@@ -25,12 +25,8 @@ const schema = new Schema({
     },
     role: {
         type: Schema.Types.ObjectId,
-        ref: "Role"
-    },
-    gender: {
-        type: String,
-        required: false,
-        enum: ["male", "female", "other"]
+        ref: "Role",
+        required: true
     },
     fileName: {
         type: String

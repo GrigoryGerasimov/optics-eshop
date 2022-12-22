@@ -1,5 +1,3 @@
-const usersMock = require("../mockData/users.json");
-const feedbacksMock = require("../mockData/feedbacks.json");
 const rolesMock = require("../mockData/roles.json");
 const collectionsMock = require("../mockData/collections.json");
 const glassTypesMock = require("../mockData/glassTypes.json");
@@ -29,8 +27,6 @@ const initializeDB = async () => {
         }
     }
 
-    const users = await models.User.find().exec();
-    const feedbacks = await models.Feedback.find().exec();
     const roles = await models.Role.find().exec();
     const collections = await models.Collection.find().exec();
     const glassTypes = await models.GlassType.find().exec();
@@ -42,12 +38,6 @@ const initializeDB = async () => {
     const shipmentTypes = await models.ShipmentType.find().exec();
     const currencies = await models.Currency.find().exec();
 
-    if (users.length < usersMock.length) {
-        await initModel(models.User, usersMock);
-    }
-    if (feedbacks.length < feedbacksMock.length) {
-        await initModel(models.Feedback, feedbacksMock);
-    }
     if (roles.length < rolesMock.length) {
         await initModel(models.Role, rolesMock);
     }

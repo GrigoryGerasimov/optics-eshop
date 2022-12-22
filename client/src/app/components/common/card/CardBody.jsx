@@ -1,6 +1,6 @@
 import React from "react";
 import { constants } from "../../../constants.jsx";
-import { useReceiveCurrencyByIdQuery } from "../../../store/backendApi";
+import { useReceiveCurrencyByIdQuery } from "../../../store/apiEndpoints";
 import Loader from "../Loader.jsx";
 import PropTypes from "prop-types";
 

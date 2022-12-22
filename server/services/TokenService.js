@@ -5,7 +5,7 @@ const { models } = require("../models");
 class TokenService {
     static generate (payload) {
         try {
-            const newAccessToken = jwt.sign({ _id: payload }, config.get("jwt")["SECRET_ACCESS_KEY"], { expiresIn: "1h" });
+            const newAccessToken = jwt.sign(payload, config.get("jwt")["SECRET_ACCESS_KEY"], { expiresIn: "1h" });
             const newRefreshToken = jwt.sign(payload, config.get("jwt")["SECRET_REFRESH_KEY"]);
             return { accessToken: newAccessToken, refreshToken: newRefreshToken, expiresIn: 3600 };
         } catch (err) {
@@ -19,12 +19,9 @@ class TokenService {
 
         try {
             const existingRefresh = await models.Token.findOne({ userId }).exec();
-            if (!existingRefresh) {
-                await models.Token.create({ userId, refreshToken });
-            } else {
-                existingRefresh.refreshToken = refreshToken;
-                return existingRefresh.save();
-            }
+            if (!existingRefresh) return await models.Token.create({ userId, refreshToken });
+            existingRefresh.refreshToken = refreshToken;
+            return existingRefresh.save();
         } catch (err) {
             process.env.NODE_ENV === "development" && console.log(err);
             throw new Error("Вследствие возникшей ошибки токен не мог быть обновлён");

@@ -9,7 +9,7 @@ import Button from "../../common/Button";
 import { Modal } from "../../common/Modal";
 import paths from "../../../routes/paths";
 import Loader from "../../common/Loader";
-import { useReceiveProductByIdQuery } from "../../../store/backendApi.js";
+import { useReceiveProductByIdQuery } from "../../../store/apiEndpoints";
 
 const ProductPage = () => {
     const { productId } = useParams();

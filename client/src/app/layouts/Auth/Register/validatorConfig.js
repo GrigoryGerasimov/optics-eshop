@@ -43,6 +43,11 @@ export const validatorConfig = {
             message: "Пароль не совпадает с введённым выше"
         }
     },
+    role: {
+        isRequired: {
+            message: "Поле обязательно для заполнения"
+        }
+    },
     license: {
         isRequired: {
             message: "Необходимо подтвердить ознакомление и согласие с Лицензионным соглашением"

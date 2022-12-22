@@ -6,7 +6,7 @@ import { columnHeadings } from "./columnHeadings.js";
 import { useModal, useProducts } from "../../../hooks";
 import Loader from "../../common/Loader";
 import { Modal } from "../../common/Modal";
-import { useUpdateProductMutation, useCreateProductMutation, useDeleteProductMutation } from "../../../store/backendApi.js";
+import { useUpdateProductMutation, useCreateProductMutation, useDeleteProductMutation } from "../../../store/apiEndpoints";
 import { toast } from "react-toastify";
 
 const AdminPage = () => {
@@ -16,8 +16,6 @@ const AdminPage = () => {
     const [currentProduct, setCurrentProduct] = useState({});
     const [currentModalFlag, setCurrentModalFlag] = useState("");
     const { products, isProductsLoading } = useProducts();
-
-    if (isProductsLoading) return <Loader/>;
 
     const [updateProduct] = useUpdateProductMutation();
     const [createProduct] = useCreateProductMutation();
@@ -72,6 +70,8 @@ const AdminPage = () => {
             errorCatcher(err);
         }
     };
+
+    if (isProductsLoading) return <Loader/>;
 
     return (
         <main className="w-full flex flex-row flex-wrap">

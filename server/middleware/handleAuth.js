@@ -1,8 +1,6 @@
-const { validationResult } = require("express-validator");
 const { models } = require("../models");
+const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const controllerConfig = require("../controllers/controllerConfig");
-const config = require("config");
 const { formatResponse } = require("../utils/formatResponse");
 
 const handleAuth = async (req, res, next) => {
@@ -21,7 +19,7 @@ const handleAuth = async (req, res, next) => {
 
     const isPasswordValid = await bcrypt.compare(password, existingUser.password);
     const saltRoundsConfirmed = await bcrypt.getRounds(existingUser.password);
-    if (!isPasswordValid || saltRoundsConfirmed !== controllerConfig["SALT"]) {
+    if (!isPasswordValid || saltRoundsConfirmed !== 12) {
         return formatResponse(res, 400, "Введённые данные некорректны");
     }
 

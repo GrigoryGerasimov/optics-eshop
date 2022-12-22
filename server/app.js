@@ -6,12 +6,8 @@ const config = require("config");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
-const fileUpload = require("express-fileupload");
-const timeout = require("connect-timeout");
 const { connectToDB } = require("./dal/connectToDB");
-const { mw } = require("./middleware");
 const { router } = require("./routes")
-const controllerConfig = require("./controllers/controllerConfig");
 
 const app = express();
 
@@ -24,22 +20,10 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     optionsSuccessStatus: 202
 }))
-app.use(timeout("15s"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(mw.onTimeout);
 app.use(compression({ filter: (req, res) => !req.headers["x-no-compression"] && compression.filter(req, res) }));
-app.use(fileUpload({
-    createParentPath: true,
-    safeFileNames: true,
-    preserveExtension: true,
-    limits: { fileSize: controllerConfig["FILE_SIZE_LIMIT"] },
-    abortOnLimit: true,
-    parseNested: true,
-    debug: true
-}));
-app.use(mw.onTimeout);
 
 app.use("/api", router);
 
