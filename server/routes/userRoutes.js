@@ -8,13 +8,9 @@ const { UserController } = require("../controllers/UserController");
 userRoutes
     .route("/")
     .get(UserController.read)
-    .post(UserController.create);
 
 userRoutes
     .route("/:userId")
     .get(UserController.readById)
-    .put(UserController.update)
-    .patch(UserController.update)
-    .delete(UserController.delete);
 
 module.exports = userRoutes;

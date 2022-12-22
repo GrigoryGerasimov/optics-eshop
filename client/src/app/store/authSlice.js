@@ -57,7 +57,7 @@ export const {
     reducer: authReducer
 } = authSlice;
 
-export const login = ({ payload }) => async dispatch => {
+export const login = payload => async dispatch => {
     dispatch(onRequestStart());
     const { email, password } = payload;
     try {
@@ -74,9 +74,10 @@ export const login = ({ payload }) => async dispatch => {
 export const register = payload => async dispatch => {
     dispatch(onRequestStart());
     try {
-        const data = await signUp(payload);
-        setTokens({ ...data, userId: data._id });
-        dispatch(onAuthSuccess({ userId: data._id }));
+        const { data } = await signUp(payload);
+        const { userId } = data;
+        setTokens(data);
+        dispatch(onAuthSuccess({ userId }));
     } catch (error) {
         dispatch(onAuthFailure(error.message));
     } finally {
@@ -98,7 +99,7 @@ export const logout = () => dispatch => {
 
 export const authSelectors = {
     getAuthStatus: () => state => state.auth?.isLoading,
-    getLoggedInStatus: () => state => state.auth?.isLoggedIn,
-    getCurrentUserId: () => state => state.auth.auth?.userId,
+    getAuthorizedUserStatus: () => state => state.auth?.isLoggedIn,
+    getAuthorizedUserId: () => state => state.auth.auth?.userId,
     getAuthError: () => state => state.auth?.error
 };

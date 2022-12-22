@@ -1,4 +1,3 @@
-const { handleTimeout } = require("./handleTimeout");
 const { handleAccepts } = require("./handleAccepts");
 const { handleValidationOnSignUp } = require('./handleValidationOnSignUp');
 const { handleValidationOnSignIn } = require('./handleValidationOnSignIn');
@@ -9,7 +8,6 @@ const { handleTokenAccessCheck } = require("./handleTokenAccessCheck");
 
 const mw = {};
 
-mw.onTimeout = handleTimeout;
 mw.onAccept = handleAccepts;
 mw.onValidationSignUp = handleValidationOnSignUp;
 mw.onValidationSignIn = handleValidationOnSignIn;

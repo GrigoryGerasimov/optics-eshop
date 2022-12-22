@@ -4,7 +4,7 @@ import ShoppingCardPosition from "./ShoppingCardPosition";
 import { Divider } from "../../common/Divider.jsx";
 import Button from "../../common/Button";
 import { ModalForm } from "./ModalForm";
-import { useReceiveCurrenciesQuery } from "../../../store/backendApi.js";
+import { useReceiveCurrenciesQuery } from "../../../store/apiEndpoints";
 import Loader from "../../common/Loader.jsx";
 import { constants } from "../../../constants.jsx";
 

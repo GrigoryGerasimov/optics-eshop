@@ -2,7 +2,6 @@ const { TokenService } = require("../services/TokenService");
 const config = require("config");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const controllerConfig = require("./controllerConfig");
 const { UserService } = require("../services/UserService");
 const { formatResponse } = require("../utils/formatResponse");
 
@@ -27,20 +26,16 @@ class AuthController {
             return formatResponse(res, 401, "Проверка на валидацию обязательных данных завершилась ошибкой");
         }
 
-        if (req.files.file.size > controllerConfig["FILE_SIZE_LIMIT"]) {
-            return formatResponse(res, 413, "Объём загружаемого файла превысил установленный лимит в 50Mb. Попробуйте загрузить файл меньшего размера");
-        }
-
         try {
-            const hashedPassword = await bcrypt.hash(req.body.password, controllerConfig["SALT"]);
-            const newUser = await UserService.create(req.files.file, { ...req.body, password: hashedPassword });
+            const hashedPassword = await bcrypt.hash(req.body.password, 12);
+            const newUser = await UserService.create({ ...req.body, password: hashedPassword });
 
-            const newUserTokens = TokenService.generate(newUser._id.toString());
-            await TokenService.save(newUser._id.toString(), newUserTokens.refreshToken);
+            const newUserTokens = TokenService.generate({ _id: newUser._id });
+            await TokenService.save(newUser._id, newUserTokens.refreshToken);
             res.status(201).json({
                 code: 201,
                 message: "Пользователь успешно занесён в коллекцию",
-                data: newUserTokens
+                data: { ...newUserTokens, userId: newUser._id }
             });
         } catch (err) {
             formatResponse(res, 400, err);

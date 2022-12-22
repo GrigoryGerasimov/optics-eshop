@@ -1,6 +1,11 @@
 import React from "react";
 import { constants } from "../../../constants";
-import { useReceiveShipmentTypeByIdQuery, useReceiveColorByIdQuery, useReceiveCountryByIdQuery, useReceiveCurrencyByIdQuery } from "../../../store/backendApi";
+import {
+    useReceiveShipmentTypeByIdQuery,
+    useReceiveColorByIdQuery,
+    useReceiveCountryByIdQuery,
+    useReceiveCurrencyByIdQuery
+} from "../../../store/apiEndpoints";
 import Loader from "../../common/Loader.jsx";
 import PropTypes from "prop-types";
 

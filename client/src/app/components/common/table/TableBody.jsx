@@ -1,10 +1,10 @@
 import React from "react";
 import { convertObjectToArray } from "../../../utils/transformation/convertObjectToArray.js";
 import { EditIcon, CloseIcon } from "../../ui/common_ui/icons";
-import { useReceiveCurrenciesQuery } from "../../../store/backendApi.js";
-import Loader from "../Loader.jsx";
+import { useReceiveCurrenciesQuery } from "../../../store/apiEndpoints";
 import { useCategories } from "../../../hooks";
 import { constants } from "../../../constants.jsx";
+import Loader from "../Loader.jsx";
 import PropTypes from "prop-types";
 
 export const TableBody = ({ tableBodyClass, bodyContent, onEdit, onDelete }) => {

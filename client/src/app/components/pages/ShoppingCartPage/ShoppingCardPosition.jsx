@@ -7,9 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { constants } from "../../../constants";
 import { useModal } from "../../../hooks";
 import { Modal } from "../../common/Modal";
-import { useReceiveCurrencyByIdQuery } from "../../../store/backendApi.js";
-import PropTypes from "prop-types";
+import { useReceiveCurrencyByIdQuery } from "../../../store/apiEndpoints";
 import Loader from "../../common/Loader";
+import PropTypes from "prop-types";
 
 const ShoppingCardPosition = ({ reservedItem, paramsToPath, onDelete, onTotalAmountCountUp }) => {
     const navigate = useNavigate();

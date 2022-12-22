@@ -1,22 +1,25 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, FormControl, FormCheckboxSingle } from "../../../components/common/form";
+import { useDispatch, useSelector } from "react-redux";
+import { Form, FormControl, FormSelect, FormCheckboxSingle } from "../../../components/common/form";
 import Button from "../../../components/common/Button.jsx";
 import { withAuthOption } from "../../../components/hoc/withAuthOption.jsx";
-import { setToStorage } from "../../../utils/storage/setToStorage.js";
 import { validatorConfig } from "./validatorConfig.js";
-import paths from "../../../routes/paths.js";
+import { authSelectors, register } from "../../../store/authSlice.js";
+import { useReceiveRolesQuery } from "../../../store/apiEndpoints";
+import Loader from "../../../components/common/Loader";
+import { toast } from "react-toastify";
 
 const RegisterForm = withAuthOption(Form);
 
 const initialState = {
-    _id: "test_uuid",
     username: "",
     firstName: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
+    role: "",
     adv: false,
     license: false
 };
@@ -27,12 +30,21 @@ const initialPasswordState = {
 };
 
 const Register = () => {
-    const { LOGIN } = paths;
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const signupError = useSelector(authSelectors.getAuthError());
+
+    const { isLoading: isRolesDataLoading, isSuccess: isRolesDataLoadSuccessful, data: rolesData } = useReceiveRolesQuery({ refetchOnFocus: true });
+
+    if (isRolesDataLoading && !isRolesDataLoadSuccessful) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     const handleSubmit = data => {
-        setToStorage(data._id, data).then(data => console.log(data));
-        navigate(`/${LOGIN}`, { replace: true });
+        try {
+            dispatch(register(data));
+            navigate("/", { replace: true });
+        } catch (err) {
+            toast.error(err);
+        }
     };
 
     return (
@@ -85,6 +97,13 @@ const Register = () => {
                 name="confirmPassword"
                 autoComplete="new-password"
             />
+            <FormSelect
+                formFieldClass="mb-[55px]"
+                label="На данном портале я собираюсь..."
+                id="role"
+                name="role"
+                options={rolesData.data}
+            />
             <FormCheckboxSingle
                 checkboxFieldClass="leading-10"
                 label="Я хочу подписаться на рекламную рассылку по электронной почте"
@@ -98,6 +117,7 @@ const Register = () => {
                 name="license"
             />
             <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Отправить</Button>
+            <div>{signupError && <pre className="inline-block text-pink-600 text-base py-4 px-0">{signupError}</pre>}</div>
         </RegisterForm>
     );
 };

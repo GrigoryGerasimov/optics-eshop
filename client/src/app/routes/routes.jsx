@@ -1,12 +1,25 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { Main, Login, Register, AuthContainer } from "../layouts";
+import { Main, Login, Register, AuthContainer, Logout } from "../layouts";
 import { ProductCardsList, ProductCard, Collection, GlassType, FrameType, LenseType, ShoppingCart, AdminControl } from "../components/pages/page_outlets";
 import { ProductCardsPage, ProductPage, CollectionPage, GlassTypePage, FrameTypePage, LenseTypePage, ShoppingCartPage, AdminPage } from "../components/pages";
 import { PageNotFound } from "../components/common/PageNotFound.jsx";
 import paths from "./paths.js";
 
-const { BASE, REST, PRODUCTS, PRODUCT: { COLLECTION, GLASS_TYPE, FRAME_TYPE, LENSE_TYPE, ID }, AUTH, LOGIN, REGISTER, AUTH_LOGIN, CART, ADMIN } = paths;
+const {
+    BASE,
+    REST,
+    PRODUCTS,
+    PRODUCT: { COLLECTION, GLASS_TYPE, FRAME_TYPE, LENSE_TYPE, ID },
+    AUTH,
+    LOGIN,
+    REGISTER,
+    LOGOUT,
+    AUTH_LOGIN,
+    CART,
+    ADMIN
+} = paths;
+
 const isSignedIn = true;
 
 export const routes = () => {
@@ -21,7 +34,7 @@ export const routes = () => {
         },
         {
             path: PRODUCTS,
-            element: !isSignedIn ? <Navigate to={AUTH_LOGIN()} state={{ from: location }}/> : <ProductCardsList/>,
+            element: !isSignedIn ? <Navigate to={AUTH_LOGIN} state={{ from: location }}/> : <ProductCardsList/>,
             children: [
                 { path: BASE, element: <ProductCardsPage/> },
                 {
@@ -49,22 +62,22 @@ export const routes = () => {
                                                     element: <ProductCard/>,
                                                     children: [
                                                         { path: BASE, element: <ProductPage/> },
-                                                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
+                                                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
                                                     ]
                                                 },
-                                                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
+                                                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
                                             ]
                                         },
-                                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
+                                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
                                     ]
                                 },
-                                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
+                                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
                             ]
                         },
-                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
+                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
                     ]
                 },
-                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN() : <PageNotFound/>}/> }
+                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
             ]
         },
         {
@@ -90,6 +103,7 @@ export const routes = () => {
                 { path: BASE, element: <Navigate to={LOGIN}/> },
                 { path: LOGIN, element: <Login/> },
                 { path: REGISTER, element: <Register/> },
+                { path: LOGOUT, element: <Logout/> },
                 { path: REST, element: <PageNotFound/> }
             ]
         },

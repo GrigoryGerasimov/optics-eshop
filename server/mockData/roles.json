@@ -1,11 +1,10 @@
 [
   {
-    "value": "admin"
+    "code": "vendor",
+    "title": "Продавать"
   },
   {
-    "value": "buyer"
-  },
-  {
-    "value": "retailer"
+    "code": "buyer",
+    "title": "Покупать"
   }
 ]
