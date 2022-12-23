@@ -34,6 +34,9 @@ const Register = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const signupError = useSelector(authSelectors.getAuthError());
+    const isAuthorized = useSelector(authSelectors.getAuthorizedUserStatus());
+
+    if (isAuthorized) navigate("/", { replace: true });
 
     useEffect(() => {
         if (signupError) toast.error("Ошибка регистрации! Попробуйте ещё раз!");
@@ -46,7 +49,6 @@ const Register = () => {
     const handleSubmit = data => {
         try {
             dispatch(register(data));
-            navigate("/", { replace: true });
         } catch (err) {
             toast.error(err);
         }

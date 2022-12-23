@@ -19,6 +19,9 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const signinError = useSelector(authSelectors.getAuthError());
+    const isAuthorized = useSelector(authSelectors.getAuthorizedUserStatus());
+
+    if (isAuthorized) navigate("/", { replace: true });
 
     useEffect(() => {
         if (signinError) toast.error("Ошибка авторизации! Попробуйте ещё раз!");
@@ -27,7 +30,6 @@ const Login = () => {
     const handleSubmit = data => {
         try {
             dispatch(login(data));
-            navigate("/");
         } catch (err) {
             toast.error(err);
         }

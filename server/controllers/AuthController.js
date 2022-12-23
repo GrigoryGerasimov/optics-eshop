@@ -46,7 +46,7 @@ class AuthController {
         const isTokenInvalid = (dbToken, token) => !dbToken || !token || token._id !== dbToken?.userId.toString();
 
         const dbToken = await TokenService.readToken(req.body.refreshToken);
-        const verifiedToken = TokenService.validate(dbToken.refreshToken, config.get("jwt")["SECRET_REFRESH_KEY"]);
+        const verifiedToken = TokenService.validate(dbToken?.refreshToken, config.get("jwt")["SECRET_REFRESH_KEY"]);
 
         if (isTokenInvalid(dbToken, verifiedToken)) {
             return formatResponse(res, 401, "Отсутствует авторизация");
