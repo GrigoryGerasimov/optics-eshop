@@ -1,0 +1,18 @@
+[
+  { "code": "en", "title": "Великобритания" },
+  { "code": "us", "title": "США" },
+  { "code": "fr", "title": "Франция" },
+  { "code": "de", "title": "Германия" },
+  { "code": "ru", "title": "РФ" },
+  { "code": "pl", "title": "Польша" },
+  { "code": "cz", "title": "Чехия" },
+  { "code": "fi", "title": "Финляндия" },
+  { "code": "ee", "title": "Эстония" },
+  { "code": "se", "title": "Швеция" },
+  { "code": "no", "title": "Норвегия" },
+  { "code": "dk", "title": "Дания" },
+  { "code": "nl", "title": "Нидерланды" },
+  { "code": "es", "title": "Испания" },
+  { "code": "it", "title": "Италия" },
+  { "code": "pl", "title": "Португалия" }
+]

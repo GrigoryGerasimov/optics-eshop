@@ -1,0 +1,12 @@
+[
+  {
+    "type": [
+      { "id": "#classic", "code": "classic", "title": "Classic glass frame" },
+      { "id": "#square", "code": "square", "title": "Square glass frame" },
+      { "id": "#round", "code": "round", "title": "Round glass frame" },
+      { "id": "#thick", "code": "thick", "title": "Thick glass frame" },
+      { "id": "#thin", "code": "thin", "title": "Thin glass frame" },
+      { "id": "#semi", "code": "semi", "title": "Semi-frame" }
+    ]
+  }
+]
