@@ -2,11 +2,17 @@ export const validatorConfig = {
     img: {
         isRequired: {
             message: "Поле обязательно для заполнения"
+        },
+        isURL: {
+            message: "Введите корректную URL к изображению"
         }
     },
     imgAddit: {
         isRequired: {
             message: "Поле обязательно для заполнения"
+        },
+        isURL: {
+            message: "Введите корректные URL к изображениям"
         }
     },
     title: {

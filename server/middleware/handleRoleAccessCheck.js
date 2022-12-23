@@ -10,7 +10,7 @@ const handleRoleAccessCheck = roleValue => async (req, res, next) => {
     }
 
     if (typeof roleValue === "string") {
-        const role = await models.Role.findOne({ value: roleValue }).exec();
+        const role = await models.Role.findOne({ code: roleValue }).exec();
         if (currentUser.role.toString() === role?._id?.toString()) {
             return next();
         }
@@ -18,7 +18,7 @@ const handleRoleAccessCheck = roleValue => async (req, res, next) => {
 
     if (Array.isArray(roleValue)) {
         for (const val of roleValue) {
-            const role = await models.Role.findOne({ value: val }).exec();
+            const role = await models.Role.findOne({ code: val }).exec();
             if (currentUser.role.toString() === role?._id?.toString()) {
                 return next();
             }

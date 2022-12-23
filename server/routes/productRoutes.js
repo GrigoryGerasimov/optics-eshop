@@ -1,20 +1,20 @@
 const { Router } = require("express");
 const productRoutes = Router();
 const { ProductController } = require("../controllers/ProductController");
-// const { mw } = require("../middleware");
-//
-// const { onTokenAccessCheck, onRoleAccessCheck } = mw;
+const { mw } = require("../middleware");
+
+const { onTokenAccessCheck, onRoleAccessCheck } = mw;
 
 productRoutes
     .route("/")
     .get(ProductController.read)
-    .post(ProductController.create);
+    .post(onTokenAccessCheck, onRoleAccessCheck("vendor"), ProductController.create);
 
 productRoutes
     .route("/:productId")
     .get(ProductController.readById)
-    .put(ProductController.update)
-    .patch(ProductController.update)
-    .delete(ProductController.delete);
+    .put(onTokenAccessCheck, onRoleAccessCheck("vendor"), ProductController.update)
+    .patch(onTokenAccessCheck, onRoleAccessCheck("vendor"), ProductController.update)
+    .delete(onTokenAccessCheck, onRoleAccessCheck("vendor"), ProductController.delete);
 
 module.exports = productRoutes;

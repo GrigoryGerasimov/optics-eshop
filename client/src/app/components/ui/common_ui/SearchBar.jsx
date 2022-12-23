@@ -2,17 +2,22 @@ import React, { useState, useEffect } from "react";
 import { SearchIcon } from "./icons";
 import { FormControl } from "../../common/form";
 import { useProducts, useCatalogs } from "../../../hooks";
+import { useNavigate } from "react-router-dom";
+import paths from "../../../routes/paths";
 
 export const SearchBar = () => {
     const [searchValue, setSearchValue] = useState("");
     const { filterSearchedProducts } = useProducts();
     const { handleSubCatalogsReset } = useCatalogs();
+    const navigate = useNavigate();
+    const { PRODUCTS } = paths;
 
     const handleChange = ({ target }) => {
         setSearchValue(target.value);
     };
 
     useEffect(() => {
+        navigate(`/${PRODUCTS}`);
         handleSubCatalogsReset();
         filterSearchedProducts(searchValue);
     }, [searchValue]);

@@ -11,11 +11,13 @@ const http = axios.create({
     baseURL: configFile.baseApiEndpoint
 });
 
+console.log(http.interceptors.request);
+
 http.interceptors.request.use(
     async config => {
         const { accessTokenKey, refreshTokenKey, expireDateKey } = getTokens();
         if (refreshTokenKey && expireDateKey < Date.now()) {
-            const data = await refresh();
+            const { data } = await refresh();
             setTokens(data);
         }
         if (accessTokenKey) {

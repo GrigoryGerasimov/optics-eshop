@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const LoginForm = withAuthOption(Form);
 
 const initialState = {
-    login: "",
+    email: "",
     password: ""
 };
 
@@ -23,7 +23,7 @@ const Login = () => {
     const handleSubmit = data => {
         try {
             dispatch(login(data));
-            navigate(location.state ? location.state.from.pathname : "");
+            navigate("/");
         } catch (err) {
             toast.error(err);
         }
@@ -32,7 +32,7 @@ const Login = () => {
     return (
         <LoginForm
             initialState={initialState}
-            formClass="w-max h-max p-[70px] text-lg text-gray-700 border-none outline-none"
+            formClass="w-[30%] h-max p-[70px] text-lg text-gray-700 border-none outline-none"
             title="Авторизация"
             onSubmit={handleSubmit}
             config={validatorConfig}
@@ -40,8 +40,8 @@ const Login = () => {
             <FormControl
                 formFieldClass="mb-[55px]"
                 label="E-Mail"
-                id="login"
-                name="login"
+                id="email"
+                name="email"
             />
             <FormControl
                 formFieldClass="mb-[55px]"
@@ -51,8 +51,8 @@ const Login = () => {
                 name="password"
                 autoComplete="current-password"
             />
-            <div>{signinError && <pre className="inline-block text-pink-600 text-base py-4 px-0">{signinError}</pre>}</div>
-            <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Войти</Button>
+            <div>{signinError && <pre className="inline-block text-pink-600 text-base py-4 px-0">Ошибка авторизации! Попробуйте ещё раз!</pre>}</div>
+            <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Войти</Button>
         </LoginForm>
     );
 };

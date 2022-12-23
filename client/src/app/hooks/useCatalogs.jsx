@@ -1,7 +1,5 @@
 import React, { useState, useContext, useMemo } from "react";
 import { useProducts } from "./useProducts";
-import { useNavigate } from "react-router-dom";
-import paths from "../routes/paths";
 import PropTypes from "prop-types";
 
 const initialState = {
@@ -19,16 +17,9 @@ export const CatalogsProvider = ({ children }) => {
     const [showSubCatalogs, setShowSubCatalogs] = useState(initialState);
     const [active, setActive] = useState(null);
     const { filterCatalogedProducts } = useProducts();
-    const navigate = useNavigate();
-    const { PRODUCTS } = paths;
 
-    const handleAddActiveState = id => {
-        setActive(id);
-    };
-
-    const handleRemoveActiveState = () => {
-        setActive(null);
-    };
+    const handleAddActiveState = id => setActive(id);
+    const handleRemoveActiveState = () => setActive(null);
 
     const handleSubCatalogsSwitch = ({ target }) => {
         setShowSubCatalogs(prevState => ({
@@ -39,7 +30,6 @@ export const CatalogsProvider = ({ children }) => {
     };
 
     const handleSubCatalogsReset = () => {
-        navigate(`/${PRODUCTS}`);
         setShowSubCatalogs(initialState);
         filterCatalogedProducts("_");
         handleRemoveActiveState();

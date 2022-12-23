@@ -23,6 +23,8 @@ const handleAuth = async (req, res, next) => {
         return formatResponse(res, 400, "Введённые данные некорректны");
     }
 
+    req.currentUser = existingUser;
+
     return next();
 };
 

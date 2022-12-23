@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { metaContactsLinks, metaLayerLinks, headLayerLinks } from "./navbarLinks";
+import { metaContactsLinks, metaLayerLinks } from "./navbarLinks";
 import { NavLogo } from "./NavLogo.jsx";
 import { useCatalogs } from "../../../hooks";
 import UserProfile from "../UserProfile";
@@ -67,18 +67,6 @@ const Header = () => {
                         </NavLink>
                     )}
                 </div>
-            </nav>
-            <nav className="h-[50%] flex flex-row justify-evenly items-center flex-wrap">
-                {headLayerLinks.map(link => (
-                    <NavLink
-                        className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none"
-                        key={link.id}
-                        to={link.pathTo}
-                        onClick={handleSubCatalogsReset}
-                    >
-                        {link.label}
-                    </NavLink>
-                ))}
             </nav>
         </header>
     );

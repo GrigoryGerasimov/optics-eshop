@@ -14,8 +14,6 @@ const ShoppingCartPage = () => {
     const { UNICODE: { CURRENCY } } = constants;
     const { isLoading: isCurrenciesDataLoading, isSuccess: isCurrenciesDataLoadSuccessful, data: currenciesData } = useReceiveCurrenciesQuery({ refetchOnFocus: true });
 
-    if (!shoppingReservation?.length) return (<div className="w-[inherit] flex justify-center">Ваша корзина пуста</div>);
-
     const handleDelete = id => handleRemoveFromCart(id);
 
     const handleTotalAmount = (id, amount) => handleTotalAmountCountUp(id, amount);
@@ -27,6 +25,8 @@ const ShoppingCartPage = () => {
     const handleOrderAcceptance = () => {
         handleModalOpen();
     };
+
+    if (!shoppingReservation?.length) return (<div className="w-[inherit] flex justify-center">Ваша корзина пуста</div>);
 
     return (
         <div className="pb-[50%] md:pb-[40%] lg:pb-[30%] xl:pb-[20%] 2xl:pb-[10%]">
