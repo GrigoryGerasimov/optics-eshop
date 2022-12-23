@@ -20,10 +20,10 @@ const {
     ADMIN
 } = paths;
 
-export const routes = isAuthorized => {
+export const routes = (isAuthorized, userRole = null) => {
     return [
         {
-            path: BASE,
+            path: "/",
             element: <Main/>,
             children: [
                 { path: BASE, element: <Navigate to={PRODUCTS}/> },
@@ -90,7 +90,7 @@ export const routes = isAuthorized => {
             path: ADMIN,
             element: <AdminControl/>,
             children: [
-                { path: BASE, element: isAuthorized ? <AdminPage/> : <Navigate to={AUTH_LOGIN}/> },
+                { path: BASE, element: isAuthorized ? userRole && userRole === "vendor" ? <AdminPage/> : <PageNotFound/> : <Navigate to={AUTH_LOGIN}/> },
                 { path: REST, element: <PageNotFound/> }
             ]
         },
@@ -99,8 +99,8 @@ export const routes = isAuthorized => {
             element: <AuthContainer/>,
             children: [
                 { path: BASE, element: <Navigate to={LOGIN}/> },
-                { path: LOGIN, element: <Login/> },
-                { path: REGISTER, element: <Register/> },
+                { path: LOGIN, element: !isAuthorized ? <Login/> : <Navigate to={`/${PRODUCTS}`}/> },
+                { path: REGISTER, element: !isAuthorized ? <Register/> : <Navigate to={`/${PRODUCTS}`}/> },
                 { path: LOGOUT, element: <Logout/> },
                 { path: REST, element: <PageNotFound/> }
             ]
