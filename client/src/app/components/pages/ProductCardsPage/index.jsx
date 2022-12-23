@@ -1,16 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../common/card/Card.jsx";
-import { useCategories, useProducts } from "../../../hooks";
+import { useCategories, useProducts, useCatalogs } from "../../../hooks";
 import Sorting from "../../ui/Sorting";
-import Loader from "../../common/Loader";
 
 const ProductCardsPage = () => {
     const navigate = useNavigate();
     const { products: productsData, isProductsLoading } = useProducts();
     const { findCategoryTitleById } = useCategories();
+    const { handleSubCatalogsReset } = useCatalogs();
 
-    if (isProductsLoading || !productsData?.length) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+    const handleNavigateOnClick = pathTo => {
+        navigate(pathTo);
+        handleSubCatalogsReset();
+    };
+
+    if (isProductsLoading || !productsData?.length) return (<div className="w-[inherit] flex justify-center">Список доступных товаров пуст</div>);
 
     return (
         <>
@@ -30,7 +35,7 @@ const ProductCardsPage = () => {
                         currencyCode={dataItem.currencyCode}
                         lastEdited={dataItem.updatedAt}
                         lastCreated={dataItem.createdAt}
-                        onClick={() => navigate(`${paramsToPath}/${dataItem._id}`)}
+                        onClick={() => handleNavigateOnClick(`${paramsToPath}/${dataItem._id}`)}
                     />;
                 })}
             </div>

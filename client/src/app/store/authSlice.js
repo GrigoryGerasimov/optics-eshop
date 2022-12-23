@@ -61,9 +61,10 @@ export const login = payload => async dispatch => {
     dispatch(onRequestStart());
     const { email, password } = payload;
     try {
-        const data = await signIn({ email, password });
-        dispatch(onAuthSuccess({ userId: data._id }));
-        setTokens({ ...data, userId: data._id });
+        const { data } = await signIn({ email, password });
+        const { userId } = data;
+        setTokens(data);
+        dispatch(onAuthSuccess({ userId }));
     } catch (error) {
         dispatch(onAuthFailure(error.message));
     } finally {

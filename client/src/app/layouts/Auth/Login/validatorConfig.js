@@ -1,5 +1,5 @@
 export const validatorConfig = {
-    login: {
+    email: {
         isRequired: {
             message: "Введите адрес электронной почты"
         }

@@ -5,25 +5,31 @@ import { FormControl, Form } from "../../../common/form";
 import Button from "../../../common/Button.jsx";
 import { Modal } from "../../../common/Modal.jsx";
 import { getRandomOrderId } from "../../../../utils/randomizer/getRandomOrderId.js";
+import { useSelector } from "react-redux";
+import { authSelectors } from "../../../../store/authSlice.js";
+import { useReceiveUserByIdQuery } from "../../../../store/apiEndpoints";
+import Loader from "../../../common/Loader";
 import PropTypes from "prop-types";
 
 const initialState = {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
-    invoicingAddress: "",
-    deliveryAddress: ""
+    phone: ""
 };
 
 export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
     const navigate = useNavigate();
     const [showModalConfirmation, setShowModalConfirmation] = useState(false);
 
+    const authorizedUserId = useSelector(authSelectors.getAuthorizedUserId());
+    const { isLoading: isAuthorizedUserDataLoading, isSuccess: isAuthorizedUserDataLoadSuccessful, data: authorizedUserData } = useReceiveUserByIdQuery(authorizedUserId, { refetchOnFocus: true });
+
+    const authorizedUser = authorizedUserData?.data;
+
     const handleCloseModalConfirmation = () => setShowModalConfirmation(false);
 
-    const handleSubmit = data => {
-        console.log(data);
+    const handleSubmit = () => {
         setShowModalConfirmation(true);
         onSubmit();
         setTimeout(() => navigate(0), 5000);
@@ -37,13 +43,20 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
         </div>
     );
 
+    if (isAuthorizedUserDataLoading && !isAuthorizedUserDataLoadSuccessful) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+
     return (
         <div
             className={`${modalStatus ? "block" : "hidden"} w-full h-full z-999 fixed top-0 left-0 bg-gray-700 bg-opacity-50`}>
             <div
                 className={`bg-white rounded z-9999 pt-10 absolute top-[5%] left-[40%] text-gray-700 text-opacity-95`}>
                 <Form
-                    initialState={initialState}
+                    initialState={!authorizedUser ? initialState : {
+                        firstName: authorizedUser.firstName,
+                        lastName: authorizedUser.lastName,
+                        email: authorizedUser.email,
+                        phone: authorizedUser.phone
+                    }}
                     formClass="w-max h-max p-[70px] text-lg text-gray-700 border-none outline-none"
                     title="Пожалуйста укажите свои контактные данные"
                     onSubmit={handleSubmit}
@@ -71,25 +84,11 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
                     />
                     <FormControl
                         formFieldClass="focus:bg-transparent mb-[35px]"
-                        label="Тел."
+                        label="Тел. +7"
                         id="phone"
                         name="phone"
                         type="phone"
-                        placeholder="+7 (___) ___-__-__"
-                    />
-                    <FormControl
-                        formFieldClass="focus:bg-transparent mb-[35px]"
-                        label="Адрес выставления счёта"
-                        id="invoicingAddress"
-                        name="invoicingAddress"
-                        placeholder="пр-кт Ленинский, ___-__, Москва 117198, РФ"
-                    />
-                    <FormControl
-                        formFieldClass="focus:bg-transparent mb-[55px]"
-                        label="Адрес доставки"
-                        id="deliveryAddress"
-                        name="deliveryAddress"
-                        placeholder="ул. Красная, __-__, Пенза 440000, РФ"
+                        placeholder="___-___-__-__"
                     />
                     <Button
                         buttonClass="w-full md:w-[70%] lg:w-[60%] xl:w-[50%] bg-gray-700 text-lg text-yellow-200 font-[inherit] py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-500"

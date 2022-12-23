@@ -13,8 +13,8 @@ const paths = {
     LOGIN: "login",
     REGISTER: "register",
     LOGOUT: "logout",
-    AUTH_LOGIN: "auth/login",
-    AUTH_LOGOUT: "auth/logout",
+    AUTH_LOGIN: "/auth/login",
+    AUTH_LOGOUT: "/auth/logout",
     CART: "cart",
     ADMIN: "admin"
 };

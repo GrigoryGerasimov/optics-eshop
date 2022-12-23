@@ -28,8 +28,9 @@ const schema = new Schema({
         ref: "Role",
         required: true
     },
-    fileName: {
-        type: String
+    phone: {
+        type: String,
+        required: true
     },
     adv: {
         type: Boolean,

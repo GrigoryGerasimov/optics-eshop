@@ -20,9 +20,7 @@ const {
     ADMIN
 } = paths;
 
-const isSignedIn = true;
-
-export const routes = () => {
+export const routes = (isAuthorized) => {
     return [
         {
             path: BASE,
@@ -34,7 +32,7 @@ export const routes = () => {
         },
         {
             path: PRODUCTS,
-            element: !isSignedIn ? <Navigate to={AUTH_LOGIN} state={{ from: location }}/> : <ProductCardsList/>,
+            element: <ProductCardsList/>,
             children: [
                 { path: BASE, element: <ProductCardsPage/> },
                 {
@@ -62,22 +60,22 @@ export const routes = () => {
                                                     element: <ProductCard/>,
                                                     children: [
                                                         { path: BASE, element: <ProductPage/> },
-                                                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                                                        { path: REST, element: <Navigate to={!isAuthorized ? AUTH_LOGIN : <PageNotFound/>}/> }
                                                     ]
                                                 },
-                                                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                                                { path: REST, element: <Navigate to={!isAuthorized ? AUTH_LOGIN : <PageNotFound/>}/> }
                                             ]
                                         },
-                                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                                        { path: REST, element: <Navigate to={!isAuthorized ? AUTH_LOGIN : <PageNotFound/>}/> }
                                     ]
                                 },
-                                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                                { path: REST, element: <Navigate to={!isAuthorized ? AUTH_LOGIN : <PageNotFound/>}/> }
                             ]
                         },
-                        { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                        { path: REST, element: <Navigate to={!isAuthorized ? AUTH_LOGIN : <PageNotFound/>}/> }
                     ]
                 },
-                { path: REST, element: <Navigate to={!isSignedIn ? AUTH_LOGIN : <PageNotFound/>}/> }
+                { path: REST, element: <Navigate to={!isAuthorized ? AUTH_LOGIN : <PageNotFound/>}/> }
             ]
         },
         {
@@ -92,7 +90,7 @@ export const routes = () => {
             path: ADMIN,
             element: <AdminControl/>,
             children: [
-                { path: BASE, element: <AdminPage/> },
+                { path: BASE, element: isAuthorized ? <AdminPage/> : <Navigate to={AUTH_LOGIN}/> },
                 { path: REST, element: <PageNotFound/> }
             ]
         },

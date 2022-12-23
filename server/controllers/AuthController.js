@@ -8,12 +8,12 @@ const { formatResponse } = require("../utils/formatResponse");
 class AuthController {
     static async signIn (req, res) {
         try {
-            const newTokens = TokenService.generate(req.currentUser);
-            await TokenService.save(req.currentUser, newTokens.refreshToken);
+            const newTokens = TokenService.generate({ _id: req.currentUser._id });
+            await TokenService.save(req.currentUser._id, newTokens.refreshToken);
             res.status(200).json({
                 code: 200,
                 message: "Пользователь успешно залогинен",
-                data: newTokens
+                data: { ...newTokens, userId: req.currentUser._id }
             });
             return newTokens;
         } catch (err) {

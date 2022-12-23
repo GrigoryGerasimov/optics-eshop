@@ -12,7 +12,7 @@ const Logout = () => {
 
     useEffect(() => {
         dispatch(logout());
-        navigate(`${AUTH_LOGIN}`);
+        navigate(AUTH_LOGIN);
     }, []);
 
     return (

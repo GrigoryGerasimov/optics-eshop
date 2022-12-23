@@ -20,6 +20,7 @@ const initialState = {
     password: "",
     confirmPassword: "",
     role: "",
+    phone: "",
     adv: false,
     license: false
 };
@@ -51,7 +52,7 @@ const Register = () => {
         <RegisterForm
             initialState={initialState}
             initialPasswordState={initialPasswordState}
-            formClass="w-max h-max p-[70px] text-lg text-gray-700 border-none outline-none"
+            formClass="w-[50%] h-max p-[70px] text-lg text-gray-700 border-none outline-none"
             title="Регистрация"
             onSubmit={handleSubmit}
             config={validatorConfig}
@@ -104,6 +105,14 @@ const Register = () => {
                 name="role"
                 options={rolesData.data}
             />
+            <FormControl
+                formFieldClass="focus:bg-transparent mb-[35px]"
+                label="Тел. +7"
+                id="phone"
+                name="phone"
+                type="phone"
+                placeholder="___-___-__-__"
+            />
             <FormCheckboxSingle
                 checkboxFieldClass="leading-10"
                 label="Я хочу подписаться на рекламную рассылку по электронной почте"
@@ -116,8 +125,8 @@ const Register = () => {
                 id="license"
                 name="license"
             />
-            <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Отправить</Button>
-            <div>{signupError && <pre className="inline-block text-pink-600 text-base py-4 px-0">{signupError}</pre>}</div>
+            <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Отправить</Button>
+            <div>{signupError && <pre className="inline-block text-pink-600 text-base py-4 px-0">Ошибка регистрации! Попробуйте ещё раз!</pre>}</div>
         </RegisterForm>
     );
 };

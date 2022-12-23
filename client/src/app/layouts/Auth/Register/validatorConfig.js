@@ -48,6 +48,14 @@ export const validatorConfig = {
             message: "Поле обязательно для заполнения"
         }
     },
+    phone: {
+        isRequired: {
+            message: "Поле обязательно для заполнения"
+        },
+        isPhone: {
+            message: "Введите корректный телефонный номер"
+        }
+    },
     license: {
         isRequired: {
             message: "Необходимо подтвердить ознакомление и согласие с Лицензионным соглашением"
