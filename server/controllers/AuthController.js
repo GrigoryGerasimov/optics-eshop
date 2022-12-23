@@ -43,21 +43,22 @@ class AuthController {
     }
 
     static async refresh (req, res) {
-        const isTokenInvalid = (dbToken, token) => !dbToken || !token || token !== dbToken?.userId.toString();
+        const isTokenInvalid = (dbToken, token) => !dbToken || !token || token._id !== dbToken?.userId.toString();
 
         const dbToken = await TokenService.readToken(req.body.refreshToken);
         const verifiedToken = TokenService.validate(dbToken.refreshToken, config.get("jwt")["SECRET_REFRESH_KEY"]);
+
         if (isTokenInvalid(dbToken, verifiedToken)) {
             return formatResponse(res, 401, "Отсутствует авторизация");
         }
 
         try {
-            const refreshedTokens = TokenService.generate(verifiedToken);
-            await TokenService.save(verifiedToken, refreshedTokens.refreshToken);
+            const refreshedTokens = TokenService.generate({ _id: verifiedToken._id });
+            await TokenService.save(verifiedToken._id, refreshedTokens.refreshToken);
             res.status(200).json({
                 code: 200,
                 message: "Токен успешно обновлён",
-                data: refreshedTokens
+                data: { ...refreshedTokens, userId: verifiedToken._id }
             });
             return refreshedTokens;
         } catch (err) {

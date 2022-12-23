@@ -56,11 +56,10 @@ const Header = () => {
                 <div>
                     {isUserAuthorized ? <UserProfile/> : (
                         <NavLink
-                            className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none"
                             to="/auth"
                             onClick={handleSubCatalogsReset}
                         >
-                            <div className="w-max h-max flex flex-row flex-wrap justify-between">
+                            <div className="w-max h-max flex flex-row flex-wrap justify-between text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none">
                                 <span className="mr-2"><UserIcon/></span>{" "}
                                 <span>Войти</span>
                             </div>

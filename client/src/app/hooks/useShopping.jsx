@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useProducts } from "./useProducts.jsx";
+import { getFromStorage, setToStorage, removeFromStorage } from "../utils/storage";
 
 export const useShopping = () => {
     const [shoppingReservation, setShoppingReservation] = useState();
@@ -8,7 +9,7 @@ export const useShopping = () => {
     const { products } = useProducts();
 
     useEffect(() => {
-        setShoppingReservation((localStorage.itemsToCart && JSON.parse(localStorage.getItem("itemsToCart"))) || []);
+        setShoppingReservation(getFromStorage("itemsToCart") || []);
     }, []);
 
     const handleCheckPresenceInCart = id => {
@@ -22,7 +23,7 @@ export const useShopping = () => {
         const reservedItem = products.find(item => item._id === id);
         setShoppingReservation(prevState => {
             prevState.push(reservedItem);
-            localStorage.setItem("itemsToCart", JSON.stringify(prevState));
+            setToStorage("itemsToCart", prevState);
             return prevState;
         });
     };
@@ -30,7 +31,7 @@ export const useShopping = () => {
     const handleRemoveFromCart = id => {
         setShoppingReservation(prevState => {
             const stateAfterDeletion = prevState.filter(item => item._id !== id);
-            localStorage.setItem("itemsToCart", JSON.stringify(stateAfterDeletion));
+            setToStorage("itemsToCart", stateAfterDeletion);
             return stateAfterDeletion;
         });
         setTotalShoppingAmount(prevAmount => {
@@ -39,7 +40,7 @@ export const useShopping = () => {
         });
     };
 
-    const handleClearCart = () => localStorage.removeItem("itemsToCart");
+    const handleClearCart = () => removeFromStorage("itemsToCart");
 
     const handleTotalAmountCountUp = (id, amount) => setTotalShoppingAmount(prevAmount => ({
         ...prevAmount,

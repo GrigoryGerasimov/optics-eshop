@@ -20,7 +20,7 @@ const {
     ADMIN
 } = paths;
 
-export const routes = (isAuthorized) => {
+export const routes = isAuthorized => {
     return [
         {
             path: BASE,

@@ -1,33 +1,15 @@
 import axios from "axios";
-import { getTokens, setTokens } from "./tokenService.js";
 import { authService } from "./authService.js";
 import { loggingService } from "./loggingService.js";
 import { toast } from "react-toastify";
 import configFile from "../config.json";
 
-const { refresh } = authService;
-
 const http = axios.create({
     baseURL: configFile.baseApiEndpoint
 });
 
-console.log(http.interceptors.request);
-
 http.interceptors.request.use(
-    async config => {
-        const { accessTokenKey, refreshTokenKey, expireDateKey } = getTokens();
-        if (refreshTokenKey && expireDateKey < Date.now()) {
-            const { data } = await refresh();
-            setTokens(data);
-        }
-        if (accessTokenKey) {
-            config.headers = {
-                ...config.headers,
-                Authorization: `Bearer ${accessTokenKey}`
-            };
-        }
-        return config;
-    },
+    config => config,
     error => {
         return Promise.reject(error);
     }
@@ -42,7 +24,3 @@ http.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
-export const httpService = {
-    post: http.post
-};

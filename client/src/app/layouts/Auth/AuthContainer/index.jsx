@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const AuthContainer = () => {
     return (
-        <div className="w-full h-full flex justify-center items-center mt-[50px] pb-[50%] md:pb-[40%] lg:pb-[30%] xl:pb-[20%] 2xl:pb-[10%]">
+        <div className="w-full h-full flex justify-center items-center mt-[50px]">
             <Outlet/>
         </div>
     );
