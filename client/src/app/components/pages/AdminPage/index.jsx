@@ -85,7 +85,7 @@ const AdminPage = () => {
                 />
             </section>
             <section
-                className="w-full text-gray-700 text-opacity-95 mt-[75px] pb-[50%] md:pb-[40%] lg:pb-[30%] xl:pb-[20%] 2xl:pb-[10%]">
+                className="w-full text-gray-700 text-opacity-95 mt-[75px]">
                 <div className={`${currentForm === "create" ? "block" : "hidden"}`}>
                     <ProductCreateForm handlePositionCreate={handlePositionCreate}/>
                 </div>

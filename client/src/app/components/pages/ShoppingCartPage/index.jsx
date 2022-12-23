@@ -29,7 +29,7 @@ const ShoppingCartPage = () => {
     if (!shoppingReservation?.length) return (<div className="w-[inherit] flex justify-center">Ваша корзина пуста</div>);
 
     return (
-        <div className="pb-[50%] md:pb-[40%] lg:pb-[30%] xl:pb-[20%] 2xl:pb-[10%]">
+        <div>
             {shoppingReservation.map(reservedItem => {
                 const paramsToPath = reservedItem.params.map(param => param.slice(1)).reduce((acc, val) => acc + "/" + val);
 

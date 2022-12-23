@@ -15,7 +15,7 @@ const Catalog = () => {
     };
 
     return (
-        <aside className="w-[13%] text-gray-700 text-opacity-95 p-[2%] pb-[50%] md:pb-[40%] lg:pb-[30%] xl:pb-[20%] 2xl:pb-[10%]">
+        <aside className="w-[13%] text-gray-700 text-opacity-95 p-[2%]">
             <ul className="leading-10">
                 <li className={`${active === "collectionSubCatalog" ? "font-extrabold" : ""} cursor-pointer hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none`} id="collectionSubCatalog" onClick={handleSubCatalogsSwitch}>Коллекция</li>
                 <CollectionSubCatalog status={showSubCatalogs.collectionSubCatalog} active={active} onAddActiveState={handleAddActiveState}/>

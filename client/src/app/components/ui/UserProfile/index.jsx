@@ -24,13 +24,13 @@ const UserProfile = () => {
 
     return (
         <>
-            <div className="flex flex-row justify-center w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none" onClick={handleProtectedOptionsToggler}>
-                Здравствуйте, {authorizedUser.firstName}{" "}
+            <div className="flex flex-row justify-center w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline" onClick={handleProtectedOptionsToggler}>
+                <span className="cursor-pointer">Здравствуйте, {authorizedUser.firstName}</span>{" "}
                 <span className="ml-[5px]">{!showProtectedOptions ? <ChevronDown/> : <ChevronUp/>}</span>
             </div>
             <ul className={`${showProtectedOptions ? "block" : "hidden"}`}>
                 <li className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none">
-                    {authorizedUserRole.code === "vendor" ? <NavLink to="/admin">Кабинет</NavLink> : <NavLink to="/">Общее</NavLink>}
+                    {authorizedUserRole.code === "vendor" && <NavLink to="/admin">Кабинет</NavLink>}
                 </li>
                 <li className="w-max h-max text-xl text-gray-700 text-opacity-95 p-2 no-underline hover:border-b hover:border-gray-700 hover:border-opacity-50 hover:rounded active:bg-yellow-100 active:bg-opacity-50 active:border-none">
                     <NavLink to={AUTH_LOGOUT}>Выйти</NavLink>

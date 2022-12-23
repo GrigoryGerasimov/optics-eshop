@@ -14,4 +14,4 @@ export {
 } from "./products";
 export { useReceiveRolesQuery, useReceiveRoleByIdQuery } from "./roles.js";
 export { useReceiveShipmentTypesQuery, useReceiveShipmentTypeByIdQuery } from "./shipmenttypes.js";
-export { useReceiveUserByIdQuery } from "./users.js";
+export { useReceiveUsersQuery, useReceiveUserByIdQuery } from "./users.js";

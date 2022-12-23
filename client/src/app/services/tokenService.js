@@ -18,12 +18,12 @@ export const setTokens = ({ accessToken, refreshToken, expiresIn, userId }) => {
 
 export const getTokens = () => {
     const tokens = {};
-    for (const key in JWT) tokens[key] = getFromStorage(key);
+    for (const key in JWT) tokens[key] = getFromStorage(JWT[key]);
     return tokens;
 };
 
 export const removeTokens = () => {
-    for (const key in JWT) removeFromStorage(key);
+    for (const key in JWT) removeFromStorage(JWT[key]);
 };
 
 const tokenService = {

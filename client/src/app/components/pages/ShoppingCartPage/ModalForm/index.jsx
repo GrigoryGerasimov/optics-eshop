@@ -7,7 +7,7 @@ import { Modal } from "../../../common/Modal.jsx";
 import { getRandomOrderId } from "../../../../utils/randomizer/getRandomOrderId.js";
 import { useSelector } from "react-redux";
 import { authSelectors } from "../../../../store/authSlice.js";
-import { useReceiveUserByIdQuery } from "../../../../store/apiEndpoints";
+import { useReceiveUsersQuery } from "../../../../store/apiEndpoints";
 import Loader from "../../../common/Loader";
 import PropTypes from "prop-types";
 
@@ -23,9 +23,9 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
     const [showModalConfirmation, setShowModalConfirmation] = useState(false);
 
     const authorizedUserId = useSelector(authSelectors.getAuthorizedUserId());
-    const { isLoading: isAuthorizedUserDataLoading, isSuccess: isAuthorizedUserDataLoadSuccessful, data: authorizedUserData } = useReceiveUserByIdQuery(authorizedUserId, { refetchOnFocus: true });
+    const { isLoading: isUsersDataLoading, isSuccess: isUsersDataLoadSuccessful, data: usersData } = useReceiveUsersQuery({ refetchOnFocus: true });
 
-    const authorizedUser = authorizedUserData?.data;
+    const authorizedUser = usersData?.data?.find(user => user?._id === authorizedUserId);
 
     const handleCloseModalConfirmation = () => setShowModalConfirmation(false);
 
@@ -43,13 +43,13 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
         </div>
     );
 
-    if (isAuthorizedUserDataLoading && !isAuthorizedUserDataLoadSuccessful) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
+    if (isUsersDataLoading && !isUsersDataLoadSuccessful) return (<div className="w-[inherit] flex justify-center"><Loader/></div>);
 
     return (
         <div
             className={`${modalStatus ? "block" : "hidden"} w-full h-full z-999 fixed top-0 left-0 bg-gray-700 bg-opacity-50`}>
             <div
-                className={`bg-white rounded z-9999 pt-10 absolute top-[5%] left-[40%] text-gray-700 text-opacity-95`}>
+                className={`bg-white rounded z-9999 pt-[70px] absolute top-[30%] left-[40%] text-gray-700 text-opacity-95`}>
                 <Form
                     initialState={!authorizedUser ? initialState : {
                         firstName: authorizedUser.firstName,
@@ -83,8 +83,8 @@ export const ModalForm = ({ modalStatus, onCloseModal, onSubmit }) => {
                         placeholder="test@test.com"
                     />
                     <FormControl
-                        formFieldClass="focus:bg-transparent mb-[35px]"
-                        label="Тел. +7"
+                        formFieldClass="focus:bg-transparent mb-[75px]"
+                        label="Тел."
                         id="phone"
                         name="phone"
                         type="phone"

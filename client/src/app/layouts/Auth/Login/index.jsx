@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, FormControl } from "../../../components/common/form";
@@ -19,6 +19,10 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const signinError = useSelector(authSelectors.getAuthError());
+
+    useEffect(() => {
+        if (signinError) toast.error("Ошибка авторизации! Попробуйте ещё раз!");
+    }, [signinError]);
 
     const handleSubmit = data => {
         try {
@@ -51,7 +55,6 @@ const Login = () => {
                 name="password"
                 autoComplete="current-password"
             />
-            <div>{signinError && <pre className="inline-block text-pink-600 text-base py-4 px-0">Ошибка авторизации! Попробуйте ещё раз!</pre>}</div>
             <Button buttonClass="w-full bg-gray-700 text-yellow-200 font-[inherit] rounded py-[10px] px-[20px] cursor-pointer hover:text-yellow-400 active:text-yellow-300 disabled:cursor-default disabled:opacity-50" type="submit">Войти</Button>
         </LoginForm>
     );

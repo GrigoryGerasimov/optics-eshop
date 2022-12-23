@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getTokens } from "./tokenService.js";
 import configFile from "../config.json";
 
 const authEndpoint = "auth";
@@ -15,11 +14,6 @@ export const authService = {
     },
     signUp: async payload => {
         const { data } = await httpAuth.post("register", payload);
-        return data;
-    },
-    refresh: async () => {
-        const { refreshTokenKey } = getTokens();
-        const { data } = await httpAuth.post("token", { refresh_token: refreshTokenKey });
         return data;
     }
 };
